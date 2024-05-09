@@ -1,0 +1,10 @@
+
+k
+java:S3824k"NReplace this "Map.get()" and condition with a call to "Map.computeIfAbsent()".(öÀşâ8™Úòıõ1
+G	java:S106"+Replace this use of System.out by a logger.(€ìéÍ8œÚòıõ1
+G	java:S106!"+Replace this use of System.out by a logger.(œë÷İ8Úòıõ1
+Z
+java:S18543"=Remove this useless assignment to local variable "processID".(·Æ®Ì8ŸÚòıõ1
+K
+java:S14813".Remove this unused "processID" local variable.(·Æ®Ì8ŸÚòıõ1
+L	java:S106d"+Replace this use of System.out by a logger.(•§—«ùÿÿÿÿ8¡Úòıõ1
