@@ -1,0 +1,14 @@
+
+E	java:S106"+Replace this use of System.out by a logger.(†…³òÿÿÿÿÿ
+E	java:S106"+Replace this use of System.out by a logger.(Ëòİúÿÿÿÿ
+@	java:S106"+Replace this use of System.out by a logger.(ÊÅâä
+E	java:S106"+Replace this use of System.out by a logger.(šäÁÃùÿÿÿÿ
+?	java:S106"+Replace this use of System.out by a logger.(Ëí¥ 
+B
+java:S1125"'Remove the unnecessary boolean literal.(¬Á¨Áÿÿÿÿÿ
+=
+java:S1125 "'Remove the unnecessary boolean literal.(ÄÜ¥ò
+E	java:S106!"+Replace this use of System.out by a logger.(È£Üúÿÿÿÿ
+@	java:S106'"+Replace this use of System.out by a logger.(—áÃ­
+o
+java:S5843B"TSimplify this regular expression to reduce its complexity from 29 to the 20 allowed.(Ñãİ‘üÿÿÿÿ
