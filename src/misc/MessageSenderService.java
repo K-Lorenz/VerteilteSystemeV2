@@ -1,5 +1,6 @@
 package misc;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.UUID;
@@ -34,6 +35,11 @@ public class MessageSenderService {
             }
             //Calculate Port from Flightnumber and startport
             port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start")) + portnum;
+            if(messageSplit[0] == "CancellationRq"){
+                //<WhatAmI> <ProcessId> <FlightNumber>
+                sendMessageToPort("CancellationRq " + messageSplit[1] + " " + messageSplit[3], port);
+                return;
+            }
         }
         else if(messageSplit[2].equals("hotel")){
             //Check if portnumber is higher than allowed amount of Hotel Systems
@@ -44,6 +50,11 @@ public class MessageSenderService {
             }
             //Calculate Port from Hotelnumber and startport
             port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.port.start")) + portnum;
+            if(messageSplit[0] == "CancellationRq"){
+                //<WhatAmI> <ProcessId> <HotelNumber>
+                sendMessageToPort("CancellationRq " + messageSplit[1] + " " + messageSplit[3], port);
+                return;
+            }
         }
         else
         {
@@ -71,5 +82,13 @@ public class MessageSenderService {
     }
     public static void sendError(String errorMessage, UUID processID){
         sendMessageToMessageBroker("Error " + processID + " " + errorMessage);
+    }
+    public static void sendMessageToClient(Socket socket, String message){
+        try{
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            out.println(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

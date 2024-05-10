@@ -6,7 +6,6 @@ import misc.PropertyLoader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -57,41 +56,44 @@ public class MessageBroker {
             case "ClientRq":
                 clientSockets.put(processID, socket);
                 //Send message to TravelBroker
-                MessageSenderService.sendMessageToTravelBroker(whatAmI + " " + processID + " " + messageSplit[2]);
+                MessageSenderService.sendMessageToTravelBroker(message);
                 break;
 
 
             //Confirmation coming from Hotel and Flight Systems
             case "Confirmation":
+                System.out.println("Confirmation " + message);
                 //Send messages to TravelBroker
+                MessageSenderService.sendMessageToTravelBroker(message);
                 break;
 
             //Booking Request coming from TravelBroker
             case "BookingRq":
                 System.out.println("Booking request " + message);
-                //MessageSenderService.sendMessageToBookingSystem(message);
                 //Send message to Hotel and Flight Systems respectively
+                MessageSenderService.sendMessageToBookingSystem(message);
                 break;
 
             //Cancellation Request coming from TravelBroker
             case "CancellationRq":
                 //Send message to Hotel and Flight Systems respectively
+                MessageSenderService.sendMessageToBookingSystem(message);
                 break;
 
             //Client Confirmation coming from TravelBroker
             case "ClientConfirmation":
                 //deconstruct message and send to correct client
-                if(messageSplit[3].equals("false"))
-                    sendMessageToClient(clientSocket, "Sorry! Your booking is not confirmed!");
+                if(messageSplit[2].equals("false"))
+                    MessageSenderService.sendMessageToClient(clientSocket, "Sorry! Your booking is not confirmed!");
                 else
-                    sendMessageToClient(clientSocket, "Yay! Your booking is confirmed!");
+                    MessageSenderService.sendMessageToClient(clientSocket, "Yay! Your booking is confirmed!");
 
                 break;
             case "Error":
-                sendMessageToClient(clientSocket, "Error! " +messageSplit[2]);
+                MessageSenderService.sendMessageToClient(clientSocket, "Error! " +messageSplit[2]);
                 break;
             default:
-                System.out.println("Message type not recognized");
+                System.out.println("MessageBroker - Message not recognized: " + message);
                 break;
         }
     }
@@ -112,12 +114,5 @@ public class MessageBroker {
         }
         return false;
     }
-    private void sendMessageToClient(Socket socket, String message){
-        try{
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }
