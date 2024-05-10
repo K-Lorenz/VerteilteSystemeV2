@@ -13,32 +13,33 @@ public class MessageSenderService {
         sendMessageToPort(message, Integer.parseInt(PropertyLoader.loadProperties().getProperty("travelbroker.port")));
     }
     public static void sendMessageToBookingSystem(String message) {
-        String [] arr = message.split(" ", 5);
+        //MessageSplit [0] = WhatAmI, [1] = ProcessId, [2] = Type, [3] = Hotel/FlightNumber, [4] = Quantity
+        String [] messageSplit = message.split(" ", 5);
         int portnum;
         //Strip F/H from name. Example => F12 -> 12
         try{
-            portnum = Integer.parseInt(arr[3].substring(1));
+            portnum = Integer.parseInt(messageSplit[3].substring(1));
         }catch (Exception e){
-            sendError("Booking number not recognized!", UUID.fromString(arr[1]));
+            sendError("Booking number not recognized!", UUID.fromString(messageSplit[1]));
             return;
         }
         int port = 0;
         //get Port from Flight/Hotel
-        if(arr[2].equals("flight")) {
+        if(messageSplit[2].equals("flight")) {
             //Check if portnumber is higher than allowed amount of Flight Systems
             if(portnum > Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.amount")))
             {
-                sendError("Flight number not recognized!", UUID.fromString(arr[1]));
+                sendError("Flight number not recognized!", UUID.fromString(messageSplit[1]));
                 return;
             }
             //Calculate Port from Flightnumber and startport
             port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start")) + portnum;
         }
-        else if(arr[2].equals("hotel")){
+        else if(messageSplit[2].equals("hotel")){
             //Check if portnumber is higher than allowed amount of Hotel Systems
             if(portnum > Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.amount")))
             {
-                sendError("Hotel number not recognized!", UUID.fromString(arr[1]));
+                sendError("Hotel number not recognized!", UUID.fromString(messageSplit[1]));
                 return;
             }
             //Calculate Port from Hotelnumber and startport
@@ -46,9 +47,9 @@ public class MessageSenderService {
         }
         else
         {
-            sendError("Booking system type not recognized!", UUID.fromString(arr[1]));
+            sendError("Booking system type not recognized!", UUID.fromString(messageSplit[1]));
         }
-        String newMessage = "BookingRq " + arr[1] + " " + arr[4];
+        String newMessage = "BookingRq " + messageSplit[1] + " " + messageSplit[4];
         sendMessageToPort(newMessage, port);
     }
 

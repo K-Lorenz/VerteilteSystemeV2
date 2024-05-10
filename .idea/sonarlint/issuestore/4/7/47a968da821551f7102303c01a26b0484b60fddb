@@ -1,6 +1,6 @@
 
-“	java:S1179"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ş“µ¼8ê”¯‘ö1J$6527be33-4d18-447e-b3b9-2b57b054e29e
-r	java:S106"+Replace this use of System.out by a logger.(Úş†ºüÿÿÿÿ8ô”¯‘ö1J$de05b4ac-a2f8-4ee9-8d0f-ad1286decde9
-m	java:S106)"+Replace this use of System.out by a logger.(˜²õæ8÷”¯‘ö1J$0b16433b-26b8-4b6a-8145-63c14bc97d38
+“	java:S1178"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯ß„ß8ê”¯‘ö1J$0ce8e040-ad94-4955-8b60-d1d973157b07
+r	java:S106"+Replace this use of System.out by a logger.(Úş†ºüÿÿÿÿ8ô”¯‘ö1J$e225d2a2-0151-4e3e-9d95-09e3fc7f6b71
+m	java:S106'"+Replace this use of System.out by a logger.(˜²õæ8÷”¯‘ö1J$ca9cb0fe-edb2-4a7a-ac77-4f6109d3490c
 p
-java:S11727"-Remove this unused method parameter "socket".(£ø´»8½‘ö1J$0657b6e8-7bf7-49c4-afce-cf8d5a8d2914
+java:S11725"-Remove this unused method parameter "socket".(£ø´»8½‘ö1J$84818ded-6d01-4d79-8ee9-2cd803cc2582

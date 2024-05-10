@@ -46,17 +46,18 @@ public class MessageBroker {
     }
 
     private void sendMessageToCorrectReceiver(String message, Socket socket) {
-        String[] arr = message.split(" ", 3);
-        UUID processID = UUID.fromString(arr[1]);
+        //MessageSplit [0] = WhatAmI, [1] = ProcessId, [2] = Message
+        String[] messageSplit = message.split(" ", 3);
+        UUID processID = UUID.fromString(messageSplit[1]);
         Socket clientSocket = clientSockets.get(processID);
-        String whatAmI = arr[0];
+        String whatAmI = messageSplit[0];
         if(!checkMessageAndAdd(message)) return;
         switch (whatAmI) {
             //CLient Request coming from Client
             case "ClientRq":
                 clientSockets.put(processID, socket);
                 //Send message to TravelBroker
-                MessageSenderService.sendMessageToTravelBroker(whatAmI + " " + processID + " " + arr[2]);
+                MessageSenderService.sendMessageToTravelBroker(whatAmI + " " + processID + " " + messageSplit[2]);
                 break;
 
 
@@ -79,14 +80,14 @@ public class MessageBroker {
             //Client Confirmation coming from TravelBroker
             case "ClientConfirmation":
                 //deconstruct message and send to correct client
-                if(arr[3].equals("false"))
+                if(messageSplit[3].equals("false"))
                     sendMessageToClient(clientSocket, "Sorry! Your booking is not confirmed!");
                 else
                     sendMessageToClient(clientSocket, "Yay! Your booking is confirmed!");
 
                 break;
             case "Error":
-                sendMessageToClient(clientSocket, "Error! " +arr[2]);
+                sendMessageToClient(clientSocket, "Error! " +messageSplit[2]);
                 break;
             default:
                 System.out.println("Message type not recognized");

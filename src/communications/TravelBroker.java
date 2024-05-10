@@ -15,9 +15,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 
-// This needs to be a Server aswell ...I think?
-// It needs to allow multiple requests to be handled at the same time from the message broker
-// afaik it doesnt need to be runnable (no main function). The message broker can run it. It should be (run) multithreaded
+
 public class TravelBroker {
     private int port;
     static List<String> waitForOtherBooking = new ArrayList<>();
@@ -53,12 +51,13 @@ public class TravelBroker {
         }
     }
     public void handleRequest(String message, Socket socket){
-        String[] arr = message.split(" ", 3);
-        UUID ProcessId = UUID.fromString(arr[1]);
-        String whatAmI = arr[0];
+        //MessageSplit [0] = WhatAmI, [1] = ProcessId, [2] = Message
+        String[] messageSplit = message.split(" ", 3);
+        UUID ProcessId = UUID.fromString(messageSplit[1]);
+        String whatAmI = messageSplit[0];
         switch (whatAmI) {
             case "ClientRq":
-                List<BookingRequest> bookingRequests = BookingRequestParser.parse(arr[2]);
+                List<BookingRequest> bookingRequests = BookingRequestParser.parse(messageSplit[2]);
                 for (BookingRequest bookingRequest : bookingRequests) {
                     //Send Flight BookingRq to Messagebroker
                     String newMessage = "BookingRq " + ProcessId + " " + bookingRequest.type() + " " + bookingRequest.name() + " " + bookingRequest.quantity();
