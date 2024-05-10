@@ -1,4 +1,11 @@
 
-V
-java:S1220""Move this file to a named package.J$e4ccecb4-ec40-4c75-8358-7259598feeb2
-k	java:S106"+Replace this use of System.out by a logger.(‚ÞÏ¥ýÿÿÿÿJ$2e3ad5bc-7d5c-4ed8-b3f1-680f06122e7f
+]
+java:S1220""Move this file to a named package.8à»¾ÿõ1J$fdd9c64c-39a7-429b-87ec-30155b863163
+l
+java:S2140&")Use "java.util.Random.nextInt()" instead.(ÞÏˆ×8é»¾ÿõ1J$7a187cf1-5559-4604-8345-247d6f6ec66e
+q
+java:S2140/")Use "java.util.Random.nextInt()" instead.(ûÕ“‰ûÿÿÿÿ8ê»¾ÿõ1J$d7e715e5-77d9-4ad0-bcd6-fe161af98275
+q
+java:S1128"/Remove this unused import 'communications.Cli'.(¶ßƒA8öøÇÿõ1J$12c343d3-fda8-40b0-9c7f-6470b04307d2
+u
+java:S1128	"-Remove this unused import 'java.util.Random'.(èøÉ›ùÿÿÿÿ8öøÇÿõ1J$b5480253-579a-4ea3-93f6-28acc89a300b

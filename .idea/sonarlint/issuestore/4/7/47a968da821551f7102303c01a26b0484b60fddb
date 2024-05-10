@@ -1,15 +1,13 @@
 
-•	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ˆõÏûÿÿÿÿ8ïƒ†şõ1J$067fbacc-b2f8-4e9e-8928-398ce0fcfc53
-
-java:S1854"7Remove this useless assignment to local variable "out".(ÜÂ§™øÿÿÿÿ8ğƒ†şõ1J$6d58b66a-a87f-4bcb-8aa5-2c5ed16188f9
-€
-java:S1854"=Remove this useless assignment to local variable "inputLine".(–®Â­8ğƒ†şõ1J$a82cea25-2394-46f8-b5bd-efb9dece78ee
-p
-java:S1481"(Remove this unused "out" local variable.(ÜÂ§™øÿÿÿÿ8ñƒ†şõ1J$e1c9e3bb-6095-41e9-8655-213529137b1a
-p
-java:S1481".Remove this unused "inputLine" local variable.(‡±•_8ñƒ†şõ1J$3baeccd1-478c-4dcd-b986-c00d3d01e218
-r	java:S106 "+Replace this use of System.out by a logger.(ª¡Üğüÿÿÿÿ8òƒ†şõ1J$f3048201-5253-49f4-b19b-fb4f93f09e19
+r	java:S106"+Replace this use of System.out by a logger.(Úş†ºüÿÿÿÿ8€ŠĞşõ1J$513ae1f9-655f-41b5-8313-1da1a5e05e4b
+v
+java:S1128"3Remove this unused import 'java.io.BufferedReader'.(€é²Å8ŠĞşõ1J$5961b23d-70ea-47e4-92ec-a1686aa5251a
+y
+java:S1128"6Remove this unused import 'java.io.InputStreamReader'.(ãˆÎÉ8ŠĞşõ1J$7a2040be-4361-4dc1-ad45-758a639c4eab
 s
-java:S1128"0Remove this unused import 'misc.PropertyLoader'.(ÛŸÕÎ8Ë‰ˆşõ1J$342fcaac-2dcc-4b77-ab46-7efe488a2056
-t
-java:S1128	"1Remove this unused import 'java.util.Properties'.(¬µ²8Ë‰ˆşõ1J$ebd6c3e4-5d93-4f6c-acd9-8b5b35fc6eab
+java:S1128"0Remove this unused import 'java.io.PrintWriter'.(ÓŞÏÛ8ŠĞşõ1J$a86ef45b-b693-4a36-ad66-cd7bc11857d1
+o
+java:S1128	",Remove this unused import 'java.net.Socket'.(­‡àú8ŠĞşõ1J$6e6db558-76ab-46fe-a113-4caf02556259
+{
+java:S1128
+"8Remove this unused import 'java.util.GregorianCalendar'.(€û½8ŠĞşõ1J$80d3b80f-43d6-4e77-9ff9-1ed9d104112b

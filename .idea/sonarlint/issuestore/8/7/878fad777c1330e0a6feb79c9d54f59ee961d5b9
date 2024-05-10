@@ -1,0 +1,16 @@
+
+m	java:S106"+Replace this use of System.out by a logger.(ú«‹û8ü„ıõ1J$d5dfe913-ede1-4e88-8013-8a3d6a3966a0
+m	java:S106"+Replace this use of System.out by a logger.(¥ÖÏ÷8ü„ıõ1J$a35d108a-5bce-488d-90d4-94678d1ea816
+r	java:S106"+Replace this use of System.out by a logger.(Ëòİúÿÿÿÿ8ü„ıõ1J$2a6c92d2-e309-4bfe-96d0-9bbc7fb20594
+m	java:S106"+Replace this use of System.out by a logger.(ÊÅâä8ü„ıõ1J$4e67c951-432f-4fbc-bef3-5268af828c54
+r	java:S106"+Replace this use of System.out by a logger.(šäÁÃùÿÿÿÿ8ü„ıõ1J$a39b36ce-343b-4c81-ba9c-6d532040f3ce
+l	java:S106"+Replace this use of System.out by a logger.(Ëí¥ 8ş„ıõ1J$a0450d1b-5adf-4f2e-93d5-38cd1ded610f
+o
+java:S1125"'Remove the unnecessary boolean literal.(¬Á¨Áÿÿÿÿÿ8ı„ıõ1J$88c856ae-39db-4b63-9bdc-dad927f1bd18
+j
+java:S1125!"'Remove the unnecessary boolean literal.(ÄÜ¥ò8ş„ıõ1J$90a63621-131e-4064-9faa-92d9ac13fc6b
+r	java:S106""+Replace this use of System.out by a logger.(È£Üúÿÿÿÿ8ş„ıõ1J$f8ec2e30-f11b-45eb-b3c8-5eff91d2777a
+m	java:S106("+Replace this use of System.out by a logger.(—áÃ­8€…ıõ1J$09330055-495d-419b-b060-3fd6bc205b11
+l	java:S1067"+Replace this use of System.out by a logger.(Ü²÷#8ˆÜ ıõ1J$9b70b4f4-2ef7-47d4-96e3-f3dc0757d0c1
+œ
+java:S5843D"TSimplify this regular expression to reduce its complexity from 29 to the 20 allowed.(Ñãİ‘üÿÿÿÿ8…ıõ1J$96ad7800-28fc-428d-b674-1f9c75f7797b

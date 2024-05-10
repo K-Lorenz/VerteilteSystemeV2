@@ -14,13 +14,13 @@ public class MessageBroker {
     private int port;
     private Map<UUID, List<String>> processMessages = new HashMap<>();
     private Map<UUID, Socket> clientSockets = new HashMap<>();
-    public MessageBroker(int port) {
-        this.port = port;
+    public MessageBroker() {
+        port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port"));
     }
     public void start() {
         //Start server
         try(ServerSocket serverSocket = new ServerSocket(port)){
-            System.out.println("Server is running on port "+serverSocket.getLocalPort());
+            System.out.println("MessageBroker running on port "+serverSocket.getLocalPort());
             while(true){
                 //Accept client connection
                 Socket clientSocket = serverSocket.accept();
@@ -57,33 +57,26 @@ public class MessageBroker {
             //CLient Request coming from Client
             case "ClientRq":
                 clientSockets.put(clientID, socket);
-                sendMessageToClient(socket, "Your request is now being handled by the TravelBroker!");
                 //Send message to TravelBroker
-                TravelBroker tb = new TravelBroker(socket);
-                tb.start();
                 break;
 
             //Reservation Request coming from TravelBroker
             case "ReservationRq":
-                sendMessageToClient(clientSocket, "The TravelBroker has sent a request for reservation to the Hotel and Flight Systems!");
                 //Send message to Hotel and Flight Systems respectively
                 break;
 
             //Confirmation coming from Hotel and Flight Systems
             case "Confirmation":
-                sendMessageToClient(clientSocket, "Flight/Hotel Systems responded to the reservation request!");
                 //Send messages to TravelBroker
                 break;
 
             //Booking Request coming from TravelBroker
             case "BookingRq":
-                sendMessageToClient(clientSocket, "The TravelBroker sent a request for booking to the Hotel and Flight Systems!");
                 //Send message to Hotel and Flight Systems respectively
                 break;
 
             //Cancellation Request coming from TravelBroker
             case "CancellationRq":
-                sendMessageToClient(clientSocket, "Something went wrong! The TravelBroker is sending cancellation requests to the Hotel and Flight Systems!");
                 //Send message to Hotel and Flight Systems respectively
                 break;
 
@@ -125,11 +118,5 @@ public class MessageBroker {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        int port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port"));
-        MessageBroker messageBroker = new MessageBroker(port);
-        messageBroker.start();
     }
 }

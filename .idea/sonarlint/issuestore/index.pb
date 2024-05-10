@@ -20,3 +20,7 @@ T
 $src/communications/TravelBroker.java,4\7\47a968da821551f7102303c01a26b0484b60fddb
 Q
 !src/communications/TCPServer.java,b\9\b9dbf879101e022ae058afa3d370de2c981e4c8d
+J
+src/misc/config.properties,f\a\faa85f2e67c32ef09d9257ebafb834bf3014abba
+K
+src/communications/Cli.java,8\7\878fad777c1330e0a6feb79c9d54f59ee961d5b9

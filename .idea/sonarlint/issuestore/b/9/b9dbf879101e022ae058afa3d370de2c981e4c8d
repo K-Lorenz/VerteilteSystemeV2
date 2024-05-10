@@ -1,6 +1,6 @@
 
-e
-java:S2095"JUse try-with-resources or close this "ServerSocket" in a "finally" clause.(àÔ”øÿÿÿÿ
-@	java:S106"+Replace this use of System.out by a logger.(€ìéÍ
-E	java:S106"+Replace this use of System.out by a logger.(Üÿéüøÿÿÿÿ
-@	java:S106"+Replace this use of System.out by a logger.(œë÷İ
+‹
+java:S2095"JUse try-with-resources or close this "ServerSocket" in a "finally" clause.(àÔ”øÿÿÿÿJ$d427cf13-cca0-4e0d-a79a-364d021d524e
+f	java:S106"+Replace this use of System.out by a logger.(€ìéÍJ$3f62a3af-4c49-429f-a314-1e0523396c4a
+k	java:S106"+Replace this use of System.out by a logger.(ÜÿéüøÿÿÿÿJ$9b514549-cebc-4c95-b3a4-17e0c2dd37ab
+f	java:S106"+Replace this use of System.out by a logger.(œë÷İJ$8ca41ba8-1112-43b5-b957-040a1d10b6ae

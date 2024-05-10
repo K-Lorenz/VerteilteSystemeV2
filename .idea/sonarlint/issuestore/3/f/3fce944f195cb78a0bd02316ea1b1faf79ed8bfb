@@ -1,10 +1,10 @@
 
-k
-java:S3824k"NReplace this "Map.get()" and condition with a call to "Map.computeIfAbsent()".(öÀþâ8™Úòýõ1
-G	java:S106"+Replace this use of System.out by a logger.(€ìéÍ8œÚòýõ1
-G	java:S106!"+Replace this use of System.out by a logger.(œë÷Ý8žÚòýõ1
-Z
-java:S18543"=Remove this useless assignment to local variable "processID".(·Æ®Ì8ŸÚòýõ1
-K
-java:S14813".Remove this unused "processID" local variable.(·Æ®Ì8ŸÚòýõ1
-L	java:S106d"+Replace this use of System.out by a logger.(•§—«ùÿÿÿÿ8¡Úòýõ1
+‘
+java:S3824d"NReplace this "Map.get()" and condition with a call to "Map.computeIfAbsent()".(öÀþâ8Â¤Óþõ1J$ead84376-f169-490d-8d47-c9cdeb57e6ae
+r	java:S106"+Replace this use of System.out by a logger.(àË·¬úÿÿÿÿ8Å¤Óþõ1J$dc9155aa-5809-4ddd-9e2b-0f96b34104cf
+m	java:S106!"+Replace this use of System.out by a logger.(œë÷Ý8Æ¤Óþõ1J$25698635-d57f-4f01-953e-d6a6f24b37a0
+€
+java:S18543"=Remove this useless assignment to local variable "processID".(·Æ®Ì8Ç¤Óþõ1J$c597334a-9aec-4f9e-b1a3-bf9a2b889036
+q
+java:S14813".Remove this unused "processID" local variable.(·Æ®Ì8Ç¤Óþõ1J$fbe26629-3c77-4b67-b5de-ddde8fd7640b
+r	java:S106]"+Replace this use of System.out by a logger.(•§—«ùÿÿÿÿ8È¤Óþõ1J$160c6ad9-bcc0-428f-b450-07ea8b6bcf8c
