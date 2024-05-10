@@ -18,9 +18,9 @@ public class MessageBroker {
     public MessageBroker() {
         port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port"));
     }
-    public void start() {
+    public void start(int backlog) {
         //Start server
-        try(ServerSocket serverSocket = new ServerSocket(port)){
+        try(ServerSocket serverSocket = new ServerSocket(port, backlog)){
             System.out.println("MessageBroker running on port "+serverSocket.getLocalPort());
             while(true){
                 //Accept client connection
@@ -68,7 +68,8 @@ public class MessageBroker {
 
             //Booking Request coming from TravelBroker
             case "BookingRq":
-                MessageSenderService.sendMessageToBookingSystem(message);
+                System.out.println("Booking request " + message);
+                //MessageSenderService.sendMessageToBookingSystem(message);
                 //Send message to Hotel and Flight Systems respectively
                 break;
 

@@ -23,8 +23,8 @@ public class TravelBroker {
         Properties properties = PropertyLoader.loadProperties();
         port = Integer.parseInt(properties.getProperty("travelbroker.port"));
     }
-    public void start(){
-        try(ServerSocket serverSocket = new ServerSocket(port)) {
+    public void start(int backlog){
+        try(ServerSocket serverSocket = new ServerSocket(port, backlog)) {
             System.out.println("TravelBroker running on port " + port);
             while (true) {
                 Socket travelSocket = serverSocket.accept();

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         int testAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.test.amount"));
         int clientAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.client.amount"));
         int bookingRequestAmountMax = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.bookingrequest.amount.max"));
@@ -22,14 +22,14 @@ public class Main {
         }
         Thread mBThread = new Thread(()->{
             MessageBroker messageBroker = new MessageBroker();
-            messageBroker.start();
+            messageBroker.start(clientAmount*50);
         });
         Thread tBThread = new Thread(()->{
             TravelBroker travelBroker = new TravelBroker();
-            travelBroker.start();
+            travelBroker.start(clientAmount*50);
         });
-        mBThread.start();
         tBThread.start();
+        mBThread.start();
         for(int i = 0; i<clientAmount; i++){
             Thread clThread = new Thread(()->{
                 Client client = new Client();
@@ -37,6 +37,7 @@ public class Main {
             });
             clThread.start();
         }
+
     }
     public static String randomString(int min, int max, int bookingHotelAmount, int bookingFlightAmount){
         Random rn = new Random();

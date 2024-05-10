@@ -1,7 +1,9 @@
 
 ]
-java:S1220""Move this file to a named package.8ùõ‰“ö1J$b9211114-5aed-4186-8af2-e92b2f9e73d1
+java:S1220""Move this file to a named package.8‹˜»•ö1J$eb2bf399-311a-4a22-98ea-a4c4c16f535f
+¹
+java:S1130"wRemove the declaration of thrown exception 'java.lang.InterruptedException', as it cannot be thrown from method's body.(º™Ú78ïÚÅ•ö1J$25c6d706-9823-48b2-bcf0-70f3a80cb40c
 a
-java:S2119*"Save and re-use this "Random".(’Æ§ò8†ö‰“ö1J$83e0e51c-94da-4239-8166-bea7a93f0de8
+java:S2119+"Save and re-use this "Random".(’Æ§ò8•˜»•ö1J$0b3a298d-a3da-4a62-ab0a-dd989f208217
 q
-java:S1128"/Remove this unused import 'communications.Cli'.(¶ßƒA8þ‘‘“ö1J$6b0888f7-b371-4895-b753-635b76d530bb
+java:S1128"/Remove this unused import 'communications.Cli'.(¶ßƒA8Ý‡¿•ö1J$c6072a0e-131d-44dc-83a8-7ce30dc3b8fe
