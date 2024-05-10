@@ -10,11 +10,15 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        int testAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.testamount"));
-        int clientAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.clientamount"));
+        int testAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.test.amount"));
+        int clientAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.client.amount"));
+        int bookingRequestAmountMax = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.bookingrequest.amount.max"));
+        int bookingRequestAmountMin = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.bookingrequest.amount.min"));
+        int bookingHotelAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.amount"));
+        int bookingFlightAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.amount"));
         List<String> testingInputs = new ArrayList<>();
         for (int i = 0; i<testAmount; i++){
-            testingInputs.add("book "+ randomString());
+            testingInputs.add("book "+ randomString(bookingRequestAmountMin, bookingRequestAmountMax, bookingHotelAmount, bookingFlightAmount));
         }
         Thread mBThread = new Thread(()->{
             MessageBroker messageBroker = new MessageBroker();
@@ -34,17 +38,18 @@ public class Main {
             clThread.start();
         }
     }
-    public static String randomString(){
-        int paramAmount = (int) Math.floor(Math.random()*10) + 1;
+    public static String randomString(int min, int max, int bookingHotelAmount, int bookingFlightAmount){
+        Random rn = new Random();
+        int paramAmount = rn.nextInt(min, max);
         StringBuilder builderString = new StringBuilder();
         for(int i = 0; i<paramAmount; i++){
-            boolean type = Math.random() < 0.5;
+            boolean type = rn.nextBoolean();
             if(type){
-                builderString.append("--flight");
+                builderString.append("--flight 'f").append(rn.nextInt(0, bookingFlightAmount-1));
             }else{
-                builderString.append("--hotel");
+                builderString.append("--hotel 'h").append(rn.nextInt(0, bookingHotelAmount-1));
             }
-            builderString.append(" 'abc' " + ((int) Math.floor(Math.random()*10) + 1) + " ");
+            builderString.append("' ").append(rn.nextInt(1, 10)).append(" ");
         }
         return  builderString.toString();
     }

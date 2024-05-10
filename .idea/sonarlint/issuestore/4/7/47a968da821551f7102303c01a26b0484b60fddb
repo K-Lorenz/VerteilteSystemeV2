@@ -1,13 +1,6 @@
 
-r	java:S106"+Replace this use of System.out by a logger.(Úş†ºüÿÿÿÿ8€ŠĞşõ1J$513ae1f9-655f-41b5-8313-1da1a5e05e4b
-v
-java:S1128"3Remove this unused import 'java.io.BufferedReader'.(€é²Å8ŠĞşõ1J$5961b23d-70ea-47e4-92ec-a1686aa5251a
-y
-java:S1128"6Remove this unused import 'java.io.InputStreamReader'.(ãˆÎÉ8ŠĞşõ1J$7a2040be-4361-4dc1-ad45-758a639c4eab
-s
-java:S1128"0Remove this unused import 'java.io.PrintWriter'.(ÓŞÏÛ8ŠĞşõ1J$a86ef45b-b693-4a36-ad66-cd7bc11857d1
-o
-java:S1128	",Remove this unused import 'java.net.Socket'.(­‡àú8ŠĞşõ1J$6e6db558-76ab-46fe-a113-4caf02556259
-{
-java:S1128
-"8Remove this unused import 'java.util.GregorianCalendar'.(€û½8ŠĞşõ1J$80d3b80f-43d6-4e77-9ff9-1ed9d104112b
+“	java:S1179"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ş“µ¼8ê”¯‘ö1J$6527be33-4d18-447e-b3b9-2b57b054e29e
+r	java:S106"+Replace this use of System.out by a logger.(Úş†ºüÿÿÿÿ8ô”¯‘ö1J$de05b4ac-a2f8-4ee9-8d0f-ad1286decde9
+m	java:S106)"+Replace this use of System.out by a logger.(˜²õæ8÷”¯‘ö1J$0b16433b-26b8-4b6a-8145-63c14bc97d38
+p
+java:S11727"-Remove this unused method parameter "socket".(£ø´»8½‘ö1J$0657b6e8-7bf7-49c4-afce-cf8d5a8d2914

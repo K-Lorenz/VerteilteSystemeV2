@@ -1,5 +1,6 @@
 package communications;
 
+import misc.MessageSenderService;
 import misc.PropertyLoader;
 
 import java.io.BufferedReader;
@@ -30,11 +31,9 @@ public class MessageBroker {
                         BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         String inputLine;
                         while((inputLine = in.readLine()) != null){
-                            System.out.println("Received message: "+inputLine);
                             sendMessageToCorrectReceiver(inputLine, clientSocket);
                         }
                         in.close();
-                        clientSocket.close();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -47,23 +46,19 @@ public class MessageBroker {
     }
 
     private void sendMessageToCorrectReceiver(String message, Socket socket) {
-        String[] arr = message.split(" ", 4);
-        UUID processID = UUID.fromString(arr[2]);
-        UUID clientID = UUID.fromString(arr[0]);
-        Socket clientSocket = clientSockets.get(clientID);
-        String whatAmI = arr[1];
+        String[] arr = message.split(" ", 3);
+        UUID processID = UUID.fromString(arr[1]);
+        Socket clientSocket = clientSockets.get(processID);
+        String whatAmI = arr[0];
         if(!checkMessageAndAdd(message)) return;
         switch (whatAmI) {
             //CLient Request coming from Client
             case "ClientRq":
-                clientSockets.put(clientID, socket);
+                clientSockets.put(processID, socket);
                 //Send message to TravelBroker
+                MessageSenderService.sendMessageToTravelBroker(whatAmI + " " + processID + " " + arr[2]);
                 break;
 
-            //Reservation Request coming from TravelBroker
-            case "ReservationRq":
-                //Send message to Hotel and Flight Systems respectively
-                break;
 
             //Confirmation coming from Hotel and Flight Systems
             case "Confirmation":
@@ -72,6 +67,7 @@ public class MessageBroker {
 
             //Booking Request coming from TravelBroker
             case "BookingRq":
+                MessageSenderService.sendMessageToBookingSystem(message);
                 //Send message to Hotel and Flight Systems respectively
                 break;
 
@@ -89,14 +85,17 @@ public class MessageBroker {
                     sendMessageToClient(clientSocket, "Yay! Your booking is confirmed!");
 
                 break;
+            case "Error":
+                sendMessageToClient(clientSocket, "Error! " +arr[2]);
+                break;
             default:
                 System.out.println("Message type not recognized");
                 break;
         }
     }
     private boolean checkMessageAndAdd(String message){
-        String[] arr = message.split(" ", 4);
-        UUID processID = UUID.fromString(arr[2]);
+        String[] arr = message.split(" ", 3);
+        UUID processID = UUID.fromString(arr[1]);
         List<String> messages = processMessages.get(processID);
         if (messages == null){
             messages = new ArrayList<>();

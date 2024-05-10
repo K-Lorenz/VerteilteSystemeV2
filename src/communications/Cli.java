@@ -14,10 +14,8 @@ public class Cli {
     public static void main(String[] args) {
 
         Properties properties = PropertyLoader.loadProperties();
-        UUID clientUUID = UUID.randomUUID();
         while (true) {
             System.out.println("------------------------------------------------------------------------------------");
-            System.out.println("Client started! Your UUID is: " + clientUUID);
             System.out.println("Please input the booking that you want to send to the server!");
             System.out.println("The only Accepted Format is: book --flight '<flightNumber>' <ticketCount> --hotel '<hotelName>' <roomCount>");
             System.out.println("Example: book --flight 'AA12323' 2 --hotel 'Hilton' 2");
@@ -39,7 +37,7 @@ public class Cli {
             }
             System.out.println("Input is valid! Sending to server!");
             try {
-                UUID processUUID = UUID.randomUUID();
+                UUID processID = UUID.randomUUID();
                 //connect to messageBroker
                 Socket socket = new Socket("localhost", Integer.parseInt(properties.getProperty("messagebroker.port")));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -47,7 +45,7 @@ public class Cli {
 
                 //Remove unneccessary "book" from input
                 String[] arr = input.split(" ", 2);
-                String message = clientUUID + " ClientRq " + processUUID + " " + arr[1];
+                String message = "ClientRq " + processID + " " + arr[1];
                 out.println(message);
                 //loop for receiving multiple messages
                 //Count = Steps of the process

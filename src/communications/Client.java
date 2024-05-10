@@ -12,11 +12,10 @@ import java.util.UUID;
 
 public class Client {
     Properties properties = PropertyLoader.loadProperties();
-    UUID clientUUID = UUID.randomUUID();
     public void start(List<String> inputs){
         for(String input:inputs){
             try {
-                UUID processUUID = UUID.randomUUID();
+                UUID processID = UUID.randomUUID();
                 //connect to messageBroker
                 Socket socket = new Socket("localhost", Integer.parseInt(properties.getProperty("messagebroker.port")));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -24,7 +23,7 @@ public class Client {
 
                 //Remove unneccessary "book" from input
                 String[] arr = input.split(" ", 2);
-                String message = clientUUID + " ClientRq " + processUUID + " " + arr[1];
+                String message = "ClientRq " + processID + " " + arr[1];
                 out.println(message);
 
                 //wait for Final booking Confirmation. Socket is kept open for this Time.
@@ -34,6 +33,5 @@ public class Client {
                 e.printStackTrace();
             }
         }
-
     }
 }

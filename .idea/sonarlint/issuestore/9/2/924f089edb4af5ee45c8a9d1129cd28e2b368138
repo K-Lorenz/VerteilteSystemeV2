@@ -1,11 +1,7 @@
 
 ]
-java:S1220""Move this file to a named package.8à»¾ÿõ1J$fdd9c64c-39a7-429b-87ec-30155b863163
-l
-java:S2140&")Use "java.util.Random.nextInt()" instead.(ŞÏˆ×8é»¾ÿõ1J$7a187cf1-5559-4604-8345-247d6f6ec66e
+java:S1220""Move this file to a named package.8ùõ‰“ö1J$b9211114-5aed-4186-8af2-e92b2f9e73d1
+a
+java:S2119*"Save and re-use this "Random".(’Æ§ò8†ö‰“ö1J$83e0e51c-94da-4239-8166-bea7a93f0de8
 q
-java:S2140/")Use "java.util.Random.nextInt()" instead.(ûÕ“‰ûÿÿÿÿ8ê»¾ÿõ1J$d7e715e5-77d9-4ad0-bcd6-fe161af98275
-q
-java:S1128"/Remove this unused import 'communications.Cli'.(¶ßƒA8öøÇÿõ1J$12c343d3-fda8-40b0-9c7f-6470b04307d2
-u
-java:S1128	"-Remove this unused import 'java.util.Random'.(èøÉ›ùÿÿÿÿ8öøÇÿõ1J$b5480253-579a-4ea3-93f6-28acc89a300b
+java:S1128"/Remove this unused import 'communications.Cli'.(¶ßƒA8ş‘‘“ö1J$6b0888f7-b371-4895-b753-635b76d530bb

@@ -24,3 +24,15 @@ J
 src/misc/config.properties,f\a\faa85f2e67c32ef09d9257ebafb834bf3014abba
 K
 src/communications/Cli.java,8\7\878fad777c1330e0a6feb79c9d54f59ee961d5b9
+R
+"src/misc/BookingRequestParser.java,3\3\33869a69c5506439ccb3d06d1c6a20c4f1fe1461
+L
+src/misc/BookingRequest.java,1\9\19bcf855919cc723f876bcf7368e8884c803294b
+K
+src/misc/messageSender.java,d\4\d422c1d5b29b0de18cd18f83696f1404b5783f7c
+K
+src/misc/MessageSender.java,7\2\725d0b07cb70e538ec8b620c69099d38931816f4
+L
+src/misc/PropertyLoader.java,4\b\4bde5cd9878a2746282b2619b19f42c69b19ec04
+R
+"src/misc/MessageSenderService.java,e\2\e29c51eae5236a9df41c7aac1d13770d6e4bcbc9

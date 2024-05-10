@@ -2,23 +2,17 @@ package booking;
 
 public class FlightBookingSystem implements BookingSystem{
     @Override
-    public boolean finalizeBooking(String reservation) {
+    public boolean cancel(String cancellation) {
         return false;
     }
-   @Override
-   public boolean checkAvailability(String bookingDetails) {
-       return false;
-   }
+
     @Override
-    public boolean reserveBooking(String bookingDetails) {
+    public boolean book(String booking) {
         return false;
     }
-    @Override
-    public boolean freeReservation(String reservationDetails) {
-        return false;
-    }
+
     @Override
     public String getSystemName() {
-        return "FlightBookingSystem";
+        return null;
     }
 }
