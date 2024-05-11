@@ -17,6 +17,7 @@ import java.util.UUID;
 
 public class TravelBroker {
     private final int port;
+    //TODO: Change to List
     private final HashMap<UUID, String> confirmedFlight = new HashMap<>();
     private final HashMap<UUID, String> confirmedHotel = new HashMap<>();
     private final HashMap<UUID, String> canceledFlight = new HashMap<>();
@@ -72,6 +73,7 @@ public class TravelBroker {
                 break;
 
             case "Response":
+                //<WhatAmI> <processId> <confirmation> <responseType> <number> <amount>
                 System.out.println("TravelBroker - Received Response: " + message);
                 System.out.println("Checking if all responses from one booking are received and successful");
                 handleResponse(message, processId);
@@ -91,6 +93,7 @@ public class TravelBroker {
     }
 
     public void handleResponse(String message, UUID processId) {
+        //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
         String[] confirmMessageSplit = message.split(" ", 5);
         String confirmationType = confirmMessageSplit[2];
         String responseType = confirmMessageSplit[3];
@@ -125,6 +128,9 @@ public class TravelBroker {
         }
     }
 
+    //TODO: Multiple Flights/Hotels belonging to one booking
+
+    //TODO: Refactor to reduce code duplication
     private void handleFlightConfirmation(UUID processId, String[] confirmMessageSplit) {
         if (confirmedHotel.containsKey(processId)) {
             System.out.println("Flight Confirmation: flight " + confirmMessageSplit[4] + ". Hotel Confirmation: " + confirmedHotel.get(processId));
@@ -184,6 +190,7 @@ public class TravelBroker {
     }
 
     private void sendCancellationRequest(UUID processId, String type, String details) {
+        //TODO add flight/hotel number to cancellation request
         String cancelMessage = "CancellationRq " + processId + " " + type + " " + details;
         System.out.println("Sending Cancellation Request to Message Broker");
         MessageSenderService.sendMessageToMessageBroker(cancelMessage);
