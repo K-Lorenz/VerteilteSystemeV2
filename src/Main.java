@@ -1,3 +1,5 @@
+import booking.FlightBookingSystem;
+import booking.HotelBookingSystem;
 import communications.Cli;
 import communications.Client;
 import communications.MessageBroker;
@@ -16,6 +18,9 @@ public class Main {
         int bookingRequestAmountMin = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.bookingrequest.amount.min"));
         int bookingHotelAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.amount"));
         int bookingFlightAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.amount"));
+        int bookingHotelPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.port.start"));
+        int bookingFlightPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start"));
+
         List<String> testingInputs = new ArrayList<>();
         for (int i = 0; i<testAmount; i++){
             testingInputs.add("book "+ randomString(bookingRequestAmountMin, bookingRequestAmountMax, bookingHotelAmount, bookingFlightAmount));
@@ -28,6 +33,7 @@ public class Main {
             TravelBroker travelBroker = new TravelBroker();
             travelBroker.start(clientAmount*50);
         });
+
         tBThread.start();
         mBThread.start();
         for(int i = 0; i<clientAmount; i++){
@@ -36,6 +42,22 @@ public class Main {
                 client.start(testingInputs);
             });
             clThread.start();
+        }
+        for(int i = 0; i<bookingHotelAmount; i++){
+            int finalI = i;
+            Thread bHThread = new Thread(()->{
+                HotelBookingSystem hotelBookingSystem = new HotelBookingSystem(bookingHotelPortStart + finalI);
+                hotelBookingSystem.start(clientAmount*50);
+            });
+            bHThread.start();
+        }
+        for(int i = 0; i<bookingFlightAmount; i++){
+            int finalI = i;
+            Thread bFThread = new Thread(()->{
+                FlightBookingSystem flightBookingSystem = new FlightBookingSystem(bookingFlightPortStart + finalI);
+                flightBookingSystem.start(clientAmount*50);
+            });
+            bFThread.start();
         }
 
     }
