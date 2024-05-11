@@ -11,25 +11,27 @@ import java.net.Socket;
 import java.util.*;
 
 public class MessageBroker {
-    private int port;
-    private Map<UUID, List<String>> processMessages = new HashMap<>();
-    private Map<UUID, Socket> clientSockets = new HashMap<>();
+    private final int port;
+    private final Map<UUID, List<String>> processMessages = new HashMap<>();
+    private final Map<UUID, Socket> clientSockets = new HashMap<>();
+
     public MessageBroker() {
         port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port"));
     }
+
     public void start(int backlog) {
         //Start server
-        try(ServerSocket serverSocket = new ServerSocket(port, backlog)){
-            System.out.println("MessageBroker running on port "+serverSocket.getLocalPort());
-            while(true){
+        try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
+            System.out.println("MessageBroker running on port " + serverSocket.getLocalPort());
+            while (true) {
                 //Accept client connection
                 Socket clientSocket = serverSocket.accept();
                 //Start client thread for multi Threading
-                Thread clientThread = new Thread(()->{
-                    try{
+                Thread clientThread = new Thread(() -> {
+                    try {
                         BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         String inputLine;
-                        while((inputLine = in.readLine()) != null){
+                        while ((inputLine = in.readLine()) != null) {
                             sendMessageToCorrectReceiver(inputLine, clientSocket);
                         }
                         in.close();
@@ -50,7 +52,7 @@ public class MessageBroker {
         UUID processID = UUID.fromString(messageSplit[1]);
         Socket clientSocket = clientSockets.get(processID);
         String whatAmI = messageSplit[0];
-        if(!checkMessageAndAdd(message)) return;
+        if (!checkMessageAndAdd(message)) return;
         switch (whatAmI) {
             //CLient Request coming from Client
             case "ClientRq":
@@ -61,7 +63,7 @@ public class MessageBroker {
 
 
             //Confirmation coming from Hotel and Flight Systems
-            case "Confirmation":
+            case "Response":
                 //Send messages to TravelBroker
                 MessageSenderService.sendMessageToTravelBroker(message);
                 break;
@@ -78,34 +80,39 @@ public class MessageBroker {
                 MessageSenderService.sendMessageToBookingSystem(message);
                 break;
 
+            case "CancellationConfirmation":
+                //Send message to TravelBroker
+                MessageSenderService.sendMessageToTravelBroker(message);
+                break;
+
             //Client Confirmation coming from TravelBroker
-            case "ClientConfirmation":
+            case "ClientResponse":
                 //deconstruct message and send to correct client
-                if(messageSplit[2].equals("false"))
+                if (messageSplit[2].equals("false"))
                     MessageSenderService.sendMessageToClient(clientSocket, "Sorry! Your booking is not confirmed!");
-                else
-                    MessageSenderService.sendMessageToClient(clientSocket, "Yay! Your booking is confirmed!");
+                else MessageSenderService.sendMessageToClient(clientSocket, "Yay! Your booking is confirmed!");
 
                 break;
             case "Error":
-                MessageSenderService.sendMessageToClient(clientSocket, "Error! " +messageSplit[2]);
+                MessageSenderService.sendMessageToClient(clientSocket, "Error! " + messageSplit[2]);
                 break;
             default:
                 System.out.println("MessageBroker - Message not recognized: " + message);
                 break;
         }
     }
-    private boolean checkMessageAndAdd(String message){
+
+    private boolean checkMessageAndAdd(String message) {
         String[] arr = message.split(" ", 3);
         UUID processID = UUID.fromString(arr[1]);
         List<String> messages = processMessages.get(processID);
-        if (messages == null){
+        if (messages == null) {
             messages = new ArrayList<>();
             messages.add(message);
             processMessages.put(processID, messages);
             return true;
         }
-        if(!messages.contains(message)){
+        if (!messages.contains(message)) {
             messages.add(message);
             processMessages.put(processID, messages);
             return true;
