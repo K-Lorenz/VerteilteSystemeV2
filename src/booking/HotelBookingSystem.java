@@ -98,8 +98,10 @@ public class HotelBookingSystem implements BookingSystem {
         }
     }
 
+
+
     @Override
-    public String getSystemName() {
-        return null;
+    public String getName() {
+        return hotelList.get(this.port);
     }
 }

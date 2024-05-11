@@ -2,9 +2,9 @@ package booking;
 
 public interface BookingSystem {
 
-    boolean cancel(String cancellation);
-    boolean book(String booking);
+    boolean cancel(int requestedRooms);
+    boolean book(int requestedRooms);
 
     //Generate/Get Name of Airline/Hotelchain
-    String getSystemName();
+    String getName();
 }
