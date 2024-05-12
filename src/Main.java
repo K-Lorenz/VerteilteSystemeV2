@@ -1,6 +1,5 @@
 import booking.FlightBookingSystem;
 import booking.HotelBookingSystem;
-import communications.Cli;
 import communications.Client;
 import communications.MessageBroker;
 import communications.TravelBroker;
@@ -9,6 +8,7 @@ import misc.PropertyLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -43,18 +43,20 @@ public class Main {
             });
             clThread.start();
         }
+        HashMap<Integer, String> hotelNames = setHotelNames(bookingHotelAmount, bookingHotelPortStart);
         for(int i = 0; i<bookingHotelAmount; i++){
             int finalI = i;
             Thread bHThread = new Thread(()->{
-                HotelBookingSystem hotelBookingSystem = new HotelBookingSystem(bookingHotelPortStart + finalI);
+                HotelBookingSystem hotelBookingSystem = new HotelBookingSystem(bookingHotelPortStart + finalI, hotelNames);
                 hotelBookingSystem.start(clientAmount*50);
             });
             bHThread.start();
         }
+        HashMap<Integer, String> airlineNames = setAirlineNames(bookingFlightAmount, bookingFlightPortStart);
         for(int i = 0; i<bookingFlightAmount; i++){
             int finalI = i;
             Thread bFThread = new Thread(()->{
-                FlightBookingSystem flightBookingSystem = new FlightBookingSystem(bookingFlightPortStart + finalI);
+                FlightBookingSystem flightBookingSystem = new FlightBookingSystem(bookingFlightPortStart + finalI, airlineNames);
                 flightBookingSystem.start(clientAmount*50);
             });
             bFThread.start();
@@ -75,5 +77,22 @@ public class Main {
             builderString.append("' ").append(rn.nextInt(1, 10)).append(" ");
         }
         return  builderString.toString();
+    }
+
+    public static HashMap<Integer, String> setAirlineNames(int bookingFlightAmount, int bookingFlightPortStart){
+        HashMap<Integer, String> airlineList = new HashMap<>();
+        final String[] airLineNames = {"Zaun Airways", "Demacia Airways", "Air Piltover", "Fly Freljord", "Air Noxus", "Ionia Air", "Bandle Airways", "Shurima Skyline", "Bilgewater Airways", "Fly Void"};
+        for (int i = bookingFlightPortStart; i < bookingFlightAmount + bookingFlightPortStart; i++) {
+            airlineList.put(i, airLineNames[new Random().nextInt(airLineNames.length)]);
+        }
+        return airlineList;
+    }
+    public static HashMap<Integer, String> setHotelNames(int bookingHotelAmount, int bookingHotelPortStart){
+        final HashMap<Integer, String> hotelList = new HashMap<>();
+        final String[] hotelNames = {"Schachtelwirt", "Hotel zur Kluft", "Gasthof zum Löwen", "Hotel zur Post", "Hotel zur Sonne", "Hotel zum Bären", "Hotel zum Hirschen", "Hotel zum Ochsen", "Hotel zum Schwan", "Hotel zum Stern", "Hotel zum Storchen", "Hotel zum Taunus", "Hotel zum Turm", "Hotel zum weißen Ross", "Hotel zum weißen Schwan", "Hotel zur alten Post", "Hotel zur alten Schule", "Hotel zur alten Stadtmauer"};
+        for (int i = bookingHotelPortStart; i < bookingHotelAmount + bookingHotelPortStart; i++) {
+            hotelList.put(i, hotelNames[new Random().nextInt(hotelNames.length)]);
+        }
+        return hotelList;
     }
 }

@@ -1,5 +1,6 @@
 package misc;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.UUID;
@@ -44,10 +45,17 @@ public class MessageSenderService {
             }
             //Calculate Port from Hotelnumber and startport
             port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.port.start")) + portnum;
+
         }
         else
         {
             sendError("Booking system type not recognized!", UUID.fromString(messageSplit[1]));
+        }
+        if(messageSplit[0].equalsIgnoreCase("CancellationRq")){
+            //<WhatAmI> <ProcessId> <Quantity>
+            String newMessage = "CancellationRq " + messageSplit[1] + " " + messageSplit[4];
+            sendMessageToPort(newMessage, port);
+            return;
         }
         String newMessage = "BookingRq " + messageSplit[1] + " " + messageSplit[4];
         sendMessageToPort(newMessage, port);
@@ -71,5 +79,13 @@ public class MessageSenderService {
     }
     public static void sendError(String errorMessage, UUID processID){
         sendMessageToMessageBroker("Error " + processID + " " + errorMessage);
+    }
+    public static void sendMessageToClient(Socket socket, String message){
+        try{
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            out.println(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
