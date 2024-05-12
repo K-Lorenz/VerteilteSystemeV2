@@ -15,22 +15,17 @@ public class FlightBookingSystem implements BookingSystem {
     private final int flightPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start"));
     private final int minSeats = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.quantity.min"));
     private final int maxSeats = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.quantity.max"));
-    private final int airlines = flightPortStart + Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.amount"));
     private final int port;
-    private final HashMap<Integer, String> airlineList = new HashMap<>();
-    private final String[] names = {"Zaun Airways", "Demacia Airways", "Air Piltover", "Fly Freljord", "Air Noxus", "Ionia Air", "Bandle Airways", "Shurima Skyline", "Bilgewater Airways", "Fly Void"};
-    private int airlineNumber;
+    private final HashMap<Integer, String> airlineList;
     private int seats = new Random().nextInt(minSeats, maxSeats);
 
 
-    public FlightBookingSystem(int port) {
+    public FlightBookingSystem(int port, HashMap<Integer, String> airlineList) {
         this.port = port;
+        this.airlineList = airlineList;
     }
 
     public void start(int backlog) {
-        for (int i = flightPortStart; i < airlines; i++) {
-            airlineList.put(i, names[new Random().nextInt(names.length)]);
-        }
         try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
             System.out.println("FlightBookingSystem running on port " + port);
             while (true) {
@@ -41,8 +36,8 @@ public class FlightBookingSystem implements BookingSystem {
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
                             //Handle message and answer
-                            handleRequest(inputLine, flightSocket);
                             System.out.println("FlightBookingSystem - Received message: " + inputLine);
+                            handleRequest(inputLine, flightSocket);
                         }
                         in.close();
                         flightSocket.close();
@@ -62,7 +57,7 @@ public class FlightBookingSystem implements BookingSystem {
         String[] splitMessage = booking.split(" ", 3);
         String processId = splitMessage[1];
         String whatAmI = splitMessage[0];
-        airlineNumber = port - flightPortStart;
+        int airlineNumber = port - flightPortStart;
         boolean successful;
         int requestedSeats = Integer.parseInt(splitMessage[2]);
         if (whatAmI.equals("BookingRq")) {
@@ -80,14 +75,14 @@ public class FlightBookingSystem implements BookingSystem {
     @Override
     public boolean cancel(int requestedSeats) {
         seats += requestedSeats;
-        System.out.println("FlightBookingSystem: " + requestedSeats + " rooms could not be booked. Remaining rooms: " + seats + ".");
+        System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats freed. Remaining seats: " + seats + ".");
         return true;
     }
 
     @Override
     public boolean book(int requestedSeats) {
         if (requestedSeats > seats) {
-            System.out.println("FlightBookingSystem: " + requestedSeats + " seats could not be booked. Remaining seats: " + seats + ".");
+            System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats could not be booked. Remaining seats: " + seats + ".");
             return false;
         }
         seats -= requestedSeats;
@@ -98,6 +93,6 @@ public class FlightBookingSystem implements BookingSystem {
 
     @Override
     public String getName() {
-        return airlineList.get(port);
+        return this.airlineList.get(port);
     }
 }

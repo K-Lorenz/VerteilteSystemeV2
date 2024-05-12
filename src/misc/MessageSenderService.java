@@ -35,11 +35,6 @@ public class MessageSenderService {
             }
             //Calculate Port from Flightnumber and startport
             port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start")) + portnum;
-            if(messageSplit[0] == "CancellationRq"){
-                //<WhatAmI> <ProcessId> <FlightNumber>
-                sendMessageToPort("CancellationRq " + messageSplit[1] + " " + messageSplit[3], port);
-                return;
-            }
         }
         else if(messageSplit[2].equals("hotel")){
             //Check if portnumber is higher than allowed amount of Hotel Systems
@@ -50,15 +45,17 @@ public class MessageSenderService {
             }
             //Calculate Port from Hotelnumber and startport
             port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.port.start")) + portnum;
-            if(messageSplit[0] == "CancellationRq"){
-                //<WhatAmI> <ProcessId> <HotelNumber>
-                sendMessageToPort("CancellationRq " + messageSplit[1] + " " + messageSplit[3], port);
-                return;
-            }
+
         }
         else
         {
             sendError("Booking system type not recognized!", UUID.fromString(messageSplit[1]));
+        }
+        if(messageSplit[0].equalsIgnoreCase("CancellationRq")){
+            //<WhatAmI> <ProcessId> <Quantity>
+            String newMessage = "CancellationRq " + messageSplit[1] + " " + messageSplit[4];
+            sendMessageToPort(newMessage, port);
+            return;
         }
         String newMessage = "BookingRq " + messageSplit[1] + " " + messageSplit[4];
         sendMessageToPort(newMessage, port);

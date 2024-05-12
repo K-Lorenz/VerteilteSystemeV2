@@ -15,22 +15,17 @@ public class HotelBookingSystem implements BookingSystem {
     private final int hotelPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.port.start"));
     private final int minRooms = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.quantity.min"));
     private final int maxRooms = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.quantity.max"));
-    private final int hotels = hotelPortStart + Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.amount"));
     private final int port;
-    private final HashMap<Integer, String> hotelList = new HashMap<>();
-    private final String[] names = {"Schachtelwirt", "Hotel zur Kluft", "Gasthof zum Löwen", "Hotel zur Post", "Hotel zur Sonne", "Hotel zum Bären", "Hotel zum Hirschen", "Hotel zum Ochsen", "Hotel zum Schwan", "Hotel zum Stern", "Hotel zum Storchen", "Hotel zum Taunus", "Hotel zum Turm", "Hotel zum weißen Ross", "Hotel zum weißen Schwan", "Hotel zur alten Post", "Hotel zur alten Schule", "Hotel zur alten Stadtmauer"};
-    private int hotelNumber;
     private int rooms = new Random().nextInt(minRooms, maxRooms);
+    private final HashMap<Integer, String> hotelList;
 
 
-    public HotelBookingSystem(int port) {
+    public HotelBookingSystem(int port, HashMap<Integer, String> hotelList) {
         this.port = port;
+        this.hotelList = hotelList;
     }
 
     public void start(int backlog) {
-        for (int i = hotelPortStart; i < hotels; i++) {
-            hotelList.put(i, names[new Random().nextInt(names.length)]);
-        }
         try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
             System.out.println("HotelBookingSystem running on port " + port);
             while (true) {
@@ -41,8 +36,8 @@ public class HotelBookingSystem implements BookingSystem {
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
                             //Handle message and answer
-                            handleRequest(inputLine, hotelSocket);
                             System.out.println("HotelBookingSystem - Received message: " + inputLine);
+                            handleRequest(inputLine, hotelSocket);
                         }
                         in.close();
                         hotelSocket.close();
@@ -62,7 +57,7 @@ public class HotelBookingSystem implements BookingSystem {
         String[] splitMessage = booking.split(" ", 3);
         String processId = splitMessage[1];
         String whatAmI = splitMessage[0];
-        hotelNumber = port - hotelPortStart;
+        int hotelNumber = port - hotelPortStart;
         boolean successful;
         int requestedRooms = Integer.parseInt(splitMessage[2]);
         if (whatAmI.equals("BookingRq")) {
@@ -82,14 +77,14 @@ public class HotelBookingSystem implements BookingSystem {
     @Override
     public boolean cancel(int requestedRooms) {
         rooms += requestedRooms;
-        System.out.println("HotelBookingSystem: " + requestedRooms + " rooms could not be booked. Remaining rooms: " + rooms + ".");
+        System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms freed. Remaining rooms: " + rooms + ".");
         return true;
     }
 
     @Override
     public boolean book(int requestedRooms) {
         if (requestedRooms > rooms) {
-            System.out.println("HotelBookingSystem: " + requestedRooms + " rooms could not be booked. Remaining rooms: " + rooms + ".");
+            System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms could not be booked. Remaining rooms: " + rooms + ".");
             return false;
         }
         rooms -= requestedRooms;
@@ -100,6 +95,6 @@ public class HotelBookingSystem implements BookingSystem {
 
     @Override
     public String getName() {
-        return hotelList.get(this.port);
+        return this.hotelList.get(this.port);
     }
 }
