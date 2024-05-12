@@ -119,9 +119,11 @@ public class TravelBroker {
             System.out.println(responseType + " " + details + " was confirmed, but since another booking was canceled, it will be canceled as well.");
             sendCancellationRequest(processId, responseType, details);
             if (responseType.equals("flight")) {
+                canceledFlights.putIfAbsent(processId, new ArrayList<>());
                 canceledFlights.get(processId).add(details);
                 System.out.println("Canceled Flights: " + canceledFlights.get(processId));
             } else {
+                canceledHotels.putIfAbsent(processId, new ArrayList<>());
                 canceledHotels.get(processId).add(details);
                 System.out.println("Canceled Hotels: " + canceledHotels.get(processId));
             }
