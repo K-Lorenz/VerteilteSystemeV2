@@ -62,15 +62,16 @@ public class MessageBroker {
 
 
             //Confirmation coming from Hotel and Flight Systems
-            case "Confirmation":
+            case "Response":
                 //Send messages to TravelBroker
+                System.out.println("Response " + message);
                 break;
 
             //Booking Request coming from TravelBroker
             case "BookingRq":
                 System.out.println("Booking request " + message);
-                //MessageSenderService.sendMessageToBookingSystem(message);
                 //Send message to Hotel and Flight Systems respectively
+                MessageSenderService.sendMessageToBookingSystem(message);
                 break;
 
             //Cancellation Request coming from TravelBroker
