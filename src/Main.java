@@ -66,27 +66,29 @@ public class Main {
         }
         startServer(bookingHotelPortStart, bookingFlightPortStart, hotelNames, airlineNames);
     }
+    public static Random random = new Random();
+
     public static String randomString(int min, int max, int bookingHotelAmount, int bookingFlightAmount){
-        Random rn = new Random();
-        int paramAmount = rn.nextInt(min, max);
+        int paramAmount = random.nextInt(min, max);
         StringBuilder builderString = new StringBuilder();
         for(int i = 0; i<paramAmount; i++){
-            boolean type = rn.nextBoolean();
+            boolean type = random.nextBoolean();
             if(type){
-                builderString.append("--flight 'f").append(rn.nextInt(0, bookingFlightAmount-1));
+                builderString.append("--flight 'f").append(random.nextInt(0, bookingFlightAmount-1));
             }else{
-                builderString.append("--hotel 'h").append(rn.nextInt(0, bookingHotelAmount-1));
+                builderString.append("--hotel 'h").append(random.nextInt(0, bookingHotelAmount-1));
             }
-            builderString.append("' ").append(rn.nextInt(1, 10)).append(" ");
+            builderString.append("' ").append(random.nextInt(1, 10)).append(" ");
         }
         return  builderString.toString();
     }
+
 
     public static HashMap<Integer, String> setAirlineNames(int bookingFlightAmount, int bookingFlightPortStart){
         HashMap<Integer, String> airlineList = new HashMap<>();
         final String[] airLineNames = {"Zaun Airways", "Air Piltover", "Fly Freljord", "Ionia Air", "Bandle Airways", "Shurima Skyline"};
         for (int i = bookingFlightPortStart; i < bookingFlightAmount + bookingFlightPortStart; i++) {
-            airlineList.put(i, airLineNames[new Random().nextInt(airLineNames.length)]);
+            airlineList.put(i, airLineNames[random.nextInt(airLineNames.length)]);
         }
         return airlineList;
     }
@@ -94,9 +96,9 @@ public class Main {
         final HashMap<Integer, String> hotelList = new HashMap<>();
         final String[] hotelNames = {"Schachtelwirt", "Hotel zur Kluft", "Gasthof zum Löwen", "Hotel zur Post", "Hotel zur Sonne", "Hotel zum Bären", "Hotel zum Hirschen", "Hotel zum Ochsen", "Hotel zum Schwan", "Hotel zum Stern", "Hotel zum Storchen", "Hotel zum Taunus", "Hotel zum Turm", "Hotel zum weißen Ross", "Hotel zum weißen Schwan", "Hotel zur alten Post", "Hotel zur alten Schule", "Hotel zur alten Stadtmauer"};
         for (int i = bookingHotelPortStart; i < bookingHotelAmount + bookingHotelPortStart; i++) {
-            String hotelName = hotelNames[new Random().nextInt(hotelNames.length)];
+            String hotelName = hotelNames[random.nextInt(hotelNames.length)];
             while(hotelList.containsValue(hotelName)){
-                hotelName = hotelNames[new Random().nextInt(hotelNames.length)];
+                hotelName = hotelNames[random.nextInt(hotelNames.length)];
             }
             hotelList.put(i, hotelName);
         }
