@@ -75,14 +75,14 @@ public class HotelBookingSystem implements BookingSystem {
 
 
     @Override
-    public boolean cancel(int requestedRooms) {
+    public synchronized boolean cancel(int requestedRooms) {
         rooms += requestedRooms;
         System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms freed. Remaining rooms: " + rooms + ".");
         return true;
     }
 
     @Override
-    public boolean book(int requestedRooms) {
+    public synchronized boolean book(int requestedRooms) {
         if (requestedRooms > rooms) {
             System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms could not be booked. Remaining rooms: " + rooms + ".");
             return false;

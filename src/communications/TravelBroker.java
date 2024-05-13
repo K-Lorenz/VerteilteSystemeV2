@@ -20,6 +20,7 @@ public class TravelBroker {
     private final HashMap<UUID, List<String>> canceledHotels = new HashMap<>();
     private final HashMap<UUID, Integer> amountOfHotelsInBooking = new HashMap<>();
     private final HashMap<UUID, Integer> amountOfFlightsInBooking = new HashMap<>();
+    private final HashMap<UUID, Long> timePerBooking = new HashMap<>();
 
     public TravelBroker() {
         Properties properties = PropertyLoader.loadProperties();
@@ -38,8 +39,7 @@ public class TravelBroker {
                         while ((inputLine = in.readLine()) != null) {
                             //Handle message and answer
                             //Switch case for different messages
-                            System.out.println("TravelBroker - Received message: " + inputLine);
-                            handleRequest(inputLine, travelSocket);
+                            handleRequest(inputLine);
                         }
                         in.close();
                         travelSocket.close();
@@ -54,13 +54,14 @@ public class TravelBroker {
         }
     }
 
-    public void handleRequest(String message, Socket socket) {
+    public void handleRequest(String message) {
         //MessageSplit [0] = WhatAmI, [1] = processId, [2] = Message
         String[] messageSplit = message.split(" ", 3);
         UUID processId = UUID.fromString(messageSplit[1]);
         String whatAmI = messageSplit[0];
         switch (whatAmI) {
             case "ClientRq":
+                System.out.println("TravelBroker - Received ClientRq: " + message);
                 int flights = 0;
                 int hotels = 0;
                 List<BookingRequest> bookingRequests = BookingRequestParser.parse(messageSplit[2]);
@@ -75,6 +76,8 @@ public class TravelBroker {
                     String newMessage = "BookingRq " + processId + " " + bookingRequest.type() + " " + bookingRequest.name() + " " + bookingRequest.quantity();
                     MessageSenderService.sendMessageToMessageBroker(newMessage);
                 }
+                //TODO: check this time to see if the booking timed out
+                timePerBooking.put(processId, System.currentTimeMillis());
                 amountOfFlightsInBooking.put(processId, flights);
                 amountOfHotelsInBooking.put(processId, hotels);
                 break;
@@ -98,7 +101,7 @@ public class TravelBroker {
         }
     }
 
-    public void handleResponse(String message, UUID processId) {
+    public synchronized void handleResponse(String message, UUID processId) {
         //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
         //example confirmMessageSplit [0] = Response, [1] = UUID, [2] = true, [3] = flight, [4] = F20 5
         String[] confirmMessageSplit = message.split(" ", 5);
@@ -114,7 +117,7 @@ public class TravelBroker {
     }
 
 
-    private void handleConfirmation(UUID processId, String responseType, String details) {
+    private synchronized void handleConfirmation(UUID processId, String responseType, String details) {
         if (canceledFlights.containsKey(processId) || canceledHotels.containsKey(processId)) {
             System.out.println(responseType + " " + details + " was confirmed, but since another booking was canceled, it will be canceled as well.");
             sendCancellationRequest(processId, responseType, details);
@@ -151,7 +154,7 @@ public class TravelBroker {
         System.out.println(responseType + " " + details + " was confirmed. Waiting for other responses.");
     }
 
-    private void handleCancellation(UUID processId, String responseType, String details) {
+    private synchronized void handleCancellation(UUID processId, String responseType, String details) {
         if (responseType.equals("flight")) {
             canceledFlights.putIfAbsent(processId, new ArrayList<>());
             canceledFlights.get(processId).add(details);
@@ -176,6 +179,7 @@ public class TravelBroker {
             for (String hotel : confirmedHotels.get(processId)) {
                 sendCancellationRequest(processId, "hotel", hotel);
             }
+            canceledHotels.putIfAbsent(processId, new ArrayList<>());
             canceledHotels.get(processId).addAll(confirmedHotels.get(processId));
             confirmedHotels.remove(processId);
             return;

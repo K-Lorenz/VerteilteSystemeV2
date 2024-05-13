@@ -73,14 +73,14 @@ public class FlightBookingSystem implements BookingSystem {
 
 
     @Override
-    public boolean cancel(int requestedSeats) {
+    public synchronized boolean cancel(int requestedSeats) {
         seats += requestedSeats;
         System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats freed. Remaining seats: " + seats + ".");
         return true;
     }
 
     @Override
-    public boolean book(int requestedSeats) {
+    public synchronized boolean book(int requestedSeats) {
         if (requestedSeats > seats) {
             System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats could not be booked. Remaining seats: " + seats + ".");
             return false;

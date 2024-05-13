@@ -89,8 +89,8 @@ public class MessageBroker {
             case "ClientResponse":
                 //deconstruct message and send to correct client
                 if (messageSplit[2].equals("false"))
-                    MessageSenderService.sendMessageToClient(clientSocket, "Sorry! Your booking is not confirmed!");
-                else MessageSenderService.sendMessageToClient(clientSocket, "Yay! Your booking is confirmed!");
+                    MessageSenderService.sendMessageToClient(clientSocket, "Sorry! Your booking " + processID + " is not confirmed!");
+                else MessageSenderService.sendMessageToClient(clientSocket, "Yay! Your booking " + processID + " is confirmed!");
 
                 break;
             case "Error":
