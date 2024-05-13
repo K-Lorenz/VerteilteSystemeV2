@@ -1,0 +1,14 @@
+
+s
+java:S1192N"VDefine a constant instead of duplicating this literal "FlightBookingSystem: " 3 times.(ÔŒ½§8£ËÌ÷1
+Š
+java:S1319"hThe type of "airlineList" should be an interface such as "Map" rather than the implementation "HashMap".(Œæ×¹üÿÿÿÿ8¤ËÌ÷1
+;
+java:S2119"Save and re-use this "Random".(íÉØ 8¬ËÌ÷1
+F	java:S106"+Replace this use of System.out by a logger.(ê±õk8­ËÌ÷1
+G	java:S106'"+Replace this use of System.out by a logger.(¹ıÎ­8¯ËÌ÷1
+U
+java:S11727"3Remove this unused method parameter "flightSocket".(äÀøıÿÿÿÿ8°ËÌ÷1
+G	java:S106N"+Replace this use of System.out by a logger.(ÔŒ½§8²ËÌ÷1
+L	java:S106U"+Replace this use of System.out by a logger.(üõ³§úÿÿÿÿ8²ËÌ÷1
+F	java:S106Y"+Replace this use of System.out by a logger.(‹„“s8²ËÌ÷1

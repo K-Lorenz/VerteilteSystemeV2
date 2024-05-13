@@ -67,13 +67,13 @@ public class TravelBroker {
                 List<BookingRequest> bookingRequests = BookingRequestParser.parse(messageSplit[2]);
                 for (BookingRequest bookingRequest : bookingRequests) {
                     //Send Flight/Hotel BookingRq to Message broker
-                    if (bookingRequest.type().equals("flight")) {
+                    if (bookingRequest.getType().equals("flight")) {
                         flights++;
                     } else {
                         hotels++;
                     }
                     System.out.println("TravelBroker - Sending BookingRq to MessageBroker: " + bookingRequest);
-                    String newMessage = "BookingRq " + processId + " " + bookingRequest.type() + " " + bookingRequest.name() + " " + bookingRequest.quantity();
+                    String newMessage = "BookingRq " + processId + " " + bookingRequest.getType() + " " + bookingRequest.getName() + " " + bookingRequest.getQuantity();
                     MessageSenderService.sendMessageToMessageBroker(newMessage);
                 }
                 //TODO: check this time to see if the booking timed out
