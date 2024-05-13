@@ -5,6 +5,9 @@ import communications.MessageBroker;
 import communications.TravelBroker;
 import misc.PropertyLoader;
 
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -61,7 +64,7 @@ public class Main {
             });
             bFThread.start();
         }
-
+        startServer(bookingHotelPortStart, bookingFlightPortStart, hotelNames, airlineNames);
     }
     public static String randomString(int min, int max, int bookingHotelAmount, int bookingFlightAmount){
         Random rn = new Random();
@@ -81,7 +84,7 @@ public class Main {
 
     public static HashMap<Integer, String> setAirlineNames(int bookingFlightAmount, int bookingFlightPortStart){
         HashMap<Integer, String> airlineList = new HashMap<>();
-        final String[] airLineNames = {"Zaun Airways", "Demacia Airways", "Air Piltover", "Fly Freljord", "Air Noxus", "Ionia Air", "Bandle Airways", "Shurima Skyline", "Bilgewater Airways", "Fly Void"};
+        final String[] airLineNames = {"Zaun Airways", "Air Piltover", "Fly Freljord", "Ionia Air", "Bandle Airways", "Shurima Skyline"};
         for (int i = bookingFlightPortStart; i < bookingFlightAmount + bookingFlightPortStart; i++) {
             airlineList.put(i, airLineNames[new Random().nextInt(airLineNames.length)]);
         }
@@ -91,8 +94,58 @@ public class Main {
         final HashMap<Integer, String> hotelList = new HashMap<>();
         final String[] hotelNames = {"Schachtelwirt", "Hotel zur Kluft", "Gasthof zum Löwen", "Hotel zur Post", "Hotel zur Sonne", "Hotel zum Bären", "Hotel zum Hirschen", "Hotel zum Ochsen", "Hotel zum Schwan", "Hotel zum Stern", "Hotel zum Storchen", "Hotel zum Taunus", "Hotel zum Turm", "Hotel zum weißen Ross", "Hotel zum weißen Schwan", "Hotel zur alten Post", "Hotel zur alten Schule", "Hotel zur alten Stadtmauer"};
         for (int i = bookingHotelPortStart; i < bookingHotelAmount + bookingHotelPortStart; i++) {
-            hotelList.put(i, hotelNames[new Random().nextInt(hotelNames.length)]);
+            String hotelName = hotelNames[new Random().nextInt(hotelNames.length)];
+            while(hotelList.containsValue(hotelName)){
+                hotelName = hotelNames[new Random().nextInt(hotelNames.length)];
+            }
+            hotelList.put(i, hotelName);
         }
         return hotelList;
     }
+
+
+    //after executing Main, visit localhost:8080 to see the hotel and airline Names, keep Main running to see them
+    public static void startServer(int bookingHotelPortStart, int bookingFlightPortStart, HashMap<Integer, String> hotelNames, HashMap<Integer, String> airlineNames) {
+        StringBuilder hotelListHtml = new StringBuilder("<h2>Hotels:</h2>");
+        for (Integer port : hotelNames.keySet()) {
+            hotelListHtml.append("<p>").append("H").append(port - bookingHotelPortStart).append(": ").append(hotelNames.get(port)).append("</p>");
+        }
+
+        StringBuilder airlineListHtml = new StringBuilder("<h2>Airlines:</h2>");
+        for (Integer port : airlineNames.keySet()) {
+            airlineListHtml.append("<p>").append("F").append(port - bookingFlightPortStart).append(": ").append(airlineNames.get(port)).append("</p>");
+        }
+
+        String htmlContent = "<!DOCTYPE html>"
+                + "<html lang=\"en\">"
+                + "<head>"
+                + "<meta charset=\"UTF-8\">"
+                + "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+                + "<title>Airlines and Hotels</title>"
+                + "</head>"
+                + "<body>"
+                + "<h1>Airlines and Hotels</h1>"
+                + hotelListHtml
+                + airlineListHtml
+                + "</body>"
+                + "</html>";
+
+        new Thread(() -> {
+            try (ServerSocket serverSocket = new ServerSocket(8080)) {
+                while (true) {
+                    Socket clientSocket = serverSocket.accept();
+                    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                    out.println("HTTP/1.1 200 OK");
+                    out.println("Content-Type: text/html");
+                    out.println();
+                    out.println(htmlContent);
+                    out.close();
+                    clientSocket.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
 }
