@@ -6,6 +6,6 @@ public interface BookingSystem {
 
     boolean book(int requestedRooms);
 
-    //Generate/Get Name of Airline/Hotelchain
     String getName();
+
 }

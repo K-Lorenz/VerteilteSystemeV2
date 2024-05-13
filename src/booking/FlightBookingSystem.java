@@ -93,6 +93,6 @@ public class FlightBookingSystem implements BookingSystem {
 
     @Override
     public String getName() {
-        return " F" + (port-flightPortStart) + " - " + airlineList.get(port);
+        return " F" + (port - flightPortStart) + " - " + airlineList.get(port);
     }
 }

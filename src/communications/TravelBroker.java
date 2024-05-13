@@ -66,7 +66,7 @@ public class TravelBroker {
                 int hotels = 0;
                 List<BookingRequest> bookingRequests = BookingRequestParser.parse(messageSplit[2]);
                 for (BookingRequest bookingRequest : bookingRequests) {
-                    //Send Flight/Hotel BookingRq to Messagebroker
+                    //Send Flight/Hotel BookingRq to Message broker
                     if (bookingRequest.type().equals("flight")) {
                         flights++;
                     } else {
@@ -83,7 +83,7 @@ public class TravelBroker {
                 break;
 
             case "Response":
-                //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
+                //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flight/Hotel number> <amount>
                 System.out.println("TravelBroker - Received Response: " + message);
                 handleResponse(message, processId);
                 break;
@@ -102,7 +102,7 @@ public class TravelBroker {
     }
 
     public synchronized void handleResponse(String message, UUID processId) {
-        //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
+        //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flight/Hotel number> <amount>
         //example confirmMessageSplit [0] = Response, [1] = UUID, [2] = true, [3] = flight, [4] = F20 5
         String[] confirmMessageSplit = message.split(" ", 5);
         boolean confirmationType = Boolean.parseBoolean(confirmMessageSplit[2]);
@@ -121,15 +121,7 @@ public class TravelBroker {
         if (canceledFlights.containsKey(processId) || canceledHotels.containsKey(processId)) {
             System.out.println(responseType + " " + details + " was confirmed, but since another booking was canceled, it will be canceled as well.");
             sendCancellationRequest(processId, responseType, details);
-            if (responseType.equals("flight")) {
-                canceledFlights.putIfAbsent(processId, new ArrayList<>());
-                canceledFlights.get(processId).add(details);
-                System.out.println("Canceled Flights: " + canceledFlights.get(processId));
-            } else {
-                canceledHotels.putIfAbsent(processId, new ArrayList<>());
-                canceledHotels.get(processId).add(details);
-                System.out.println("Canceled Hotels: " + canceledHotels.get(processId));
-            }
+            addToCanceledMap(processId, responseType, details);
             return;
         }
         if (responseType.equals("flight")) {
@@ -155,21 +147,14 @@ public class TravelBroker {
     }
 
     private synchronized void handleCancellation(UUID processId, String responseType, String details) {
-        if (responseType.equals("flight")) {
-            canceledFlights.putIfAbsent(processId, new ArrayList<>());
-            canceledFlights.get(processId).add(details);
-            System.out.println("Canceled Flights: " + canceledFlights.get(processId));
-        } else {
-            canceledHotels.putIfAbsent(processId, new ArrayList<>());
-            canceledHotels.get(processId).add(details);
-            System.out.println("Canceled Hotels: " + canceledHotels.get(processId));
-        }
+        addToCanceledMap(processId, responseType, details);
 
         if (confirmedFlights.containsKey(processId)) {
             System.out.println(responseType + " " + details + " was canceled, and since a flight was confirmed, it will be canceled.");
             for (String flight : confirmedFlights.get(processId)) {
                 sendCancellationRequest(processId, "flight", flight);
             }
+            canceledFlights.putIfAbsent(processId, new ArrayList<>());
             canceledFlights.get(processId).addAll(confirmedFlights.get(processId));
             confirmedFlights.remove(processId);
             return;
@@ -195,6 +180,18 @@ public class TravelBroker {
         System.out.println(responseType + " " + details + " was canceled. Waiting for other responses.");
 
 
+    }
+
+    private void addToCanceledMap(UUID processId, String responseType, String details) {
+        if (responseType.equals("flight")) {
+            canceledFlights.putIfAbsent(processId, new ArrayList<>());
+            canceledFlights.get(processId).add(details);
+            System.out.println("Canceled Flights: " + canceledFlights.get(processId));
+        } else {
+            canceledHotels.putIfAbsent(processId, new ArrayList<>());
+            canceledHotels.get(processId).add(details);
+            System.out.println("Canceled Hotels: " + canceledHotels.get(processId));
+        }
     }
 
     private void sendResponse(UUID processId, boolean success) {

@@ -16,8 +16,8 @@ public class HotelBookingSystem implements BookingSystem {
     private final int minRooms = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.quantity.min"));
     private final int maxRooms = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.quantity.max"));
     private final int port;
-    private int rooms = new Random().nextInt(minRooms, maxRooms);
     private final HashMap<Integer, String> hotelList;
+    private int rooms = new Random().nextInt(minRooms, maxRooms);
 
 
     public HotelBookingSystem(int port, HashMap<Integer, String> hotelList) {
@@ -69,8 +69,6 @@ public class HotelBookingSystem implements BookingSystem {
             //<WhatAmI> <processId> <false>
             MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
         }
-
-
     }
 
 
@@ -95,6 +93,6 @@ public class HotelBookingSystem implements BookingSystem {
 
     @Override
     public String getName() {
-        return "H" + (port-hotelPortStart) + " - " + hotelList.get(this.port);
+        return "H" + (port - hotelPortStart) + " - " + hotelList.get(this.port);
     }
 }
