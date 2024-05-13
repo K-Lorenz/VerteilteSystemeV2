@@ -95,6 +95,6 @@ public class HotelBookingSystem implements BookingSystem {
 
     @Override
     public String getName() {
-        return this.hotelList.get(this.port);
+        return "H" + (port-hotelPortStart) + " - " + hotelList.get(this.port);
     }
 }
