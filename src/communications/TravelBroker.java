@@ -138,7 +138,10 @@ public class TravelBroker {
         Integer amountOfFlights = amountOfFlightsInBooking.get(processId);
         Integer amountOfHotels = amountOfHotelsInBooking.get(processId);
 
-        if (confirmedFlightsList != null && confirmedHotelsList != null && amountOfFlights != null && amountOfHotels != null && confirmedFlightsList.size() == amountOfFlights && confirmedHotelsList.size() == amountOfHotels) {
+        boolean allFlightsConfirmed = confirmedFlightsList != null && !confirmedFlightsList.isEmpty() && amountOfFlights != 0 && confirmedFlightsList.size() == amountOfFlights;
+        boolean allHotelsConfirmed = confirmedHotelsList != null && !confirmedHotelsList.isEmpty() && amountOfHotels != 0 && confirmedHotelsList.size() == amountOfHotels;
+
+        if ((allFlightsConfirmed && allHotelsConfirmed) || ((allFlightsConfirmed && amountOfHotels == 0) || (amountOfFlights == 0 && allHotelsConfirmed))) {
             System.out.println(responseType + " " + details + " was confirmed, and all other bookings were successful as well.");
             sendResponse(processId, true);
             return;
@@ -171,8 +174,13 @@ public class TravelBroker {
         }
         List<String> canceledFlightsList = canceledFlights.get(processId);
         List<String> canceledHotelsList = canceledHotels.get(processId);
+        Integer amountOfFlights = amountOfFlightsInBooking.get(processId);
+        Integer amountOfHotels = amountOfHotelsInBooking.get(processId);
 
-        if (canceledFlightsList != null && canceledHotelsList != null && canceledFlightsList.size() == amountOfFlightsInBooking.get(processId) && canceledHotelsList.size() == amountOfHotelsInBooking.get(processId)) {
+        boolean allFlightsCanceled = canceledFlightsList != null && !canceledFlightsList.isEmpty() && amountOfFlights != 0 && canceledFlightsList.size() == amountOfFlights;
+        boolean allHotelsCanceled = canceledHotelsList != null && !canceledHotelsList.isEmpty() && amountOfHotels != 0 && canceledHotelsList.size() == amountOfHotels;
+
+        if ((allFlightsCanceled && allHotelsCanceled) || ((allFlightsCanceled && amountOfHotels == 0) || (amountOfFlights == 0 && allHotelsCanceled))) {
             System.out.println(responseType + " " + details + " was canceled, and all other bookings were canceled as well.");
             sendResponse(processId, false);
             return;
