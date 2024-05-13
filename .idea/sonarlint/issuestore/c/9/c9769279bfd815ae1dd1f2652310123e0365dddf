@@ -1,0 +1,14 @@
+
+r
+java:S1192N"UDefine a constant instead of duplicating this literal "HotelBookingSystem: " 3 times.(ŒÒíî8¼ËÌ÷1
+ˆ
+java:S1319"fThe type of "hotelList" should be an interface such as "Map" rather than the implementation "HashMap".(öÚÃŒıÿÿÿÿ8¼ËÌ÷1
+;
+java:S2119"Save and re-use this "Random".(¾†–Ù8ÄËÌ÷1
+G	java:S106"+Replace this use of System.out by a logger.(¸¾Ä–8ÅËÌ÷1
+L	java:S106'"+Replace this use of System.out by a logger.(èƒÕõıÿÿÿÿ8ÇËÌ÷1
+T
+java:S11727"2Remove this unused method parameter "hotelSocket".(™Ğæ˜ıÿÿÿÿ8ÈËÌ÷1
+G	java:S106N"+Replace this use of System.out by a logger.(ŒÒíî8ÉËÌ÷1
+L	java:S106U"+Replace this use of System.out by a logger.(ñ¾¤Éıÿÿÿÿ8ÉËÌ÷1
+L	java:S106Y"+Replace this use of System.out by a logger.(â¬šŠıÿÿÿÿ8ÊËÌ÷1

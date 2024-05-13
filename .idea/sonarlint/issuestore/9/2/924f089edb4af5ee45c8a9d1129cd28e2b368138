@@ -1,9 +1,15 @@
 
+Š
+java:S1319R"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(Ëöõ8èÊÌ÷1
+
+java:S1319Z"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(¤€Ÿıÿÿÿÿ8èÊÌ÷1
 ]
-java:S1220""Move this file to a named package.8‹˜»•ö1J$eb2bf399-311a-4a22-98ea-a4c4c16f535f
-¹
-java:S1130"wRemove the declaration of thrown exception 'java.lang.InterruptedException', as it cannot be thrown from method's body.(º™Ú78ïÚÅ•ö1J$25c6d706-9823-48b2-bcf0-70f3a80cb40c
-a
-java:S2119+"Save and re-use this "Random".(’Æ§ò8•˜»•ö1J$0b3a298d-a3da-4a62-ab0a-dd989f208217
-q
-java:S1128"/Remove this unused import 'communications.Cli'.(¶ßƒA8İ‡¿•ö1J$c6072a0e-131d-44dc-83a8-7ce30dc3b8fe
+java:S1220""Move this file to a named package.8‹˜»•ö1J$142132e7-fdcd-485c-bbcf-ffe2f1f41006
+“
+java:S1130"wRemove the declaration of thrown exception 'java.lang.InterruptedException', as it cannot be thrown from method's body.(º™Ú78ƒËÌ÷1
+;
+java:S2119C"Save and re-use this "Random".(’Æ§ò8ŠËÌ÷1
+;
+java:S2119V"Save and re-use this "Random".(ùÊÔ‰8ŒËÌ÷1
+@
+java:S2119^"Save and re-use this "Random".(Õ€µÍúÿÿÿÿ8ËÌ÷1
