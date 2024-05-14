@@ -8,7 +8,7 @@ Initialisierung (angelehnt an Kims Vorarbeit) und Planung des Projekts . Client 
 Anbindung Properties. BookingRequestParser. BookingSystemInterface geschrieben.
 (Initialisierung: Ich habe die grundlegende Struktur aufgebaut. Jedoch wurde diese erweitert und angepasst)
 ## Uiyoung Kim:
-Ich, Uiyoung Kim, habe mich um die Struktur, Planung und Initialisierung des Projekts gekümmert, die Grundstruktur der Server und Klassen erstellt, die Logik für Buchung und Messagebroker hinzugefügt und die Travelbroker-Initialisierung durchgeführt. Zudem habe ich bei der Dokumentation geholfen.
+Ich, Uiyoung Kim, habe mich um die Struktur, Planung und Initialisierung des Projekts gekümmert, die Grundstruktur der Server und Klassen erstellt, die Logik für Buchung und Messagebroker hinzugefügt und im Travelbroker Fehlerfälle bearbeitet. Zudem habe ich bei der Dokumentation geholfen.
 
 ## David Alexander Eugen Wolf:
 
