@@ -1,14 +1,18 @@
 
-r
-java:S1192N"UDefine a constant instead of duplicating this literal "HotelBookingSystem: " 3 times.(ŒÒíî8¼ËÌ÷1
-ˆ
-java:S1319"fThe type of "hotelList" should be an interface such as "Map" rather than the implementation "HashMap".(öÚÃŒıÿÿÿÿ8¼ËÌ÷1
-;
-java:S2119"Save and re-use this "Random".(¾†–Ù8ÄËÌ÷1
-G	java:S106"+Replace this use of System.out by a logger.(¸¾Ä–8ÅËÌ÷1
-L	java:S106'"+Replace this use of System.out by a logger.(èƒÕõıÿÿÿÿ8ÇËÌ÷1
-T
-java:S11727"2Remove this unused method parameter "hotelSocket".(™Ğæ˜ıÿÿÿÿ8ÈËÌ÷1
-G	java:S106N"+Replace this use of System.out by a logger.(ŒÒíî8ÉËÌ÷1
-L	java:S106U"+Replace this use of System.out by a logger.(ñ¾¤Éıÿÿÿÿ8ÉËÌ÷1
-L	java:S106Y"+Replace this use of System.out by a logger.(â¬šŠıÿÿÿÿ8ÊËÌ÷1
+˜
+java:S1192`"UDefine a constant instead of duplicating this literal "HotelBookingSystem: " 3 times.(ŒÒíî8Ä´ÀÅ÷1J$fb476cfc-a2d8-4e13-b71f-109ad9332618
+®
+java:S1319"fThe type of "hotelList" should be an interface such as "Map" rather than the implementation "HashMap".(öÚÃŒıÿÿÿÿ8áò—É÷1J$cad8882d-0e08-4e8a-b81f-55bb84b7ba28
+a
+java:S2119"Save and re-use this "Random".(¾†–Ù8éò—É÷1J$4af2b091-7914-485a-ba1a-ed3084d7ab69
+m	java:S106#"+Replace this use of System.out by a logger.(¸¾Ä–8Ú´ÀÅ÷1J$ffee284a-a3c5-420c-9547-364aa4c7c019
+u
+java:S6881("2Use virtual threads for heavy blocking operations.(ŞØ€µ8ëò—É÷1J$5ff3b621-db88-4962-86a0-190c45695d43
+¡
+java:S21422"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8ëò—É÷1J$bae93d88-bc45-4c28-974e-b938735313bf
+r	java:S106-"+Replace this use of System.out by a logger.(èƒÕõıÿÿÿÿ8É½ıÈ÷1J$ffc8b82d-e6ed-489a-8b91-3049d9d81f9d
+z
+java:S1172="2Remove this unused method parameter "hotelSocket".(™Ğæ˜ıÿÿÿÿ8íò—É÷1J$3d200a2c-1fea-4796-93a5-238aa8c22c51
+m	java:S106`"+Replace this use of System.out by a logger.(ŒÒíî8É½ıÈ÷1J$99fca1c0-57cf-43ba-8f0d-a98ec7c53b1f
+r	java:S106h"+Replace this use of System.out by a logger.(ñ¾¤Éıÿÿÿÿ8îò—É÷1J$dfac5e15-04dd-484a-b332-ccecf55c289e
+r	java:S106m"+Replace this use of System.out by a logger.(â¬šŠıÿÿÿÿ8ïò—É÷1J$09e109f7-e8a4-44a6-9efc-d7e41062fb5e

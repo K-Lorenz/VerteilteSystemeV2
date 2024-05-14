@@ -1,15 +1,15 @@
 
-m	java:S106"+Replace this use of System.out by a logger.(ú«‹û8ü„ıõ1J$c641b1de-2fdf-4fb2-ab60-1e7b59a5c200
-r	java:S106"+Replace this use of System.out by a logger.(Ëòİúÿÿÿÿ8ü„ıõ1J$cfb9d25c-a1c9-489c-9f1e-ce3fcbac6e37
-m	java:S106"+Replace this use of System.out by a logger.(ÊÅâä8ü„ıõ1J$26e1f26d-3072-410d-8ef9-76793b948e6e
-r	java:S106"+Replace this use of System.out by a logger.(šäÁÃùÿÿÿÿ8ü„ıõ1J$5e5e7b69-fca8-423c-8b33-1232123c7a94
-l	java:S106"+Replace this use of System.out by a logger.(Ëí¥ 8ş„ıõ1J$422396bd-a9a5-4716-bddb-a8a3bd5188f6
+m	java:S106"+Replace this use of System.out by a logger.(ú«‹û8ü„ıõ1J$7dbff628-ea18-426a-abcf-fd7927c7b297
+r	java:S106"+Replace this use of System.out by a logger.(Ëòİúÿÿÿÿ8ü„ıõ1J$0ae9bb92-ad86-4a46-ac48-be48a7314a0a
+m	java:S106"+Replace this use of System.out by a logger.(ÊÅâä8ü„ıõ1J$428a7a8b-3d55-4896-8851-2b8e6b17283d
+r	java:S106"+Replace this use of System.out by a logger.(šäÁÃùÿÿÿÿ8ü„ıõ1J$92d83636-9ecc-47dd-8f85-d5a48d09c7b4
+l	java:S106"+Replace this use of System.out by a logger.(Ëí¥ 8ş„ıõ1J$6dae1f5b-c56a-4b9b-a02f-c452e2e552a8
 o
-java:S1125"'Remove the unnecessary boolean literal.(¬Á¨Áÿÿÿÿÿ8ı„ıõ1J$919c8f75-fe5a-400b-8bea-455a79647199
+java:S1125"'Remove the unnecessary boolean literal.(¬Á¨Áÿÿÿÿÿ8ı„ıõ1J$44114de1-8242-45e3-b2d6-2e4c65cd4c4f
 j
-java:S1125"'Remove the unnecessary boolean literal.(ÄÜ¥ò8ş„ıõ1J$0957d857-8875-4d73-923b-8eecf0801dfd
-r	java:S106 "+Replace this use of System.out by a logger.(È£Üúÿÿÿÿ8ş„ıõ1J$0d43b550-1a7f-428e-978d-2fe5f383f8d1
-m	java:S106&"+Replace this use of System.out by a logger.(—áÃ­8€…ıõ1J$3ef040f8-6437-4cae-bd56-52e772f99518
-l	java:S1065"+Replace this use of System.out by a logger.(Ü²÷#8ˆÜ ıõ1J$37bf55b6-900a-422b-a469-2e0b50f40cb1
+java:S1125"'Remove the unnecessary boolean literal.(ÄÜ¥ò8ş„ıõ1J$f67296c7-9ac4-4552-844f-792bf595f9de
+r	java:S106 "+Replace this use of System.out by a logger.(È£Üúÿÿÿÿ8ş„ıõ1J$d6aedb0d-e179-4491-9548-9a9721b8d2de
+m	java:S106&"+Replace this use of System.out by a logger.(—áÃ­8€…ıõ1J$24ab4f0b-2b1f-4e7c-a530-aa1109d7893e
+l	java:S1065"+Replace this use of System.out by a logger.(Ü²÷#8ˆÜ ıõ1J$f64f7330-b2fc-4e09-83ca-fd1edf515275
 œ
-java:S5843B"TSimplify this regular expression to reduce its complexity from 29 to the 20 allowed.(Ñãİ‘üÿÿÿÿ8…ıõ1J$8669a09a-aa05-464a-bf9f-fcf174317ef8
+java:S5843B"TSimplify this regular expression to reduce its complexity from 29 to the 20 allowed.(Ñãİ‘üÿÿÿÿ8…ıõ1J$39665c8f-1f1d-4409-9998-6467a82f4377

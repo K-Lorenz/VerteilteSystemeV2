@@ -13,41 +13,37 @@ import java.util.*;
 
 
 public class TravelBroker {
-    private final int port;
-    private final HashMap<UUID, List<String>> confirmedFlights = new HashMap<>();
-    private final HashMap<UUID, List<String>> canceledFlights = new HashMap<>();
-    private final HashMap<UUID, List<String>> confirmedHotels = new HashMap<>();
-    private final HashMap<UUID, List<String>> canceledHotels = new HashMap<>();
-    private final HashMap<UUID, Integer> amountOfHotelsInBooking = new HashMap<>();
-    private final HashMap<UUID, Integer> amountOfFlightsInBooking = new HashMap<>();
+    private int port;
+    private HashMap<UUID, List<String>> confirmedFlights = new HashMap<>();
+    private HashMap<UUID, List<String>> canceledFlights = new HashMap<>();
+    private HashMap<UUID, List<String>> confirmedHotels = new HashMap<>();
+    private HashMap<UUID, List<String>> canceledHotels = new HashMap<>();
+    private HashMap<UUID, Integer> amountOfHotelsInBooking = new HashMap<>();
+    private HashMap<UUID, Integer> amountOfFlightsInBooking = new HashMap<>();
+    private int retryAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("travelbroker.retries"));
+    private int retryDelay = Integer.parseInt(PropertyLoader.loadProperties().getProperty("travelbroker.retryDelay"));
 
-    public ArrayList<String> findAllUnconfirmed(
-    UUID processId, 
-    ArrayList<String> AllBookingsFromOneClientRQ, 
-    ArrayList<String>unconfirmedList)
-    {
-        List<String> confirmedList = new ArrayList<>();
-        unconfirmedList.clear();
 
-        List<String>confirmedFlightsList = confirmedFlights.get(processId);
-        for (String e : confirmedFlightsList) {
-            confirmedList.add(e);
+    public ArrayList<String> findUnconfirmed (UUID processId, ArrayList<String> allBookings){
+        // f20 5, h2 5
+        ArrayList<String> unconfirmedList = new ArrayList<>();
+        List<String> allResponsesList = new ArrayList<>();
+        if(confirmedFlights.containsKey(processId) && !confirmedFlights.get(processId).isEmpty()){
+            allResponsesList.addAll(confirmedFlights.get(processId));
         }
-        List<String>canceledFlightsList = canceledFlights.get(processId);
-        for (String e : canceledFlightsList) {
-            confirmedList.add(e);
+        if(confirmedHotels.containsKey(processId) && !confirmedHotels.get(processId).isEmpty()){
+            allResponsesList.addAll(confirmedHotels.get(processId));
         }
-        List<String>confirmedHotelsList = confirmedHotels.get(processId);
-        for (String e : confirmedHotelsList) {
-            confirmedList.add(e);
+        if(canceledFlights.containsKey(processId) && !canceledFlights.get(processId).isEmpty()){
+            allResponsesList.addAll(canceledFlights.get(processId));
         }
-        List<String>canceledHotelsList = canceledHotels.get(processId);
-        for (String e : canceledHotelsList) {
-            confirmedList.add(e);
+        if(canceledHotels.containsKey(processId) && !canceledHotels.get(processId).isEmpty()){
+            allResponsesList.addAll(canceledHotels.get(processId));
         }
-        for (String value : AllBookingsFromOneClientRQ) {
-            if (!confirmedList.contains(value)) {
-                unconfirmedList.add(value);
+
+        for(String singleResponse: allBookings){
+            if(!allResponsesList.contains(singleResponse)){
+                unconfirmedList.add(singleResponse);
             }
         }
         return unconfirmedList;
@@ -58,15 +54,29 @@ public class TravelBroker {
         ArrayList<String> unconfirmedList = new ArrayList<>();
         try{
             do{
-                Thread.sleep(60000);
-                unconfirmedList = findAllUnconfirmed(processId, AllBookingsFromOneClientRQ, unconfirmedList);
-                count++;
-            }while(!unconfirmedList.isEmpty() || count >= 3);
-            if(count >= 4){
+                Thread.sleep(retryDelay);
+                unconfirmedList = findUnconfirmed(processId, AllBookingsFromOneClientRQ);
                 for(String e : unconfirmedList){
-                    handleCancellation(processId,"No confirmation",e);
+                    System.out.println("sending Requests!");
+                    if(e.split(" ")[0].contains("f")) {
+                        MessageSenderService.sendMessageToMessageBroker("BookingRq " + processId + " flight " + e);
+                    } else {
+                        MessageSenderService.sendMessageToMessageBroker("BookingRq " + processId + " hotel " + e);
+                    }
                 }
-            }
+                System.out.println(count + " tries");
+                count++;
+                if(count == retryAmount){
+                    for(String e : unconfirmedList){
+                        if(e.split(" ")[0].contains("f")) {
+                            handleCancellation(processId, "flight", e);
+                        } else {
+                            handleCancellation(processId, "hotel", e);
+                        }
+                    }
+                    break;
+                }
+            }while(!unconfirmedList.isEmpty());
         } catch(InterruptedException e){
             e.printStackTrace();
         }
@@ -87,8 +97,6 @@ public class TravelBroker {
                         BufferedReader in = new BufferedReader(new InputStreamReader(travelSocket.getInputStream()));
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
-                            //Handle message and answer
-                            //Switch case for different messages
                             handleRequest(inputLine);
                         }
                         in.close();
@@ -107,16 +115,17 @@ public class TravelBroker {
     public void handleRequest(String message) {
         //MessageSplit [0] = WhatAmI, [1] = processId, [2] = Message
         String[] messageSplit = message.split(" ", 3);
+
         UUID processId = UUID.fromString(messageSplit[1]);
         String whatAmI = messageSplit[0];
         switch (whatAmI) {
             case "ClientRq":
+
                 System.out.println("TravelBroker - Received ClientRq: " + message);
                 int flights = 0;
                 int hotels = 0;
-                ArrayList <String> AllBookingsFromOneClientRQ = new ArrayList<>();
                 List<BookingRequest> bookingRequests = BookingRequestParser.parse(messageSplit[2]);
-
+                ArrayList <String> allBookingsFromOneClientRQ = new ArrayList<>();
                 for (BookingRequest bookingRequest : bookingRequests) {
                     //Send Flight/Hotel BookingRq to Message broker
                     if (bookingRequest.getType().equals("flight")) {
@@ -124,16 +133,16 @@ public class TravelBroker {
                     } else {
                         hotels++;
                     }
-                    System.out.println("TravelBroker - Sending BookingRq to MessageBroker: " + bookingRequest);
+                    System.out.println("TravelBroker - Sending BookingRq to MessageBroker: " + bookingRequest.getType() + " " + bookingRequest.getName() + " " + bookingRequest.getQuantity()) ;
                     String newMessage = "BookingRq " + processId + " " + bookingRequest.getType() + " " + bookingRequest.getName() + " " + bookingRequest.getQuantity();
-                    AllBookingsFromOneClientRQ.add(newMessage);
+                    allBookingsFromOneClientRQ.add(bookingRequest.getName() + " " + bookingRequest.getQuantity());
                     MessageSenderService.sendMessageToMessageBroker(newMessage);
                 }
                 amountOfFlightsInBooking.put(processId, flights);
                 amountOfHotelsInBooking.put(processId, hotels);
 
                 Thread checkBookingThread = new Thread(() -> {
-                    checkCurrentBookingSituation(processId, AllBookingsFromOneClientRQ);
+                    checkCurrentBookingSituation(processId, allBookingsFromOneClientRQ);
                 });
                 checkBookingThread.start();
                 break;

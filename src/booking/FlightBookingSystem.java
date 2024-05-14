@@ -17,6 +17,7 @@ public class FlightBookingSystem implements BookingSystem {
     private final int flightPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start"));
     private final int minSeats = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.quantity.min"));
     private final int maxSeats = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.quantity.max"));
+    private final int processingTime = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.processingtime"));
     private final int port;
     private final HashMap<Integer, String> airlineList;
     private int seats = new Random().nextInt(minSeats, maxSeats);
@@ -36,6 +37,7 @@ public class FlightBookingSystem implements BookingSystem {
                 Socket flightSocket = serverSocket.accept();
                 Thread flightThread = new Thread(() -> {
                     try {
+                        Thread.sleep(processingTime);
                         BufferedReader in = new BufferedReader(new InputStreamReader(flightSocket.getInputStream()));
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
@@ -70,14 +72,16 @@ public class FlightBookingSystem implements BookingSystem {
         if (randomNumber > probability) {
             if (whatAmI.equals("BookingRq")) {
                 if(bookingList.containsKey(processId)){
-                    MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " flight F" + airlineNumber + " " + requestedSeats);
+                    System.out.println("Idempotency");
+                    MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " flight f" + airlineNumber + " " + requestedSeats);
                     return;
                 }
                 successful = book(requestedSeats, processId);
                 //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
-                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " flight F" + airlineNumber + " " + requestedSeats);
+                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " flight f" + airlineNumber + " " + requestedSeats);
             } else if (whatAmI.equals("CancellationRq")) {
                 if(cancelList.contains(processId)){
+                    System.out.println("Idempotency");
                     MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true");
                     return;
                 }

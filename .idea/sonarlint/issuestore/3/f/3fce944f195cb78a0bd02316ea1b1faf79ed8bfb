@@ -1,5 +1,11 @@
 
-k
-java:S3824l"NReplace this "Map.get()" and condition with a call to "Map.computeIfAbsent()".(öÀşâ8ÌÌ÷1
-L	java:S106"+Replace this use of System.out by a logger.(àË·¬úÿÿÿÿ8’ÌÌ÷1
-L	java:S106d"+Replace this use of System.out by a logger.(šÄ½–ÿÿÿÿÿ8–ÌÌ÷1
+r	java:S106"+Replace this use of System.out by a logger.(àË·¬úÿÿÿÿ8Õ¾ıÈ÷1J$b63cc227-8d74-464a-9cb7-38d492def464
+z
+java:S6881$"2Use virtual threads for heavy blocking operations.(ê¢™ºıÿÿÿÿ8Íó—É÷1J$2fa72376-09e9-47c0-bf02-4623ff57720c
+¡
+java:S2142("^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8Îó—É÷1J$7089d86c-833b-42d5-94dd-789f301cb6bf
+r	java:S106e"+Replace this use of System.out by a logger.(šÄ½–ÿÿÿÿÿ8Ğó—É÷1J$d92f4487-8da5-4638-bb43-c289c92f7bd8
+R
+java:S1128"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8Œê»É÷1
+{
+java:S1068"3Remove this unused "processMessages" private field.(¶Ê‰ˆüÿÿÿÿ8³­»É÷1J$71d61751-bfc0-4e38-bcc4-be647eb87c75

@@ -17,6 +17,7 @@ public class HotelBookingSystem implements BookingSystem {
     private final int hotelPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.port.start"));
     private final int minRooms = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.quantity.min"));
     private final int maxRooms = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.quantity.max"));
+    private final int processingTime = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.processingtime"));
     private final int port;
     private final HashMap<Integer, String> hotelList;
     private int rooms = new Random().nextInt(minRooms, maxRooms);
@@ -36,6 +37,7 @@ public class HotelBookingSystem implements BookingSystem {
                 Socket hotelSocket = serverSocket.accept();
                 Thread hotelThread = new Thread(() -> {
                     try {
+                        Thread.sleep(processingTime);
                         BufferedReader in = new BufferedReader(new InputStreamReader(hotelSocket.getInputStream()));
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
@@ -70,12 +72,12 @@ public class HotelBookingSystem implements BookingSystem {
         if (randomNumber > probability) {
             if (whatAmI.equals("BookingRq")) {
                 if(bookingList.containsKey(processId)){
-                    MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " hotel H" + hotelNumber + " " + requestedRooms);
+                    MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " hotel h" + hotelNumber + " " + requestedRooms);
                     return;
                 }
                 successful = book(requestedRooms, processId);
                 //<WhatAmI> <processId> <confirmation (true/false)> <type> <Hotelnumber> <amount>
-                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " hotel H" + hotelNumber + " " + requestedRooms);
+                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " hotel h" + hotelNumber + " " + requestedRooms);
             } else if (whatAmI.equals("CancellationRq")) {
                 if(cancelList.contains(processId)){
                     MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " false");

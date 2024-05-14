@@ -14,9 +14,10 @@ public class MessageBroker {
     private final int port;
     private final Map<UUID, List<String>> processMessages = new HashMap<>();
     private final Map<UUID, Socket> clientSockets = new HashMap<>();
-
+    private final int delay;
     public MessageBroker() {
         port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port"));
+        delay = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.delay"));
     }
 
     public void start(int backlog) {
@@ -32,10 +33,11 @@ public class MessageBroker {
                         BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
+                            Thread.sleep(delay);
                             sendMessageToCorrectReceiver(inputLine, clientSocket);
                         }
                         in.close();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 });
@@ -52,7 +54,6 @@ public class MessageBroker {
         UUID processID = UUID.fromString(messageSplit[1]);
         Socket clientSocket = clientSockets.get(processID);
         String whatAmI = messageSplit[0];
-        if (!checkMessageAndAdd(message)) return;
         switch (whatAmI) {
             //CLient Request coming from Client
             case "ClientRq":
@@ -100,24 +101,6 @@ public class MessageBroker {
                 System.out.println("MessageBroker - Message not recognized: " + message);
                 break;
         }
-    }
-
-    private boolean checkMessageAndAdd(String message) {
-        String[] arr = message.split(" ", 3);
-        UUID processID = UUID.fromString(arr[1]);
-        List<String> messages = processMessages.get(processID);
-        if (messages == null) {
-            messages = new ArrayList<>();
-            messages.add(message);
-            processMessages.put(processID, messages);
-            return true;
-        }
-        if (!messages.contains(message)) {
-            messages.add(message);
-            processMessages.put(processID, messages);
-            return true;
-        }
-        return false;
     }
 
 }
