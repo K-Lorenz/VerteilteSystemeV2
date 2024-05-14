@@ -32,7 +32,7 @@ public class HotelBookingSystem implements BookingSystem {
 
     public void start(int backlog) {
         try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
-            System.out.println("HotelBookingSystem running on port " + port);
+            System.out.println("HotelBookingSystem("+getName()+") running on port " + port);
             while (true) {
                 Socket hotelSocket = serverSocket.accept();
                 Thread hotelThread = new Thread(() -> {
@@ -42,7 +42,7 @@ public class HotelBookingSystem implements BookingSystem {
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
                             //Handle message and answer
-                            System.out.println("HotelBookingSystem - Received message: " + inputLine);
+                            System.out.println("HotelBookingSystem("+getName()+") - Received message: " + inputLine);
                             handleRequest(inputLine, hotelSocket);
                         }
                         in.close();
@@ -86,6 +86,8 @@ public class HotelBookingSystem implements BookingSystem {
                 //<WhatAmI> <processId> <false>
                 MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
             }
+        }else{
+            System.out.println("HotelBookingSystem("+getName()+") - did not respond to message.");
         }
     }
 
@@ -93,7 +95,7 @@ public class HotelBookingSystem implements BookingSystem {
     @Override
     public synchronized boolean cancel(int requestedRooms, String processId) {
         rooms += requestedRooms;
-        System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms freed. Remaining rooms: " + rooms + ".");
+        System.out.println("HotelBookingSystem("+getName()+") -  " + requestedRooms + " rooms freed. Remaining rooms: " + rooms + ".");
         cancelList.add(processId);
         return true;
     }
@@ -101,12 +103,12 @@ public class HotelBookingSystem implements BookingSystem {
     @Override
     public synchronized boolean book(int requestedRooms, String processId) {
         if (requestedRooms > rooms) {
-            System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms could not be booked. Remaining rooms: " + rooms + ".");
+            System.out.println("HotelBookingSystem("+getName()+") - " + requestedRooms + " rooms could not be booked. Remaining rooms: " + rooms + ".");
             bookingList.put(processId, false);
             return false;
         }
         rooms -= requestedRooms;
-        System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms booked. Remaining rooms: " + rooms + ".");
+        System.out.println("HotelBookingSystem("+getName()+") - " + requestedRooms + " rooms booked. Remaining rooms: " + rooms + ".");
         bookingList.put(processId, true);
         return true;
     }
@@ -114,6 +116,6 @@ public class HotelBookingSystem implements BookingSystem {
 
     @Override
     public String getName() {
-        return "H" + (port - hotelPortStart) + " - " + hotelList.get(this.port);
+        return "h" + (port - hotelPortStart) + " - " + hotelList.get(this.port);
     }
 }

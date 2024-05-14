@@ -32,7 +32,7 @@ public class FlightBookingSystem implements BookingSystem {
 
     public void start(int backlog) {
         try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
-            System.out.println("FlightBookingSystem running on port " + port);
+            System.out.println("FlightBookingSystem("+getName()+") - running on port " + port);
             while (true) {
                 Socket flightSocket = serverSocket.accept();
                 Thread flightThread = new Thread(() -> {
@@ -42,7 +42,7 @@ public class FlightBookingSystem implements BookingSystem {
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
                             //Handle message and answer
-                            System.out.println("FlightBookingSystem - Received message: " + inputLine);
+                            System.out.println("FlightBookingSystem("+getName()+") -  Received message: " + inputLine);
                             handleRequest(inputLine, flightSocket);
                         }
                         in.close();
@@ -89,6 +89,8 @@ public class FlightBookingSystem implements BookingSystem {
                 //<WhatAmI> <processId> <false>
                 MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
             }
+        }else{
+            System.out.println("FlightBookingSystem("+getName()+") - did not respond to message.");
         }
     }
 
@@ -96,7 +98,7 @@ public class FlightBookingSystem implements BookingSystem {
     @Override
     public synchronized boolean cancel(int requestedSeats, String processId) {
         seats += requestedSeats;
-        System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats freed. Remaining seats: " + seats + ".");
+        System.out.println("FlightBookingSystem("+getName()+") - " + requestedSeats + " seats freed. Remaining seats: " + seats + ".");
         cancelList.add(processId);
         return true;
     }
@@ -104,12 +106,12 @@ public class FlightBookingSystem implements BookingSystem {
     @Override
     public synchronized boolean book(int requestedSeats, String processId) {
         if (requestedSeats > seats) {
-            System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats could not be booked. Remaining seats: " + seats + ".");
+            System.out.println("FlightBookingSystem("+getName()+") - " + requestedSeats + " seats could not be booked. Remaining seats: " + seats + ".");
             bookingList.put(processId, false);
             return false;
         }
         seats -= requestedSeats;
-        System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats booked. Remaining seats: " + seats + ".");
+        System.out.println("FlightBookingSystem("+getName()+") - " + requestedSeats + " seats booked. Remaining seats: " + seats + ".");
         bookingList.put(processId, true);
         return true;
 
@@ -117,6 +119,6 @@ public class FlightBookingSystem implements BookingSystem {
 
     @Override
     public String getName() {
-        return " F" + (port - flightPortStart) + " - " + airlineList.get(port);
+        return " f" + (port - flightPortStart) + " - " + airlineList.get(port);
     }
 }
