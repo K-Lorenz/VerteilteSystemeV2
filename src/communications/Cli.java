@@ -15,11 +15,13 @@ public class Cli {
 
         Properties properties = PropertyLoader.loadProperties();
         while (true) {
-            System.out.println("------------------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------------");
             System.out.println("Please input the booking that you want to send to the server!");
-            System.out.println("The only Accepted Format is: book --flight '<flightNumber>' <ticketCount> --hotel '<hotelName>' <roomCount>");
-            System.out.println("Example: book --flight 'AA12323' 2 --hotel 'Hilton' 2");
+            System.out.println("The only accepted format is: book --flight '<flightNumber>' <ticketCount> --hotel '<hotelName>' <roomCount>");
+            System.out.println("Example: book --flight 'f1' 2 --hotel 'h2' 2");
             System.out.println("Please note that you can have multiple flights and/or hotels in one booking!");
+            System.out.println("------------------------------------------------------------------------------------------------------------");
+            System.out.print("> ");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             boolean valid = false;
             String input = "";
@@ -30,6 +32,7 @@ public class Cli {
                     valid = checkValidity(input);
                     if (valid == false) {
                         System.out.println("Invalid input! Please try again!");
+                        System.out.print("> ");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -49,7 +52,7 @@ public class Cli {
                 out.println(message);
                 //loop for receiving multiple messages
                 //Count = Steps of the process
-                for (int i = 0; i < 6; i++) {
+                for (int i = 0; i < 1; i++) {
                     System.out.println(in.readLine());
                 }
                 socket.close();
