@@ -18,9 +18,43 @@ public class TravelBroker {
     private final HashMap<UUID, List<String>> canceledFlights = new HashMap<>();
     private final HashMap<UUID, List<String>> confirmedHotels = new HashMap<>();
     private final HashMap<UUID, List<String>> canceledHotels = new HashMap<>();
-    private final HashMap<UUID, Integer> amountOfHotelsInBooking = new HashMap<>();
-    private final HashMap<UUID, Integer> amountOfFlightsInBooking = new HashMap<>();
-    private final HashMap<UUID, Long> timePerBooking = new HashMap<>();
+    private final HashMap<UUID, List<String>> amountOfHotelsInBooking = new HashMap<>();
+    private final HashMap<UUID, List<String>> amountOfFlightsInBooking = new HashMap<>();
+
+    //Neuer Thread.
+    /*
+    While schleife
+        prüfen ob über der Zeit
+            falls ja neuer Request
+               falls 2 neue Requests geschickt wurden. -> Cancel
+     */
+
+    public boolean isSameSize(UUID processId){
+        return
+                confirmedFlights.get(processId).size() +
+                canceledFlights.get(processId).size() +
+                confirmedHotels.get(processId).size() +
+                canceledHotels.get(processId).size()
+                ==
+                amountOfFlightsInBooking.get(processId) +
+                amountOfHotelsInBooking.get(processId);
+    }
+
+    public void checkCurrentBookingSituation(UUID processId){
+        int count = 0;
+        try{
+            do{
+                Thread.sleep(60000);
+                count++;
+
+            }while(count <= 3 || isSameSize(processId));
+            if(count >= 4){
+
+            }
+        } catch(InterruptedException e){
+            e.printStackTrace();
+        }
+    }
 
     public TravelBroker() {
         Properties properties = PropertyLoader.loadProperties();
@@ -76,10 +110,18 @@ public class TravelBroker {
                     String newMessage = "BookingRq " + processId + " " + bookingRequest.getType() + " " + bookingRequest.getName() + " " + bookingRequest.getQuantity();
                     MessageSenderService.sendMessageToMessageBroker(newMessage);
                 }
+
+                Thread checkBookingThread = new Thread(() -> {
+                    checkCurrentBookingSituation(processId);
+                });
+                checkBookingThread.start();
+
                 //TODO: check this time to see if the booking timed out
                 //timePerBooking.put(processId, System.currentTimeMillis());
                 amountOfFlightsInBooking.put(processId, flights);
                 amountOfHotelsInBooking.put(processId, hotels);
+
+
                 break;
 
             case "Response":
@@ -139,18 +181,17 @@ public class TravelBroker {
 
         boolean allFlightsConfirmed = confirmedFlightsList != null && !confirmedFlightsList.isEmpty() && amountOfFlights != 0 && confirmedFlightsList.size() == amountOfFlights;
         boolean allHotelsConfirmed = confirmedHotelsList != null && !confirmedHotelsList.isEmpty() && amountOfHotels != 0 && confirmedHotelsList.size() == amountOfHotels;
-
         if ((allFlightsConfirmed && allHotelsConfirmed) || ((allFlightsConfirmed && amountOfHotels == 0) || (amountOfFlights == 0 && allHotelsConfirmed))) {
             System.out.println(responseType + " " + details + " was confirmed, and all other bookings were successful as well.");
             sendResponse(processId, true);
             return;
         }
         System.out.println(responseType + " " + details + " was confirmed. Waiting for other responses.");
+
     }
 
     private synchronized void handleCancellation(UUID processId, String responseType, String details) {
         addToCanceledMap(processId, responseType, details);
-
         if (confirmedFlights.containsKey(processId)) {
             System.out.println(responseType + " " + details + " was canceled, and since a flight was confirmed, it will be canceled.");
             for (String flight : confirmedFlights.get(processId)) {

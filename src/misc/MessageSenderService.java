@@ -23,6 +23,11 @@ public class MessageSenderService {
         //MessageSplit [0] = WhatAmI, [1] = ProcessId, [2] = Type, [3] = Hotel/FlightNumber, [4] = Quantity
         String [] messageSplit = message.split(" ", 5);
         int portnum;
+        /*Probabilty to crash server
+        if(prob<0.05){
+            //crash server
+        }
+        */
         //Strip F/H from name. Example => F12 -> 12
         portnum = Integer.parseInt(messageSplit[3].substring(1));
 
@@ -88,9 +93,10 @@ public class MessageSenderService {
             e.printStackTrace();
         }
     }
-    public static void sendError(String errorMessage, UUID processID){
-        sendMessageToTravelBroker("Error " + processID + " " + errorMessage);
-        sendMessageToMessageBroker("Error " + processID + " " + errorMessage);
+    public static void sendError(String errorMessage){
+        // <WhatAmI> <ProcessId> <Message>
+        String[] messageSplit = errorMessage.split(" ", 3);
+        sendMessageToTravelBroker("Response " + messageSplit[1] + " false " + messageSplit[2]);
     }
 
     public static void sendMessageToClient(Socket socket, String message){
@@ -114,7 +120,7 @@ class SendMessageOrTimeout implements Callable<String> {
     @Override
     public String call() throws Exception {
         try{
-            while(MessageSenderService.sendMessageToPort(this.message, this.port) == false){
+            while(!MessageSenderService.sendMessageToPort(this.message, this.port)){
                 Thread.sleep(5000);
             }
         } catch (Exception e) {
