@@ -64,21 +64,26 @@ public class HotelBookingSystem implements BookingSystem {
         int hotelNumber = port - hotelPortStart;
         boolean successful;
         int requestedRooms = Integer.parseInt(splitMessage[2]);
-        if (whatAmI.equals("BookingRq")) {
-            if(bookingList.containsKey(processId)){
-                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " hotel H" + hotelNumber + " " + requestedRooms);
-                return;
+
+        double randomNumber = Math.random();
+        double probability = Double.parseDouble(PropertyLoader.loadProperties().getProperty("bookingsystems.bookingnomessage"));
+        if (randomNumber > probability) {
+            if (whatAmI.equals("BookingRq")) {
+                if(bookingList.containsKey(processId)){
+                    MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " hotel H" + hotelNumber + " " + requestedRooms);
+                    return;
+                }
+                successful = book(requestedRooms, processId);
+                //<WhatAmI> <processId> <confirmation (true/false)> <type> <Hotelnumber> <amount>
+                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " hotel H" + hotelNumber + " " + requestedRooms);
+            } else if (whatAmI.equals("CancellationRq")) {
+                if(cancelList.contains(processId)){
+                    MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " false");
+                    return;
+                } successful = cancel(requestedRooms, processId);
+                //<WhatAmI> <processId> <false>
+                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
             }
-            successful = book(requestedRooms, processId);
-            //<WhatAmI> <processId> <confirmation (true/false)> <type> <Hotelnumber> <amount>
-            MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " hotel H" + hotelNumber + " " + requestedRooms);
-        } else if (whatAmI.equals("CancellationRq")) {
-            if(cancelList.contains(processId)){
-                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " false");
-                return;
-            } successful = cancel(requestedRooms, processId);
-            //<WhatAmI> <processId> <false>
-            MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
         }
     }
 

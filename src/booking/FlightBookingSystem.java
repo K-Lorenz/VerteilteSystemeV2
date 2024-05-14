@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.UUID;
 
 public class FlightBookingSystem implements BookingSystem {
 
@@ -65,22 +64,27 @@ public class FlightBookingSystem implements BookingSystem {
         int airlineNumber = port - flightPortStart;
         boolean successful;
         int requestedSeats = Integer.parseInt(splitMessage[2]);
-        if (whatAmI.equals("BookingRq")) {
-            if(bookingList.containsKey(processId)){
-                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " flight F" + airlineNumber + " " + requestedSeats);
-                return;
+
+        double randomNumber = Math.random();
+        double probability = Double.parseDouble(PropertyLoader.loadProperties().getProperty("bookingsystems.bookingnomessage"));
+        if (randomNumber > probability) {
+            if (whatAmI.equals("BookingRq")) {
+                if(bookingList.containsKey(processId)){
+                    MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " flight F" + airlineNumber + " " + requestedSeats);
+                    return;
+                }
+                successful = book(requestedSeats, processId);
+                //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
+                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " flight F" + airlineNumber + " " + requestedSeats);
+            } else if (whatAmI.equals("CancellationRq")) {
+                if(cancelList.contains(processId)){
+                    MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true");
+                    return;
+                }
+                successful = cancel(requestedSeats, processId);
+                //<WhatAmI> <processId> <false>
+                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
             }
-            successful = book(requestedSeats, processId);
-            //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
-            MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " flight F" + airlineNumber + " " + requestedSeats);
-        } else if (whatAmI.equals("CancellationRq")) {
-            if(cancelList.contains(processId)){
-                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true");
-                return;
-            }
-            successful = cancel(requestedSeats, processId);
-            //<WhatAmI> <processId> <false>
-            MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
         }
     }
 
