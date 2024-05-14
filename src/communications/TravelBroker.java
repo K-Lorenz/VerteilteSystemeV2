@@ -94,6 +94,12 @@ public class TravelBroker {
                 String clientMessage = "ClientResponse " + processId + " " + "false";
                 MessageSenderService.sendMessageToMessageBroker(clientMessage);
                 break;
+            
+            case "Error":
+                //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flight/Hotel number> <amount>
+                System.out.println("TravelBroker - Received Response: " + message);
+                handleResponse(message, processId);
+                break;
 
             default:
                 System.out.println("TravelBroker - Message not recognized: " + message);
