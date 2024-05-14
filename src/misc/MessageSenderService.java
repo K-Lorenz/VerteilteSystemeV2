@@ -24,38 +24,18 @@ public class MessageSenderService {
         String [] messageSplit = message.split(" ", 5);
         int portnum;
         //Strip F/H from name. Example => F12 -> 12
-        try{
-            portnum = Integer.parseInt(messageSplit[3].substring(1));
-        }catch (Exception e){
-            sendError("Booking number not recognized!", UUID.fromString(messageSplit[1]));
-            return;
-        }
+        portnum = Integer.parseInt(messageSplit[3].substring(1));
+
         int port = 0;
         //get Port from Flight/Hotel
         if(messageSplit[2].equals("flight")) {
-            //Check if portnumber is higher than allowed amount of Flight Systems
-            if(portnum > Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.amount")))
-            {
-                sendError("Flight number not recognized!", UUID.fromString(messageSplit[1]));
-                return;
-            }
             //Calculate Port from Flightnumber and startport
             port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start")) + portnum;
         }
-        else if(messageSplit[2].equals("hotel")){
-            //Check if portnumber is higher than allowed amount of Hotel Systems
-            if(portnum > Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.amount")))
-            {
-                sendError("Hotel number not recognized!", UUID.fromString(messageSplit[1]));
-                return;
-            }
+        else{
             //Calculate Port from Hotelnumber and startport
             port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.port.start")) + portnum;
 
-        }
-        else
-        {
-            sendError("Booking system type not recognized!", UUID.fromString(messageSplit[1]));
         }
         if(messageSplit[0].equalsIgnoreCase("CancellationRq")){
             //<WhatAmI> <ProcessId> <Quantity>
@@ -67,14 +47,14 @@ public class MessageSenderService {
                 future.get(60, TimeUnit.SECONDS);
             } catch (TimeoutException e) {
                 future.cancel(true);
-                sendError(message, UUID.fromString(messageSplit[1]));
+                sendError(message);
             } catch (Exception e){
                 e.printStackTrace();
             }
             executor.shutdownNow();
-
             return;
         }
+
         String newMessage = "BookingRq " + messageSplit[1] + " " + messageSplit[4];
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<String> future = executor.submit(new SendMessageOrTimeout(newMessage, port));
@@ -82,7 +62,7 @@ public class MessageSenderService {
             future.get(60, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
             future.cancel(true);
-            sendError(message, UUID.fromString(messageSplit[1]));
+            sendError(message);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -112,6 +92,7 @@ public class MessageSenderService {
         sendMessageToTravelBroker("Error " + processID + " " + errorMessage);
         sendMessageToMessageBroker("Error " + processID + " " + errorMessage);
     }
+
     public static void sendMessageToClient(Socket socket, String message){
         try{
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);

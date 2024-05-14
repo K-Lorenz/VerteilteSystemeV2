@@ -8,7 +8,10 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 public class FlightBookingSystem implements BookingSystem {
 
@@ -18,6 +21,8 @@ public class FlightBookingSystem implements BookingSystem {
     private final int port;
     private final HashMap<Integer, String> airlineList;
     private int seats = new Random().nextInt(minSeats, maxSeats);
+    private final HashMap<String, Boolean> bookingList = new HashMap<>();
+    private final List<String> cancelList = new ArrayList<>();
 
 
     public FlightBookingSystem(int port, HashMap<Integer, String> airlineList) {
@@ -61,11 +66,19 @@ public class FlightBookingSystem implements BookingSystem {
         boolean successful;
         int requestedSeats = Integer.parseInt(splitMessage[2]);
         if (whatAmI.equals("BookingRq")) {
-            successful = book(requestedSeats);
+            if(bookingList.containsKey(processId)){
+                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " flight F" + airlineNumber + " " + requestedSeats);
+                return;
+            }
+            successful = book(requestedSeats, processId);
             //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
             MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " flight F" + airlineNumber + " " + requestedSeats);
         } else if (whatAmI.equals("CancellationRq")) {
-            successful = cancel(requestedSeats);
+            if(cancelList.contains(processId)){
+                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true");
+                return;
+            }
+            successful = cancel(requestedSeats, processId);
             //<WhatAmI> <processId> <false>
             MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
         }
@@ -73,20 +86,23 @@ public class FlightBookingSystem implements BookingSystem {
 
 
     @Override
-    public synchronized boolean cancel(int requestedSeats) {
+    public synchronized boolean cancel(int requestedSeats, String processId) {
         seats += requestedSeats;
         System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats freed. Remaining seats: " + seats + ".");
+        cancelList.add(processId);
         return true;
     }
 
     @Override
-    public synchronized boolean book(int requestedSeats) {
+    public synchronized boolean book(int requestedSeats, String processId) {
         if (requestedSeats > seats) {
             System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats could not be booked. Remaining seats: " + seats + ".");
+            bookingList.put(processId, false);
             return false;
         }
         seats -= requestedSeats;
         System.out.println("FlightBookingSystem: " + getName() + " " + requestedSeats + " seats booked. Remaining seats: " + seats + ".");
+        bookingList.put(processId, true);
         return true;
 
     }

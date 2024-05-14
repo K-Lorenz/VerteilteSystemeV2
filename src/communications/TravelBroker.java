@@ -77,7 +77,7 @@ public class TravelBroker {
                     MessageSenderService.sendMessageToMessageBroker(newMessage);
                 }
                 //TODO: check this time to see if the booking timed out
-                timePerBooking.put(processId, System.currentTimeMillis());
+                //timePerBooking.put(processId, System.currentTimeMillis());
                 amountOfFlightsInBooking.put(processId, flights);
                 amountOfHotelsInBooking.put(processId, hotels);
                 break;
@@ -93,12 +93,6 @@ public class TravelBroker {
                 System.out.println("Sending Confirmation to Client");
                 String clientMessage = "ClientResponse " + processId + " " + "false";
                 MessageSenderService.sendMessageToMessageBroker(clientMessage);
-                break;
-            
-            case "Error":
-                //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flight/Hotel number> <amount>
-                System.out.println("TravelBroker - Received Response: " + message);
-                handleResponse(message, processId);
                 break;
 
             default:
@@ -121,7 +115,6 @@ public class TravelBroker {
             handleCancellation(processId, responseType, details);
         }
     }
-
 
     private synchronized void handleConfirmation(UUID processId, String responseType, String details) {
         if (canceledFlights.containsKey(processId) || canceledHotels.containsKey(processId)) {

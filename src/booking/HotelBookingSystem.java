@@ -7,7 +7,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class HotelBookingSystem implements BookingSystem {
@@ -18,6 +20,8 @@ public class HotelBookingSystem implements BookingSystem {
     private final int port;
     private final HashMap<Integer, String> hotelList;
     private int rooms = new Random().nextInt(minRooms, maxRooms);
+    private final HashMap<String, Boolean> bookingList = new HashMap<>();
+    private final List<String> cancelList = new ArrayList<>();
 
 
     public HotelBookingSystem(int port, HashMap<Integer, String> hotelList) {
@@ -61,11 +65,18 @@ public class HotelBookingSystem implements BookingSystem {
         boolean successful;
         int requestedRooms = Integer.parseInt(splitMessage[2]);
         if (whatAmI.equals("BookingRq")) {
-            successful = book(requestedRooms);
+            if(bookingList.containsKey(processId)){
+                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " hotel H" + hotelNumber + " " + requestedRooms);
+                return;
+            }
+            successful = book(requestedRooms, processId);
             //<WhatAmI> <processId> <confirmation (true/false)> <type> <Hotelnumber> <amount>
             MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " hotel H" + hotelNumber + " " + requestedRooms);
         } else if (whatAmI.equals("CancellationRq")) {
-            successful = cancel(requestedRooms);
+            if(cancelList.contains(processId)){
+                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " false");
+                return;
+            } successful = cancel(requestedRooms, processId);
             //<WhatAmI> <processId> <false>
             MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
         }
@@ -73,20 +84,23 @@ public class HotelBookingSystem implements BookingSystem {
 
 
     @Override
-    public synchronized boolean cancel(int requestedRooms) {
+    public synchronized boolean cancel(int requestedRooms, String processId) {
         rooms += requestedRooms;
         System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms freed. Remaining rooms: " + rooms + ".");
+        cancelList.add(processId);
         return true;
     }
 
     @Override
-    public synchronized boolean book(int requestedRooms) {
+    public synchronized boolean book(int requestedRooms, String processId) {
         if (requestedRooms > rooms) {
             System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms could not be booked. Remaining rooms: " + rooms + ".");
+            bookingList.put(processId, false);
             return false;
         }
         rooms -= requestedRooms;
         System.out.println("HotelBookingSystem: " + getName() + " " + requestedRooms + " rooms booked. Remaining rooms: " + rooms + ".");
+        bookingList.put(processId, true);
         return true;
     }
 
