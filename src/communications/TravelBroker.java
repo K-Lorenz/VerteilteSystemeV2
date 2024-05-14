@@ -60,12 +60,9 @@ public class TravelBroker {
             do{
                 Thread.sleep(60000);
                 unconfirmedList = findAllUnconfirmed(processId, AllBookingsFromOneClientRQ, unconfirmedList);
-                for(String e : unconfirmedList){
-                    MessageSenderService.sendMessageToMessageBroker(e);
-                }
                 count++;
-            }while(!unconfirmedList.isEmpty() || count < 3);
-            if(count == 3){
+            }while(!unconfirmedList.isEmpty() || count >= 3);
+            if(count >= 4){
                 for(String e : unconfirmedList){
                     handleCancellation(processId,"No confirmation",e);
                 }
