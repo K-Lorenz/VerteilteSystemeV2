@@ -22,11 +22,7 @@ public class MessageSenderService {
         //MessageSplit [0] = WhatAmI, [1] = ProcessId, [2] = Type, [3] = Hotel/FlightNumber, [4] = Quantity
         String [] messageSplit = message.split(" ", 5);
         int portnum;
-        /*Probabilty to crash server
-        if(prob<0.05){
-            //crash server
-        }
-        */
+
         //Strip F/H from name. Example => F12 -> 12
         portnum = Integer.parseInt(messageSplit[3].substring(1));
 

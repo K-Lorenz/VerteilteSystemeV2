@@ -43,7 +43,13 @@ public class HotelBookingSystem implements BookingSystem {
                         while ((inputLine = in.readLine()) != null) {
                             //Handle message and answer
                             System.out.println("HotelBookingSystem("+getName()+") - Received message: " + inputLine);
-                            handleRequest(inputLine, hotelSocket);
+                            double randomNumber = Math.random();
+                            double probability = Double.parseDouble(PropertyLoader.loadProperties().getProperty("bookingsystems.bookingfailure"));
+                            if (randomNumber > probability) {
+                                handleRequest(inputLine, hotelSocket);
+                            } else {
+                                System.out.println("HotelBookingSystem ("+getName()+") crashed and did not process the message.");
+                            }
                         }
                         in.close();
                         hotelSocket.close();
@@ -66,28 +72,42 @@ public class HotelBookingSystem implements BookingSystem {
         int hotelNumber = port - hotelPortStart;
         boolean successful;
         int requestedRooms = Integer.parseInt(splitMessage[2]);
-
         double randomNumber = Math.random();
         double probability = Double.parseDouble(PropertyLoader.loadProperties().getProperty("bookingsystems.bookingnomessage"));
-        if (randomNumber > probability) {
-            if (whatAmI.equals("BookingRq")) {
-                if(bookingList.containsKey(processId)){
+
+        if (whatAmI.equals("BookingRq")) {
+            if(bookingList.containsKey(processId)){
+                if (randomNumber > probability) {
                     MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " hotel h" + hotelNumber + " " + requestedRooms);
                     return;
+                }else{
+                    System.out.println("HotelBookingSystem ("+getName()+") processed the request but failed to send a response.");
+                    return;
                 }
-                successful = book(requestedRooms, processId);
-                //<WhatAmI> <processId> <confirmation (true/false)> <type> <Hotelnumber> <amount>
+            }
+            successful = book(requestedRooms, processId);
+            //<WhatAmI> <processId> <confirmation (true/false)> <type> <Hotelnumber> <amount>
+            if (randomNumber > probability) {
                 MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " hotel h" + hotelNumber + " " + requestedRooms);
-            } else if (whatAmI.equals("CancellationRq")) {
-                if(cancelList.contains(processId)){
+            }else{
+                System.out.println("HotelBookingSystem ("+getName()+") processed the request but failed to send a response.");
+            }
+        } else if (whatAmI.equals("CancellationRq")) {
+            if(cancelList.contains(processId)){
+                if (randomNumber > probability) {
                     MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " false");
                     return;
-                } successful = cancel(requestedRooms, processId);
-                //<WhatAmI> <processId> <false>
+                }else{
+                    System.out.println("HotelBookingSystem ("+getName()+") processed the request but failed to send a response.");
+                    return;
+                }
+            } successful = cancel(requestedRooms, processId);
+            //<WhatAmI> <processId> <false>
+            if (randomNumber > probability) {
                 MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
+            }else{
+                System.out.println("HotelBookingSystem ("+getName()+") processed the request but failed to send a response.");
             }
-        }else{
-            System.out.println("HotelBookingSystem("+getName()+") - did not respond to message.");
         }
     }
 

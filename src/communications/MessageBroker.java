@@ -4,7 +4,6 @@ import misc.MessageSenderService;
 import misc.PropertyLoader;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,6 +11,7 @@ import java.util.*;
 
 public class MessageBroker {
     private final int port;
+    private ArrayList<UUID> finishedProcessList = new ArrayList<>();
     private final Map<UUID, List<String>> processMessages = new HashMap<>();
     private final Map<UUID, Socket> clientSockets = new HashMap<>();
     private final int delay;
@@ -90,13 +90,21 @@ public class MessageBroker {
             case "ClientResponse":
                 //deconstruct message and send to correct client
                 if (messageSplit[2].equals("false"))
-                    MessageSenderService.sendMessageToClient(clientSocket, "Sorry! Your booking " + processID + " is not confirmed!");
-                else MessageSenderService.sendMessageToClient(clientSocket, "Yay! Your booking " + processID + " is confirmed!");
+                {
+                    if(!finishedProcessList.contains(processID)){
+                        finishedProcessList.add(processID);
+                        MessageSenderService.sendMessageToClient(clientSocket, "Sorry! Your booking " + processID + " is not confirmed!"); 
+                    }
+                }
+                else{
+                    MessageSenderService.sendMessageToClient(clientSocket, "Yay! Your booking " + processID + " is confirmed!");
+                }
 
                 break;
             case "Error":
                 MessageSenderService.sendMessageToClient(clientSocket, "Error! " + messageSplit[2]);
                 break;
+                
             default:
                 System.out.println("MessageBroker - Message not recognized: " + message);
                 break;

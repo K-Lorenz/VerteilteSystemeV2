@@ -43,7 +43,13 @@ public class FlightBookingSystem implements BookingSystem {
                         while ((inputLine = in.readLine()) != null) {
                             //Handle message and answer
                             System.out.println("FlightBookingSystem("+getName()+") -  Received message: " + inputLine);
+                            double randomNumber = Math.random();
+                            double probability = Double.parseDouble(PropertyLoader.loadProperties().getProperty("bookingsystems.bookingfailure"));
+                            if (randomNumber > probability) {
                             handleRequest(inputLine, flightSocket);
+                            } else {
+                                System.out.println("FlightBookingSystem ("+getName()+") crashed and did not process the message.");
+                            }
                         }
                         in.close();
                         flightSocket.close();
@@ -66,31 +72,45 @@ public class FlightBookingSystem implements BookingSystem {
         int airlineNumber = port - flightPortStart;
         boolean successful;
         int requestedSeats = Integer.parseInt(splitMessage[2]);
-
         double randomNumber = Math.random();
         double probability = Double.parseDouble(PropertyLoader.loadProperties().getProperty("bookingsystems.bookingnomessage"));
-        if (randomNumber > probability) {
-            if (whatAmI.equals("BookingRq")) {
-                if(bookingList.containsKey(processId)){
-                    System.out.println("Idempotency");
+
+        if (whatAmI.equals("BookingRq")) {
+            if(bookingList.containsKey(processId)){
+                System.out.println("Idempotency");
+                if (randomNumber > probability) {
                     MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " flight f" + airlineNumber + " " + requestedSeats);
                     return;
-                }
-                successful = book(requestedSeats, processId);
-                //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
-                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " flight f" + airlineNumber + " " + requestedSeats);
-            } else if (whatAmI.equals("CancellationRq")) {
-                if(cancelList.contains(processId)){
-                    System.out.println("Idempotency");
-                    MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true");
+                }else{
+                    System.out.println("FlightBookingSystem ("+getName()+") processed the request but failed to send a response.");
                     return;
                 }
-                successful = cancel(requestedSeats, processId);
-                //<WhatAmI> <processId> <false>
-                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
             }
-        }else{
-            System.out.println("FlightBookingSystem("+getName()+") - did not respond to message.");
+            successful = book(requestedSeats, processId);
+            //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flightnumber> <amount>
+            if (randomNumber > probability) {
+                MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " flight f" + airlineNumber + " " + requestedSeats);
+            }else{
+                System.out.println("FlightBookingSystem ("+getName()+") processed the request but failed to send a response.");
+            }
+        } else if (whatAmI.equals("CancellationRq")) {
+            if(cancelList.contains(processId)){
+                System.out.println("Idempotency");
+                if (randomNumber > probability) {
+                    MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true");
+                    return;
+                }else{
+                    System.out.println("FlightBookingSystem ("+getName()+") processed the request but failed to send a response.");
+                    return;
+                }
+            }
+            successful = cancel(requestedSeats, processId);
+            //<WhatAmI> <processId> <false>
+            if (randomNumber > probability) {
+                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful);
+            }else{
+                System.out.println("FlightBookingSystem ("+getName()+") processed the request but failed to send a response.");
+            }
         }
     }
 

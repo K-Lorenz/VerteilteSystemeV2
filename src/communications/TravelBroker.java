@@ -14,6 +14,7 @@ import java.util.*;
 
 public class TravelBroker {
     private int port;
+    private ArrayList<UUID> finishedProcessList = new ArrayList<>();
     private HashMap<UUID, List<String>> confirmedFlights = new HashMap<>();
     private HashMap<UUID, List<String>> canceledFlights = new HashMap<>();
     private HashMap<UUID, List<String>> confirmedHotels = new HashMap<>();
@@ -54,18 +55,19 @@ public class TravelBroker {
         ArrayList<String> unconfirmedList = new ArrayList<>();
         try{
             do{
+                Thread.sleep(retryDelay);
                 unconfirmedList = findUnconfirmed(processId, AllBookingsFromOneClientRQ);
                 for(String e : unconfirmedList){
-                    if(e.split(" ")[0].contains("f")) {
+                    if(e.split(" ")[0].contains("f") && !finishedProcessList.contains(processId)) {
                         System.out.println("TravelBroker - Sending BookingRequest to MessageBroker: " + processId + " flight " + e);
                         MessageSenderService.sendMessageToMessageBroker("BookingRq " + processId + " flight " + e);
-                    } else {
+                    } else if(!finishedProcessList.contains(processId)) {
                         System.out.println("TravelBroker - Sending BookingRequest to MessageBroker: " + processId + " flight " + e);
                         MessageSenderService.sendMessageToMessageBroker("BookingRq " + processId + " hotel " + e);
                     }
                 }
                 count++;
-                if(count == retryAmount){
+                if(count == retryAmount && !finishedProcessList.contains(processId)){
                     for(String e : unconfirmedList){
                         if(e.split(" ")[0].contains("f")) {
                             handleCancellation(processId, "flight", e);
@@ -75,8 +77,7 @@ public class TravelBroker {
                     }
                     break;
                 }
-                Thread.sleep(retryDelay);
-            }while(!unconfirmedList.isEmpty());
+            }while(!finishedProcessList.contains(processId)|| !unconfirmedList.isEmpty());
         } catch(InterruptedException e){
             e.printStackTrace();
         }
@@ -264,6 +265,7 @@ public class TravelBroker {
 
     private void sendResponse(UUID processId, boolean success) {
         String clientMessage = "ClientResponse " + processId + " " + success;
+        finishedProcessList.add(processId);
         System.out.println("TravelBroker - Sending Response to Message Broker: " + clientMessage);
         MessageSenderService.sendMessageToMessageBroker(clientMessage);
     }
