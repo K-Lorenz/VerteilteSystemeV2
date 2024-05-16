@@ -200,6 +200,10 @@ public class TravelBroker {
         Integer amountOfFlights = amountOfFlightsInBooking.get(processId);
         Integer amountOfHotels = amountOfHotelsInBooking.get(processId);
 
+        if(amountOfFlights == null) amountOfFlights = 0;
+        if(amountOfHotels == null) amountOfHotels = 0;
+
+
         boolean allFlightsConfirmed = confirmedFlightsList != null && !confirmedFlightsList.isEmpty() && amountOfFlights != 0 && confirmedFlightsList.size() == amountOfFlights;
         boolean allHotelsConfirmed = confirmedHotelsList != null && !confirmedHotelsList.isEmpty() && amountOfHotels != 0 && confirmedHotelsList.size() == amountOfHotels;
         if ((allFlightsConfirmed && allHotelsConfirmed) || ((allFlightsConfirmed && amountOfHotels == 0) || (amountOfFlights == 0 && allHotelsConfirmed))) {
@@ -237,6 +241,9 @@ public class TravelBroker {
         List<String> canceledHotelsList = canceledHotels.get(processId);
         Integer amountOfFlights = amountOfFlightsInBooking.get(processId);
         Integer amountOfHotels = amountOfHotelsInBooking.get(processId);
+
+        if(amountOfFlights == null) amountOfFlights = 0;
+        if(amountOfHotels == null) amountOfHotels = 0;
 
         boolean allFlightsCanceled = canceledFlightsList != null && !canceledFlightsList.isEmpty() && amountOfFlights != 0 && canceledFlightsList.size() == amountOfFlights;
         boolean allHotelsCanceled = canceledHotelsList != null && !canceledHotelsList.isEmpty() && amountOfHotels != 0 && canceledHotelsList.size() == amountOfHotels;
