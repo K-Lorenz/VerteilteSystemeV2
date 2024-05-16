@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        int testAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.test.amount"));
+        int inputAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.input.amount"));
         int clientAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.client.amount"));
         int bookingRequestAmountMax = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.bookingrequest.amount.max"));
         int bookingRequestAmountMin = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.bookingrequest.amount.min"));
@@ -25,7 +25,7 @@ public class Main {
         int bookingFlightPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start"));
 
         List<String> testingInputs = new ArrayList<>();
-        for (int i = 0; i<testAmount; i++){
+        for (int i = 0; i<inputAmount; i++){
             testingInputs.add("book "+ randomString(bookingRequestAmountMin, bookingRequestAmountMax, bookingHotelAmount, bookingFlightAmount));
         }
         Thread mBThread = new Thread(()->{
@@ -42,7 +42,7 @@ public class Main {
         for(int i = 0; i<clientAmount; i++){
             Thread clThread = new Thread(()->{
                 Client client = new Client();
-                client.start(testingInputs);
+                client.start(testingInputs.get(random.nextInt(0, inputAmount - 1)));
             });
             clThread.start();
         }
