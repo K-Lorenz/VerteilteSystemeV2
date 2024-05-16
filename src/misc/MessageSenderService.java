@@ -3,7 +3,6 @@ package misc;
 import java.io.PrintWriter;
 import java.net.ConnectException;
 import java.net.Socket;
-import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,11 +22,7 @@ public class MessageSenderService {
         //MessageSplit [0] = WhatAmI, [1] = ProcessId, [2] = Type, [3] = Hotel/FlightNumber, [4] = Quantity
         String [] messageSplit = message.split(" ", 5);
         int portnum;
-        /*Probabilty to crash server
-        if(prob<0.05){
-            //crash server
-        }
-        */
+
         //Strip F/H from name. Example => F12 -> 12
         portnum = Integer.parseInt(messageSplit[3].substring(1));
 
@@ -45,45 +40,21 @@ public class MessageSenderService {
         if(messageSplit[0].equalsIgnoreCase("CancellationRq")){
             //<WhatAmI> <ProcessId> <Quantity>
             String newMessage = "CancellationRq " + messageSplit[1] + " " + messageSplit[4];
-
-            ExecutorService executor = Executors.newSingleThreadExecutor();
-            Future<String> future = executor.submit(new SendMessageOrTimeout(newMessage, port));
-            try {
-                future.get(60, TimeUnit.SECONDS);
-            } catch (TimeoutException e) {
-                future.cancel(true);
-                sendError(message);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-            executor.shutdownNow();
+            MessageSenderService.sendMessageToPort(newMessage,port);
             return;
         }
 
         String newMessage = "BookingRq " + messageSplit[1] + " " + messageSplit[4];
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        Future<String> future = executor.submit(new SendMessageOrTimeout(newMessage, port));
-        try {
-            future.get(60, TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
-            future.cancel(true);
-            sendError(message);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        executor.shutdownNow();
+        MessageSenderService.sendMessageToPort(newMessage,port);
     }
 
-    public static boolean sendMessageToPort(String message, int port) {
+    private static void sendMessageToPort(String message, int port) {
         try (Socket socket = new Socket("localhost", port)) {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             out.println(message);
-        } catch (ConnectException e){
-            return false;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
     }
     public static void sendMessageWithSocket(String message, Socket socket) {
         try {
@@ -106,26 +77,5 @@ public class MessageSenderService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-}
-
-class SendMessageOrTimeout implements Callable<String> {
-    private String message;
-    private int port;
-
-    public SendMessageOrTimeout(String message, int port){
-        this.message = message;
-        this.port = port;
-    }
-    @Override
-    public String call() throws Exception {
-        try{
-            while(!MessageSenderService.sendMessageToPort(this.message, this.port)){
-                Thread.sleep(5000);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "message sent successfully!";
     }
 }

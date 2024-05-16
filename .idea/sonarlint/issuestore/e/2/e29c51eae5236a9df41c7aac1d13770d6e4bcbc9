@@ -1,3 +1,14 @@
 
+
+java:S20950"MUse try-with-resources or close this "ExecutorService" in a "finally" clause.(‡˜ä8àÑ¯Æ÷1J$5d5a78b8-b3fb-4c0b-b4ee-37e6fe416fc7
+
+java:S2095?"MUse try-with-resources or close this "ExecutorService" in a "finally" clause.(‡˜ä8àÑ¯Æ÷1J$8c93853e-1eee-4d2e-aa53-68b0e67b9ccf
 }
-java:S1118":Add a private constructor to hide the implicit public one.(­úÍÀ8æÎÕ’ö1J$e242b338-9a7d-47ff-aedc-e3d6258e6111
+java:S1118":Add a private constructor to hide the implicit public one.(­úÍÀ8æÎÕ’ö1J$3c477dc1-7eae-4559-a02f-0423d759fe94
+ƒ	java:S125"<This block of commented-out lines of code should be removed.(ã¹ÀÕıÿÿÿÿ8äÑ¯Æ÷1J$0e6431f4-0dcb-4c50-b99a-e58ef8038936
+¡
+java:S21427"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8æÑ¯Æ÷1J$50b2bb9c-6d00-46f6-ae75-e187cd6151ee
+¡
+java:S2142F"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8çÑ¯Æ÷1J$39219861-a390-4fb7-b682-da32cd1c013c
+¡
+java:S2142}"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8ìÑ¯Æ÷1J$24680fa8-d556-427e-88c7-bf3d05848666

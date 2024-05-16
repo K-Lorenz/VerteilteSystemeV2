@@ -4,7 +4,6 @@ import misc.MessageSenderService;
 import misc.PropertyLoader;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,11 +11,13 @@ import java.util.*;
 
 public class MessageBroker {
     private final int port;
+    private ArrayList<UUID> finishedProcessList = new ArrayList<>();
     private final Map<UUID, List<String>> processMessages = new HashMap<>();
     private final Map<UUID, Socket> clientSockets = new HashMap<>();
-
+    private final int delay;
     public MessageBroker() {
         port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port"));
+        delay = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.delay"));
     }
 
     public void start(int backlog) {
@@ -32,10 +33,11 @@ public class MessageBroker {
                         BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
+                            Thread.sleep(delay);
                             sendMessageToCorrectReceiver(inputLine, clientSocket);
                         }
                         in.close();
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 });
@@ -52,7 +54,6 @@ public class MessageBroker {
         UUID processID = UUID.fromString(messageSplit[1]);
         Socket clientSocket = clientSockets.get(processID);
         String whatAmI = messageSplit[0];
-        if (!checkMessageAndAdd(message)) return;
         switch (whatAmI) {
             //CLient Request coming from Client
             case "ClientRq":
@@ -89,35 +90,25 @@ public class MessageBroker {
             case "ClientResponse":
                 //deconstruct message and send to correct client
                 if (messageSplit[2].equals("false"))
-                    MessageSenderService.sendMessageToClient(clientSocket, "Sorry! Your booking " + processID + " is not confirmed!");
-                else MessageSenderService.sendMessageToClient(clientSocket, "Yay! Your booking " + processID + " is confirmed!");
+                {
+                    if(!finishedProcessList.contains(processID)){
+                        finishedProcessList.add(processID);
+                        MessageSenderService.sendMessageToClient(clientSocket, "Sorry! Your booking " + processID + " is not confirmed!"); 
+                    }
+                }
+                else{
+                    MessageSenderService.sendMessageToClient(clientSocket, "Yay! Your booking " + processID + " is confirmed!");
+                }
 
                 break;
             case "Error":
                 MessageSenderService.sendMessageToClient(clientSocket, "Error! " + messageSplit[2]);
                 break;
+                
             default:
                 System.out.println("MessageBroker - Message not recognized: " + message);
                 break;
         }
-    }
-
-    private boolean checkMessageAndAdd(String message) {
-        String[] arr = message.split(" ", 3);
-        UUID processID = UUID.fromString(arr[1]);
-        List<String> messages = processMessages.get(processID);
-        if (messages == null) {
-            messages = new ArrayList<>();
-            messages.add(message);
-            processMessages.put(processID, messages);
-            return true;
-        }
-        if (!messages.contains(message)) {
-            messages.add(message);
-            processMessages.put(processID, messages);
-            return true;
-        }
-        return false;
     }
 
 }

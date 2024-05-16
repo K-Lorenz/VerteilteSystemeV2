@@ -1,15 +1,21 @@
 
 Š
-java:S1319R"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(Ëöõ8èÊÌ÷1
+java:S1319W"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(Ëöõ8ş±ÀÅ÷1
 
-java:S1319Z"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(¤€Ÿıÿÿÿÿ8èÊÌ÷1
+java:S1319_"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(¤€Ÿıÿÿÿÿ8ş±ÀÅ÷1
+‰
+java:S1319n"gThe type of "hotelNames" should be an interface such as "Map" rather than the implementation "HashMap".(ìì²úûÿÿÿÿ8ş±ÀÅ÷1
+‹
+java:S1319n"iThe type of "airlineNames" should be an interface such as "Map" rather than the implementation "HashMap".(ìì²úûÿÿÿÿ8ÿ±ÀÅ÷1
+t
+java:S1104E"RMake random a static final constant or non-public and provide accessors if needed.(×‘éµùÿÿÿÿ8€²ÀÅ÷1
+N
+java:S1444E",Make this "public static random" field final(×‘éµùÿÿÿÿ8€²ÀÅ÷1
 ]
-java:S1220""Move this file to a named package.8‹˜»•ö1J$142132e7-fdcd-485c-bbcf-ffe2f1f41006
+java:S1220""Move this file to a named package.8‹˜»•ö1J$27a2582a-f7a9-457a-909b-feb0b12d85a4
 “
-java:S1130"wRemove the declaration of thrown exception 'java.lang.InterruptedException', as it cannot be thrown from method's body.(º™Ú78ƒËÌ÷1
-;
-java:S2119C"Save and re-use this "Random".(’Æ§ò8ŠËÌ÷1
-;
-java:S2119V"Save and re-use this "Random".(ùÊÔ‰8ŒËÌ÷1
-@
-java:S2119^"Save and re-use this "Random".(Õ€µÍúÿÿÿÿ8ËÌ÷1
+java:S1130"wRemove the declaration of thrown exception 'java.lang.InterruptedException', as it cannot be thrown from method's body.(º™Ú78¼²ÀÅ÷1
+Q
+java:S2864p"4Iterate over the "entrySet" instead of the "keySet".(°çƒ†8Ğ²ÀÅ÷1
+V
+java:S2864u"4Iterate over the "entrySet" instead of the "keySet".(ªñåãÿÿÿÿÿ8Ò²ÀÅ÷1
