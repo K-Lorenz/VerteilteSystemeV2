@@ -19,15 +19,12 @@ public class FlightBookingSystem implements BookingSystem {
     private final int flightPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start"));
     private final int minSeats = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.quantity.min"));
     private final int maxSeats = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.quantity.max"));
-    private final int poolsize = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.poolsize"));
     private final int processingTime = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.processingtime"));
     private final int port;
     private final HashMap<Integer, String> airlineList;
     private int seats = new Random().nextInt(minSeats, maxSeats);
     private final HashMap<String, Boolean> bookingList = new HashMap<>();
     private final List<String> cancelList = new ArrayList<>();
-    private final ExecutorService threadPool = Executors.newFixedThreadPool(poolsize);
-
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
