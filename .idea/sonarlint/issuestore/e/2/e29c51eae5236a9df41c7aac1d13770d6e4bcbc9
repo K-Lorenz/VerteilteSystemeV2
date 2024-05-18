@@ -1,3 +1,6 @@
 
+¡	java:S115	"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¯ÈŸ¨øÿÿÿÿ8ëåÌíø1J$c04963aa-362f-4424-9ee8-8b3d49a3ae96
 }
-java:S1118":Add a private constructor to hide the implicit public one.(­úÍÀ8æÎÕ’ö1J$a80f427d-ee37-45e0-b830-8004667e693d
+java:S1118":Add a private constructor to hide the implicit public one.(­úÍÀ8ìåÌíø1J$ed195cd1-69f5-4118-a449-fa9fa8bcb8fc
+t
+java:S1068	",Remove this unused "mbAmount" private field.(¯ÈŸ¨øÿÿÿÿ8ñåÌíø1J$0be2b895-ea5f-491e-99ca-3355eba39e69

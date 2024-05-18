@@ -22,8 +22,8 @@ public class MessageBroker {
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_BOLD = "\u001B[1m";
-    public MessageBroker() {
-        port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port"));
+    public MessageBroker(int port) {
+        this.port = port;
         delay = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.delay"));
     }
 
@@ -68,7 +68,7 @@ public class MessageBroker {
                     clientSockets.put(processID, socket);
                 }
                 //Send message to TravelBroker
-                MessageSenderService.sendMessageToTravelBroker(message);
+                MessageSenderService.sendMessageToTravelBroker(message, processID, port);
                 break;
 
 

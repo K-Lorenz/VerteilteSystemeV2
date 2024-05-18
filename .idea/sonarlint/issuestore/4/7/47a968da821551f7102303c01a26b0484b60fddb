@@ -2,14 +2,14 @@
 	java:S112p"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Ûµ˜ëø1J$d1173f53-eae1-4f0a-bd11-4ccbe60f732b
 ª
 java:S2259›"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(Ì’É³ıÿÿÿÿ8èµ˜ëø1J$e8872134-bf20-416c-ad64-42672eb84670
-ª
-java:S2259 "a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(Ì’É³ıÿÿÿÿ8èµ˜ëø1J$23176799-2ec3-4660-97ca-b55698f7401b
 ©
 java:S2259 "`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(Ì’É³ıÿÿÿÿ8èµ˜ëø1J$db669492-80be-4e7b-ba0c-5976b5516d8b
 ¥
 java:S2259Ÿ"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(œÉİ˜8èµ˜ëø1J$d07d3d1a-1584-493b-8a20-f4527d25d1d1
 ©
 java:S2259›"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(Ì’É³ıÿÿÿÿ8èµ˜ëø1J$a5df278e-6f9a-461f-8bcc-dbe162b22c68
+ª
+java:S2259 "a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(Ì’É³ıÿÿÿÿ8èµ˜ëø1J$23176799-2ec3-4660-97ca-b55698f7401b
 ¤
 java:S2259Ÿ"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(œÉİ˜8èµ˜ëø1J$dc3306c0-82ff-4407-9f6b-629461dc9ad9
 r	java:S106#"+Replace this use of System.out by a logger.(Õ´Ø¹øÿÿÿÿ8ìµ˜ëø1J$fe3a238d-fa05-4a03-a4e2-220dabe7034b

@@ -2,14 +2,24 @@ package misc;
 
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class MessageSenderService {
+    private static final int mbAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.amount"));
+    private static HashMap<UUID, Integer> mbInstanceMap = new HashMap<>();
     public static void sendMessageToMessageBroker(String message) {
         //connect to messageBroker
-        sendMessageToPort(message, Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port")));
+        int port = mbInstanceMap.get(UUID.fromString(message.split(" ", 3)[1]));
+
+        sendMessageToPort(message, port);
     }
     public static void sendMessageToTravelBroker(String message) {
         sendMessageToPort(message, Integer.parseInt(PropertyLoader.loadProperties().getProperty("travelbroker.port")));
+    }
+    public static void sendMessageToTravelBroker(String message, UUID processId, int port){
+        mbInstanceMap.put(processId, port);
+        sendMessageToTravelBroker(message);
     }
     public static void sendMessageToBookingSystem(String message) {
         //MessageSplit [0] = WhatAmI, [1] = ProcessId, [2] = Type, [3] = Hotel/FlightNumber, [4] = Quantity

@@ -1,6 +1,8 @@
 
-‡
-java:S2095"DUse try-with-resources or close this "Socket" in a "finally" clause.(ŞàïÇ8æí´äø1J$57ed969e-e055-4340-8cb9-f672f348971b
-~	java:S125%"<This block of commented-out lines of code should be removed.(Ê ‚ü8Ò¾³çø1J$fa96534b-395d-4ec5-804f-60317a1e8980
-r	java:S106-"+Replace this use of System.out by a logger.(µ–¶¤ûÿÿÿÿ8ã·Œëø1J$16678574-99a5-48e1-9a45-c23ece89fc08
-m	java:S106/"+Replace this use of System.out by a logger.(İ´¢—8«êëø1J$e0c311a8-ce4c-4c44-916c-c1fcf063b448
+†
+java:S2095"DUse try-with-resources or close this "Socket" in a "finally" clause.(Òúî8Ï±¥íø1J$060bfbaf-2b95-4f9b-b7a1-9b32722b7018
+k
+java:S2140")Use "java.util.Random.nextInt()" instead.(Òúî8Ò±¥íø1J$e4ca4533-e6b9-482e-b3cd-3d0e4f706cf1
+~	java:S125&"<This block of commented-out lines of code should be removed.(Ê ‚ü8Ô±¥íø1J$73d0cbd4-114b-4d16-a8d8-4543327cc79d
+r	java:S106."+Replace this use of System.out by a logger.(µ–¶¤ûÿÿÿÿ8Ô±¥íø1J$a3b8c463-d232-43c3-aa32-1aa91fdbc1c0
+m	java:S1060"+Replace this use of System.out by a logger.(İ´¢—8Ô±¥íø1J$21268100-b1eb-4937-a070-a7c135d17ce9
