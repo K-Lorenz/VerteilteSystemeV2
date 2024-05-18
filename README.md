@@ -25,7 +25,7 @@ Durch das Zusammenarbeiten in Intellijs "Code Together" ist in den Git Commits n
 2. Erste Logik-Implementierung (Kim)
 3. Übernahme des Konzepts in neues Projekt - keine Funktionalität (Tyler und Konrad)
 4. Implementierung der Kernfunktionalität und Kommunikation (Louis und Tyler)
-5. Fehlerzustände und Idempotenz (Louis, David und Tyler)
+5. Fehlerzustände und Idempotenz (David, Tyler und Louis)
 ## Messagebroker
 1. Struktur und Konzept (Kim)
 2. Überarbeitung des Konzepts (Konrad)
@@ -38,7 +38,7 @@ Durch das Zusammenarbeiten in Intellijs "Code Together" ist in den Git Commits n
 1. Struktur und Konzept (Kim)
 2. Überarbeitung Struktur und Konzept (Konrad)
 3. Weitere Überarbeitung (Tyler)
-4. Implementierung von Logik und Funktionalität (Tyler)
+4. Implementierung von Logik und Funktionalität (Tyler und Kim)
 5. Überarbeitung der Struktur - Logik wurde leicht angepasst für Fehlerverarbeitung (Konrad und David)
 6. Testing (David und Konrad)
 ## Andere
