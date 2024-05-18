@@ -44,6 +44,7 @@ Durch das Zusammenarbeiten in Intellijs "Code Together" ist in den Git Commits n
 ## Andere
 - Architekture (Louis, Kim, Tyler und David)
 - Testkonzept (Louis, Kim und Tyler)
+- Video Planung und Durchführung (Tyler und Kim)
 - Ehrenwörtliche Erklärung (Louis)
 - CLI (Konrad und Tyler)
 - Main (Tyler und Konrad)
