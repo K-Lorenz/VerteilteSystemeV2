@@ -15,6 +15,13 @@ public class MessageBroker {
     private final Map<UUID, List<String>> processMessages = new HashMap<>();
     private final Map<UUID, Socket> clientSockets = new HashMap<>();
     private final int delay;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BOLD = "\u001B[1m";
     public MessageBroker() {
         port = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port"));
         delay = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.delay"));
@@ -23,7 +30,7 @@ public class MessageBroker {
     public void start(int backlog) {
         //Start server
         try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
-            System.out.println("MessageBroker running on port " + serverSocket.getLocalPort());
+            System.out.println(ANSI_BLUE + "MessageBroker running on port " + serverSocket.getLocalPort() + ANSI_RESET);
             while (true) {
                 //Accept client connection
                 Socket clientSocket = serverSocket.accept();
@@ -108,7 +115,7 @@ public class MessageBroker {
                 break;
                 
             default:
-                System.out.println("MessageBroker - Message not recognized: " + message);
+                System.out.println(ANSI_RED + "MessageBroker - Message not recognized: " + message + ANSI_RESET);
                 break;
         }
     }

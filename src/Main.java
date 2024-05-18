@@ -13,8 +13,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BOLD = "\u001B[1m";
     public static void main(String[] args) throws InterruptedException {
-        int inputAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.input.amount"));
         int clientAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.client.amount"));
         int bookingRequestAmountMax = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.bookingrequest.amount.max"));
         int bookingRequestAmountMin = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.bookingrequest.amount.min"));
@@ -23,10 +29,7 @@ public class Main {
         int bookingHotelPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.hotel.port.start"));
         int bookingFlightPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start"));
 
-        List<String> testingInputs = new ArrayList<>();
-        for (int i = 0; i<inputAmount; i++){
-            testingInputs.add("book "+ randomString(bookingRequestAmountMin, bookingRequestAmountMax, bookingHotelAmount, bookingFlightAmount));
-        }
+
         Thread mBThread = new Thread(()->{
             MessageBroker messageBroker = new MessageBroker();
             messageBroker.start(clientAmount*50);
@@ -42,7 +45,7 @@ public class Main {
         for(int i = 0; i<clientAmount; i++){
             Thread clThread = new Thread(()->{
                 Client client = new Client();
-                boolean result = client.start(testingInputs.get(random.nextInt(0, inputAmount)));
+                boolean result = client.start("book " + randomString(bookingRequestAmountMin, bookingRequestAmountMax, bookingHotelAmount, bookingFlightAmount));
                 finishedProcessList.put(client.processID, result);
             });
             clThread.start();
@@ -75,9 +78,9 @@ public class Main {
                     if(Boolean.TRUE.equals(finishedProcessList.get(processID))){
                         success++;
                     }
-                    System.out.println("Client "+processID+" finished with "+finishedProcessList.get(processID));
+                    System.out.println((Boolean.TRUE.equals(finishedProcessList.get(processID))? ANSI_GREEN : ANSI_RED) +processID+" finished with "+finishedProcessList.get(processID)+ ANSI_RESET);
                 }
-                System.out.println("Success Rate: "+(success*100/clientAmount)+"%");
+                System.out.println(ANSI_BOLD + ANSI_YELLOW +"Success Rate: "+(success*100/clientAmount)+"%"+ ANSI_RESET);
                 break;
             }
         }

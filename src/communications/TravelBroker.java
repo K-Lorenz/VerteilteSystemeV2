@@ -17,6 +17,13 @@ public class TravelBroker {
     private int port;
     private int retryDelay = Integer.parseInt(PropertyLoader.loadProperties().getProperty("travelbroker.retryDelay"));
     private List<Booking> bookings = new ArrayList<>();
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BOLD = "\u001B[1m";
 
     public TravelBroker() {
         Properties properties = PropertyLoader.loadProperties();
@@ -25,7 +32,7 @@ public class TravelBroker {
 
     public void start(int backlog) {
         try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
-            System.out.println("TravelBroker running on port " + port);
+            System.out.println(ANSI_BLUE + "TravelBroker running on port " + port + ANSI_RESET);
             while (true) {
                 Socket travelSocket = serverSocket.accept();
                 Thread travelThread = new Thread(() -> {
@@ -56,7 +63,7 @@ public class TravelBroker {
         String whatAmI = messageSplit[0];
         switch (whatAmI) {
             case "ClientRq":
-                System.out.println("TravelBroker - Received ClientRequest: '" + message +"'");
+                System.out.println(ANSI_CYAN + "TravelBroker - Received ClientRequest: '" + message +"'" + ANSI_RESET);
                 Booking booking = new Booking(processId, BookingRequestParser.parse(messageSplit[2]));
                 synchronized (bookings){
                     bookings.add(booking);
@@ -67,17 +74,17 @@ public class TravelBroker {
 
             case "Response":
                 //<WhatAmI> <processId> <confirmation (true/false)> <type> <Flight/Hotel number> <amount>
-                System.out.println("TravelBroker - Received Response: '" + message +"'");
+                System.out.println(ANSI_CYAN + "TravelBroker - Received Response: '" + message +"'" + ANSI_RESET);
                 handleResponse(message, processId);
                 break;
 
             case "CancellationConfirmation":
-                System.out.println("TravelBroker - Received CancellationConfirmation: '" + message +"'");
+                System.out.println(ANSI_CYAN + "TravelBroker - Received CancellationConfirmation: '" + message +"'"+ ANSI_RESET);
                 handleCancellationConfirmation(message, processId);
                 break;
 
             default:
-                System.out.println("TravelBroker - Message not recognized: " + message);
+                System.out.println(ANSI_RED + "TravelBroker - Message not recognized: " + message+ ANSI_RESET);
                 break;
         }
     }
@@ -93,7 +100,7 @@ public class TravelBroker {
                         }
                     } else {
                         request.sendMessage();
-                        System.out.println("TravelBroker - Sending Booking Request to Message Broker: " + "BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity());
+                        System.out.println(ANSI_CYAN + "TravelBroker - Sending Booking Request to Message Broker: " + "BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity() + ANSI_RESET);
                         MessageSenderService.sendMessageToMessageBroker("BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity());
                     }
                 }
@@ -125,7 +132,7 @@ public class TravelBroker {
     }
     private synchronized void handleConfirmation(UUID processId, String responseType, String details) {
         Objects.requireNonNull(getBookingRequestByTypeAndDetails(Objects.requireNonNull(getBookingByUUID(processId)), responseType, details)).confirm();
-        System.out.println("TravelBroker - " +responseType + " " + details + " of "+processId +" was confirmed. Waiting for other responses.");
+        System.out.println(ANSI_GREEN + "TravelBroker - " +responseType + " " + details + " of "+processId +" was confirmed. Waiting for other responses." + ANSI_RESET);
     }
     private Booking getBookingByUUID(UUID processId){
         for(Booking booking:bookings){
@@ -148,18 +155,18 @@ public class TravelBroker {
         getBookingRequestByTypeAndDetails(getBookingByUUID(processId), responseType, details).confirmCancel();
     }
     private synchronized void handleCancellation(UUID processId, String responseType, String details) {
-        System.out.println("TravelBroker - " +responseType + " " + details + " of " +processId + " was rejected. Waiting for other responses.");
+        System.out.println(ANSI_RED + "TravelBroker - " +responseType + " " + details + " of " +processId + " was rejected. Waiting for other responses." + ANSI_RESET);
         getBookingRequestByTypeAndDetails(getBookingByUUID(processId), responseType, details).reject();
         getBookingRequestByTypeAndDetails(getBookingByUUID(processId), responseType, details).confirmCancel();
     }
     private void sendResponse(UUID processId, boolean success) {
         String clientMessage = "ClientResponse " + processId + " " + success;
-        System.out.println("TravelBroker - Sending Response to Message Broker: " + clientMessage);
+        System.out.println(ANSI_CYAN + "TravelBroker - Sending Response to Message Broker: " + clientMessage+ ANSI_RESET);
         MessageSenderService.sendMessageToMessageBroker(clientMessage);
     }
     private void sendCancellationRequest(UUID processId, String type, String details) {
         String cancelMessage = "CancellationRq " + processId + " " + type + " " + details;
-        System.out.println("TravelBroker - Sending Cancellation Request to Message Broker: " + cancelMessage);
+        System.out.println(ANSI_CYAN+"TravelBroker - Sending Cancellation Request to Message Broker: " + cancelMessage+ ANSI_RESET);
         MessageSenderService.sendMessageToMessageBroker(cancelMessage);
     }
 }

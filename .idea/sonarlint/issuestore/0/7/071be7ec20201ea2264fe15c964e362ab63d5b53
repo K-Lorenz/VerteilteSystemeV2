@@ -1,5 +1,6 @@
 
 ‡
-java:S2095"DUse try-with-resources or close this "Socket" in a "finally" clause.(ŞàïÇ8æí´äø1J$ef0ca4f4-3075-45fb-aeda-5586ecef3b4b
-~	java:S125"<This block of commented-out lines of code should be removed.(Ê ‚ü8Ò¾³çø1J$61237f28-1b3f-4f46-bf07-14ebadd2502b
-r	java:S106$"+Replace this use of System.out by a logger.(˜Š¿Ûüÿÿÿÿ8×¿²çø1J$199d51a6-1c1a-4216-b199-80d708640f9b
+java:S2095"DUse try-with-resources or close this "Socket" in a "finally" clause.(ŞàïÇ8æí´äø1J$57ed969e-e055-4340-8cb9-f672f348971b
+~	java:S125%"<This block of commented-out lines of code should be removed.(Ê ‚ü8Ò¾³çø1J$fa96534b-395d-4ec5-804f-60317a1e8980
+r	java:S106-"+Replace this use of System.out by a logger.(µ–¶¤ûÿÿÿÿ8ã·Œëø1J$16678574-99a5-48e1-9a45-c23ece89fc08
+m	java:S106/"+Replace this use of System.out by a logger.(İ´¢—8«êëø1J$e0c311a8-ce4c-4c44-916c-c1fcf063b448

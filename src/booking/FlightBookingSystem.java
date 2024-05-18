@@ -11,18 +11,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class FlightBookingSystem implements BookingSystem {
 
     private final int flightPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start"));
     private final int minSeats = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.quantity.min"));
     private final int maxSeats = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.quantity.max"));
+    private final int poolsize = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.poolsize"));
     private final int processingTime = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.processingtime"));
     private final int port;
     private final HashMap<Integer, String> airlineList;
     private int seats = new Random().nextInt(minSeats, maxSeats);
     private final HashMap<String, Boolean> bookingList = new HashMap<>();
     private final List<String> cancelList = new ArrayList<>();
+    private final ExecutorService threadPool = Executors.newFixedThreadPool(poolsize);
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BOLD = "\u001B[1m";
 
 
     public FlightBookingSystem(int port, HashMap<Integer, String> airlineList) {
@@ -32,7 +44,7 @@ public class FlightBookingSystem implements BookingSystem {
 
     public void start(int backlog) {
         try (ServerSocket serverSocket = new ServerSocket(port, backlog)) {
-            System.out.println("FlightBookingSystem("+getName()+") - running on port " + port);
+            System.out.println(ANSI_BLUE + "FlightBookingSystem("+getName()+") - running on port " + port + ANSI_RESET);
             while (true) {
                 Socket flightSocket = serverSocket.accept();
                 Thread flightThread = new Thread(() -> {
@@ -42,13 +54,13 @@ public class FlightBookingSystem implements BookingSystem {
                         String inputLine;
                         while ((inputLine = in.readLine()) != null) {
                             //Handle message and answer
-                            System.out.println("FlightBookingSystem("+getName()+") -  Received message: " + inputLine);
+                            System.out.println(ANSI_YELLOW + "FlightBookingSystem("+getName()+") -  Received message: " + inputLine + ANSI_RESET);
                             double randomNumber = Math.random();
                             double probability = Double.parseDouble(PropertyLoader.loadProperties().getProperty("bookingsystems.bookingfailure"));
                             if (randomNumber > probability) {
                             handleRequest(inputLine, flightSocket);
                             } else {
-                                System.out.println("FlightBookingSystem ("+getName()+") crashed and did not process the message.");
+                                System.out.println(ANSI_RED + "FlightBookingSystem ("+getName()+") - crashed and did not process the message."+ANSI_RESET);
                             }
                         }
                         in.close();
@@ -77,12 +89,12 @@ public class FlightBookingSystem implements BookingSystem {
 
         if (whatAmI.equals("BookingRq")) {
             if(bookingList.containsKey(processId)){
-                System.out.println("Idempotency");
+                System.out.println(ANSI_YELLOW + "FlightBookingSystem ("+getName()+") - Request Ignored Idempotency" + ANSI_RESET);
                 if (randomNumber > probability) {
                     MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " flight f" + airlineNumber + " " + requestedSeats);
                     return;
                 }else{
-                    System.out.println("FlightBookingSystem ("+getName()+") processed the request but failed to send a response.");
+                    System.out.println(ANSI_RED + "FlightBookingSystem ("+getName()+") - processed the request but failed to send a response." +ANSI_RESET);
                     return;
                 }
             }
@@ -91,16 +103,16 @@ public class FlightBookingSystem implements BookingSystem {
             if (randomNumber > probability) {
                 MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + successful + " flight f" + airlineNumber + " " + requestedSeats);
             }else{
-                System.out.println("FlightBookingSystem ("+getName()+") processed the request but failed to send a response.");
+                System.out.println(ANSI_RED + "FlightBookingSystem ("+getName()+") - processed the request but failed to send a response." + ANSI_RESET);
             }
         } else if (whatAmI.equals("CancellationRq")) {
             if(cancelList.contains(processId)){
-                System.out.println("Idempotency");
+                System.out.println(ANSI_YELLOW + "FlightBookingSystem ("+getName()+") - Request Ignored Idempotency" + ANSI_RESET);
                 if (randomNumber > probability) {
                     MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true" + " flight f" + airlineNumber + " " + requestedSeats);
                     return;
                 }else{
-                    System.out.println("FlightBookingSystem ("+getName()+") processed the request but failed to send a response.");
+                    System.out.println(ANSI_RED + "FlightBookingSystem ("+getName()+") - processed the request but failed to send a response." + ANSI_RESET);
                     return;
                 }
             }
@@ -109,7 +121,7 @@ public class FlightBookingSystem implements BookingSystem {
             if (randomNumber > probability) {
                 MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " " + successful + " flight f" + airlineNumber + " " + requestedSeats);
             }else{
-                System.out.println("FlightBookingSystem ("+getName()+") processed the request but failed to send a response.");
+                System.out.println(ANSI_RED + "FlightBookingSystem ("+getName()+") - processed the request but failed to send a response." +ANSI_RESET);
             }
         }
     }
@@ -118,7 +130,7 @@ public class FlightBookingSystem implements BookingSystem {
     @Override
     public synchronized boolean cancel(int requestedSeats, String processId) {
         seats += requestedSeats;
-        System.out.println("FlightBookingSystem("+getName()+") - " + requestedSeats + " seats freed. Remaining seats: " + seats + ".");
+        System.out.println(ANSI_YELLOW + "FlightBookingSystem("+getName()+") - " + requestedSeats + " seats freed. Remaining seats: " + seats + "." + ANSI_RESET);
         cancelList.add(processId);
         return true;
     }
@@ -126,12 +138,12 @@ public class FlightBookingSystem implements BookingSystem {
     @Override
     public synchronized boolean book(int requestedSeats, String processId) {
         if (requestedSeats > seats) {
-            System.out.println("FlightBookingSystem("+getName()+") - " + requestedSeats + " seats could not be booked. Remaining seats: " + seats + ".");
+            System.out.println(ANSI_YELLOW + "FlightBookingSystem("+getName()+") - " + requestedSeats + " seats could not be booked. Remaining seats: " + seats + "." + ANSI_RESET);
             bookingList.put(processId, false);
             return false;
         }
         seats -= requestedSeats;
-        System.out.println("FlightBookingSystem("+getName()+") - " + requestedSeats + " seats booked. Remaining seats: " + seats + ".");
+        System.out.println(ANSI_YELLOW + "FlightBookingSystem("+getName()+") - " + requestedSeats + " seats booked. Remaining seats: " + seats + "." + ANSI_RESET);
         bookingList.put(processId, true);
         return true;
 
