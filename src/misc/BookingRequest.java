@@ -51,6 +51,9 @@ public class BookingRequest {
     public synchronized void confirmCancel() {
         this.isCanceled = true;
     }
+    public synchronized boolean isCanceled() {
+        return isCanceled;
+    }
 
     @Override
     public synchronized boolean equals(Object o) {

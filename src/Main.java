@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -36,14 +38,12 @@ public class Main {
 
         tBThread.start();
         mBThread.start();
-         HashMap<UUID, Boolean> finishedProcessList = new HashMap<>();
+        ConcurrentHashMap<UUID, Boolean> finishedProcessList = new ConcurrentHashMap<>();
         for(int i = 0; i<clientAmount; i++){
             Thread clThread = new Thread(()->{
                 Client client = new Client();
-                synchronized (finishedProcessList){
-                    System.out.println("Testing");
-                    finishedProcessList.put(client.processID, client.start(testingInputs.get(random.nextInt(0, inputAmount))));
-                }
+                boolean result = client.start(testingInputs.get(random.nextInt(0, inputAmount)));
+                finishedProcessList.put(client.processID, result);
             });
             clThread.start();
         }
@@ -70,9 +70,14 @@ public class Main {
             Thread.sleep(2000);
             if(finishedProcessList.size() == clientAmount){
                 System.out.println("All Clients finished");
+                int success = 0;
                 for(UUID processID : finishedProcessList.keySet()){
+                    if(Boolean.TRUE.equals(finishedProcessList.get(processID))){
+                        success++;
+                    }
                     System.out.println("Client "+processID+" finished with "+finishedProcessList.get(processID));
                 }
+                System.out.println("Success Rate: "+(success*100/clientAmount)+"%");
                 break;
             }
         }

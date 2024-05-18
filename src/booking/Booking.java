@@ -17,6 +17,16 @@ public record Booking(UUID processID, List<BookingRequest> requests) {
         }
         return false;
     }
+    public boolean isSuccessful(){
+        synchronized (requests) {
+            for (BookingRequest request : requests) {
+                if (request.isFailed() || request.isRejected() || request.isCanceled()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     public List<BookingRequest> uncompletedRequests() {
         List<BookingRequest> uncompleted = new CopyOnWriteArrayList<>(requests);

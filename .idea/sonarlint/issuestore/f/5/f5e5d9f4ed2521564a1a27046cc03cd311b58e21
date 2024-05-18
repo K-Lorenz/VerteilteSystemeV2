@@ -1,33 +1,33 @@
 
 
-java:S1192R"JDefine a constant instead of duplicating this literal " flight f" 4 times.(ÃìÄê8‹ıÙâø1J$34f2f750-fbee-460c-82b0-7802d23c6d02
+java:S1192R"JDefine a constant instead of duplicating this literal " flight f" 4 times.(ÃìÄê8‹ıÙâø1J$155ddb77-5cb5-4608-a0ec-f61c4d253c5c
 ¿
-java:S1192U"wDefine a constant instead of duplicating this literal ") processed the request but failed to send a response." 4 times.(Â—ûÿÿÿÿ8‡ç§İø1J$b62f3698-c7ea-4b80-a0dc-e25fc1850fa9
+java:S1192U"wDefine a constant instead of duplicating this literal ") processed the request but failed to send a response." 4 times.(Â—ûÿÿÿÿ8‡ç§İø1J$7f3843bf-daa5-4191-8eff-8971b959cc7b
 —
-java:S1192#"UDefine a constant instead of duplicating this literal "FlightBookingSystem(" 5 times.(´ÕÃ58‰ÀƒË÷1J$13c55133-6c6b-424f-9251-8243e5ce3677
+java:S1192#"UDefine a constant instead of duplicating this literal "FlightBookingSystem(" 5 times.(´ÕÃ58‰ÀƒË÷1J$bd0dbdb6-6be8-4ba1-9b96-09c1bb0760e5
 
-java:S11923"VDefine a constant instead of duplicating this literal "FlightBookingSystem (" 5 times.(§“šÔşÿÿÿÿ8ˆç§İø1J$c7c09c47-a5e1-45bb-a465-af4ab0414913
+java:S11923"VDefine a constant instead of duplicating this literal "FlightBookingSystem (" 5 times.(§“šÔşÿÿÿÿ8ˆç§İø1J$7a752ecc-1b8d-4b95-8ca7-25db4b86b98b
 °
-java:S1319"hThe type of "airlineList" should be an interface such as "Map" rather than the implementation "HashMap".(Œæ×¹üÿÿÿÿ8Éò—É÷1J$047ce889-fd28-4604-9c6d-5aa032a2dbb4
+java:S1319"hThe type of "airlineList" should be an interface such as "Map" rather than the implementation "HashMap".(Œæ×¹üÿÿÿÿ8Éò—É÷1J$0719de24-ad51-4b24-857b-939ea047e0c3
 a
-java:S2119"Save and re-use this "Random".(íÉØ 8Ğò—É÷1J$e68dbf4e-af18-4e8c-ae02-5cb35b67260f
-l	java:S106#"+Replace this use of System.out by a logger.(´ÕÃ58œ†ÁÇ÷1J$974e60fc-a5ce-4b9c-b494-6228e50dfde4
+java:S2119"Save and re-use this "Random".(íÉØ 8Ğò—É÷1J$3d44ea65-be71-4610-bf21-fc0fadbdcf2e
+l	java:S106#"+Replace this use of System.out by a logger.(´ÕÃ58œ†ÁÇ÷1J$af994323-81b4-4533-b1da-9272f1d9439d
 u
-java:S6881("2Use virtual threads for heavy blocking operations.(ŞØ€µ8Óò—É÷1J$75d0c0ab-6be4-4cb6-a4fc-488ea597a728
+java:S6881("2Use virtual threads for heavy blocking operations.(ŞØ€µ8Óò—É÷1J$e3d4ec5f-31da-4834-9604-ff2d6501d887
 ¡
-java:S21428"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8Ôò—É÷1J$72ed11ac-eacd-4a74-b62f-67acc6690728
-m	java:S106-"+Replace this use of System.out by a logger.(¢¤îğ8¤½ıÈ÷1J$85649205-7325-4c25-8ff1-6c8f7bd775d2
-r	java:S1063"+Replace this use of System.out by a logger.(§“šÔşÿÿÿÿ8ç§İø1J$561ada40-444c-4349-8264-b305df096412
+java:S21428"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8Ôò—É÷1J$b1e04251-ff6a-4985-a5d0-a238ac6cf4bc
+m	java:S106-"+Replace this use of System.out by a logger.(¢¤îğ8¤½ıÈ÷1J$3cbaa9a9-6540-419d-b778-101b74d76018
+r	java:S1063"+Replace this use of System.out by a logger.(§“šÔşÿÿÿÿ8ç§İø1J$db9b650c-1935-44ef-813d-195c9a9bb0e6
 š
-java:S3776C"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(äÀøıÿÿÿÿ8ç§İø1J$3a2dbfc3-1420-4259-a61b-476f96073a44
+java:S3776C"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(äÀøıÿÿÿÿ8ç§İø1J$20b7473c-9f9e-449b-9d3e-0e3beb0d6e60
 {
-java:S1172C"3Remove this unused method parameter "flightSocket".(äÀøıÿÿÿÿ8Õò—É÷1J$618b0eed-c5d3-411f-a5fb-c8476ed23507
-r	java:S106P"+Replace this use of System.out by a logger.(Ëãıäúÿÿÿÿ8¤½ıÈ÷1J$a27c27b7-0c0c-49f6-bbaa-01f5182f7bbf
-r	java:S106U"+Replace this use of System.out by a logger.(Â—ûÿÿÿÿ8¡ç§İø1J$605b98c5-554f-439d-acc8-c23b09a567f0
-r	java:S106^"+Replace this use of System.out by a logger.(Â—ûÿÿÿÿ8¢ç§İø1J$dd6f75e1-6935-498c-881f-96cdb8e81332
-r	java:S106b"+Replace this use of System.out by a logger.(Ëãıäúÿÿÿÿ8×ò—É÷1J$ab93146e-4245-4434-ab31-b6d49dbea0a3
-r	java:S106g"+Replace this use of System.out by a logger.(Â—ûÿÿÿÿ8£ç§İø1J$3f130f37-da9a-491b-bdeb-a3e9bab65c82
-r	java:S106p"+Replace this use of System.out by a logger.(Â—ûÿÿÿÿ8¤ç§İø1J$55c58039-5b65-4a58-b43b-10539e07a2fb
-l	java:S106y"+Replace this use of System.out by a logger.(íÂóu8‡èËÉ÷1J$617c3851-0b66-45e9-9e74-552c1b7e3810
-m	java:S106"+Replace this use of System.out by a logger.( ÊÂ?8ã­ÌÉ÷1J$64124684-7c8f-4be5-88c4-8023fd53f66e
-n	java:S106†"+Replace this use of System.out by a logger.(ı°Ó´8•”ßÊ÷1J$e47ef58d-ac6f-4f40-8d05-c895ceecb18c
+java:S1172C"3Remove this unused method parameter "flightSocket".(äÀøıÿÿÿÿ8Õò—É÷1J$1c51959f-7f75-4e13-86df-90f728c79dcc
+r	java:S106P"+Replace this use of System.out by a logger.(Ëãıäúÿÿÿÿ8¤½ıÈ÷1J$936265eb-652c-4541-b5e7-0d13bcd8a60c
+r	java:S106U"+Replace this use of System.out by a logger.(Â—ûÿÿÿÿ8¡ç§İø1J$331795b3-a4a6-4846-b186-1c90603137df
+r	java:S106^"+Replace this use of System.out by a logger.(Â—ûÿÿÿÿ8¢ç§İø1J$21c832c9-09a0-4d3e-a3ec-7b3941d0e750
+r	java:S106b"+Replace this use of System.out by a logger.(Ëãıäúÿÿÿÿ8×ò—É÷1J$7aea10ee-bc14-4428-9b15-0bfe52892ca7
+r	java:S106g"+Replace this use of System.out by a logger.(Â—ûÿÿÿÿ8£ç§İø1J$7843a486-e4b7-42a9-bb02-624967db0981
+r	java:S106p"+Replace this use of System.out by a logger.(Â—ûÿÿÿÿ8¤ç§İø1J$5ced18a0-b1c7-4f3d-9862-a07b541904c5
+l	java:S106y"+Replace this use of System.out by a logger.(íÂóu8‡èËÉ÷1J$2c5bd9c7-dbe2-4599-be97-d573931f14b3
+m	java:S106"+Replace this use of System.out by a logger.( ÊÂ?8ã­ÌÉ÷1J$45899f73-4e49-4b6c-95a8-0594338aa5b4
+n	java:S106†"+Replace this use of System.out by a logger.(ı°Ó´8•”ßÊ÷1J$4f55e970-d01a-4697-a848-ee95ed685b9d

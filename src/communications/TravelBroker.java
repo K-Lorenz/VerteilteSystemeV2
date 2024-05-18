@@ -105,7 +105,7 @@ public class TravelBroker {
                     throw new RuntimeException(e);
                 }
             }
-                sendResponse(booking.processID(), !booking.isCancelling());
+                sendResponse(booking.processID(), booking.isSuccessful());
         });
         bookingThread.start();
     }

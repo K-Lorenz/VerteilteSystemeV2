@@ -27,14 +27,13 @@ public class Client {
             out.println(message);
 
             //wait for Final booking Confirmation. Socket is kept open for this Time.
-            System.out.println(in.readLine());
+            //System.out.println(in.readLine());
             response = in.readLine();
             socket.close();
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return response.equals("Yay! Your booking" + processID + " is confirmed!");
+        System.out.println(response);
+        return response.equals("Yay! Your booking " + processID + " is confirmed!");
     }
 }

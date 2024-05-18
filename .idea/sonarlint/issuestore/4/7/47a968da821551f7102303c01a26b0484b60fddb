@@ -1,30 +1,30 @@
 
-g	java:S112i"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ÊßÜæø1
-ƒ
-java:S2259”"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(Ì’É³ıÿÿÿÿ8ÔßÜæø1
-„
-java:S2259”"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(Ì’É³ıÿÿÿÿ8ÔßÜæø1
-
-java:S2259˜"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(œÉİ˜8ÔßÜæø1
-„
-java:S2259™"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(Ì’É³ıÿÿÿÿ8ÔßÜæø1
-~
-java:S2259˜"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(œÉİ˜8ÔßÜæø1
-ƒ
-java:S2259™"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(Ì’É³ıÿÿÿÿ8ÔßÜæø1
-L	java:S106"+Replace this use of System.out by a logger.(Úş†ºüÿÿÿÿ8×ßÜæø1
-L	java:S106;"+Replace this use of System.out by a logger.(¦†¥ƒşÿÿÿÿ8ÚßÜæø1
-G	java:S106F"+Replace this use of System.out by a logger.(ÂÇ«ô8ÛßÜæø1
-L	java:S106K"+Replace this use of System.out by a logger.(È€Òúÿÿÿÿ8ÛßÜæø1
-G	java:S106P"+Replace this use of System.out by a logger.(“ÏŞä8ÛßÜæø1
-o
-java:S3776T"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ûê¡ë8ÛßÜæø1
-T
-java:S6881g"2Use virtual threads for heavy blocking operations.(Èİ£šıÿÿÿÿ8ÜßÜæø1
-L	java:S106`"+Replace this use of System.out by a logger.(æÉÛäúÿÿÿÿ8ÜßÜæø1
-{
-java:S2142h"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8İßÜæø1
-M	java:S106€"+Replace this use of System.out by a logger.(àûé¯úÿÿÿÿ8ŞßÜæø1
-H	java:S106—"+Replace this use of System.out by a logger.(Ú™à8ßßÜæø1
-M	java:S106"+Replace this use of System.out by a logger.(Á³ù’ùÿÿÿÿ8àßÜæø1
-H	java:S106¢"+Replace this use of System.out by a logger.(œŒ“‘8àßÜæø1
+	java:S112i"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ÊßÜæø1J$4ecbb7ce-e086-4bdd-95e5-74969625596e
+ª
+java:S2259™"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(Ì’É³ıÿÿÿÿ8ÔßÜæø1J$459dfd9c-e89e-4e2f-b8b4-33e2bad30621
+©
+java:S2259”"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(Ì’É³ıÿÿÿÿ8ÔßÜæø1J$cb84ccd5-3279-47b3-b7fc-edcfc6a5e978
+¥
+java:S2259˜"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(œÉİ˜8ÔßÜæø1J$70120206-23ee-4a67-8383-22d6e0d3f7c0
+¤
+java:S2259˜"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(œÉİ˜8ÔßÜæø1J$9d2da027-ef49-4aa2-b0a4-0cd2214ef438
+ª
+java:S2259”"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(Ì’É³ıÿÿÿÿ8ÔßÜæø1J$3cbaf184-2bf7-4ced-af6d-786c0965b083
+©
+java:S2259™"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(Ì’É³ıÿÿÿÿ8ÔßÜæø1J$62aff7f1-e3ac-4d26-a3d3-ecfc457250c5
+r	java:S106"+Replace this use of System.out by a logger.(Úş†ºüÿÿÿÿ8×ßÜæø1J$c0bec789-92c3-4cd5-9cae-6fd681459c07
+r	java:S106;"+Replace this use of System.out by a logger.(¦†¥ƒşÿÿÿÿ8ÚßÜæø1J$9fb2c57f-6d11-4a71-8bfc-72f7c6dc14a7
+m	java:S106F"+Replace this use of System.out by a logger.(ÂÇ«ô8ÛßÜæø1J$137c0dd5-3f6f-46da-bd51-68d53ca02c24
+r	java:S106K"+Replace this use of System.out by a logger.(È€Òúÿÿÿÿ8ÛßÜæø1J$57a1e606-496f-4596-8f3b-9e1c6c733b1c
+m	java:S106P"+Replace this use of System.out by a logger.(“ÏŞä8ÛßÜæø1J$d87cd41f-5022-4781-9b1a-c580ff8209c9
+•
+java:S3776T"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ûê¡ë8ÛßÜæø1J$eed62567-fa78-4c85-9636-ad499f3ff9ad
+z
+java:S6881g"2Use virtual threads for heavy blocking operations.(Èİ£šıÿÿÿÿ8ÜßÜæø1J$03a60379-132b-4d0c-b071-183a3500938a
+r	java:S106`"+Replace this use of System.out by a logger.(æÉÛäúÿÿÿÿ8ÜßÜæø1J$f4117d5f-7f8b-4ac4-a1f0-3e7dae351069
+¡
+java:S2142h"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8İßÜæø1J$be86db69-58c6-431f-9e49-79e47d1b7a78
+s	java:S106€"+Replace this use of System.out by a logger.(àûé¯úÿÿÿÿ8ŞßÜæø1J$2e97412d-f699-4132-82d7-0a16eaa62397
+n	java:S106—"+Replace this use of System.out by a logger.(Ú™à8ßßÜæø1J$01087138-99be-436b-9b85-da888d2048f6
+s	java:S106"+Replace this use of System.out by a logger.(Á³ù’ùÿÿÿÿ8àßÜæø1J$ec5c0930-abf8-4cd7-bade-665912ddfd11
+n	java:S106¢"+Replace this use of System.out by a logger.(œŒ“‘8àßÜæø1J$73adf184-7b19-41e6-90e7-902c4350dccc

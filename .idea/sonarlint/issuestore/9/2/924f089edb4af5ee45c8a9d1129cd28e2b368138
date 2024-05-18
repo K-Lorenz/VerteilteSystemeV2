@@ -1,24 +1,24 @@
 
 °
-java:S1319b"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(Ëöõ8¹Êœçø1J$6e97eaaf-2fea-4977-8589-7344e559883c
+java:S1319g"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(Ëöõ8Õ„®èø1J$b005dcb1-9b36-49e6-8d03-86135a760d92
 µ
-java:S1319j"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(¤€Ÿıÿÿÿÿ8ºÊœçø1J$d295955f-df84-4d67-ac2b-16410c790c10
+java:S1319o"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(¤€Ÿıÿÿÿÿ8Ö„®èø1J$934997c9-71ec-4411-9467-6f206e289314
 ¯
-java:S1319y"gThe type of "hotelNames" should be an interface such as "Map" rather than the implementation "HashMap".(ìì²úûÿÿÿÿ8ºÊœçø1J$1d3a7772-770f-4a49-bdb7-4ee5135974f7
+java:S1319~"gThe type of "hotelNames" should be an interface such as "Map" rather than the implementation "HashMap".(ìì²úûÿÿÿÿ8Ö„®èø1J$5ee2e496-a995-4698-b5fd-f49d63ce089f
 ±
-java:S1319y"iThe type of "airlineNames" should be an interface such as "Map" rather than the implementation "HashMap".(ìì²úûÿÿÿÿ8ºÊœçø1J$2b382863-c9d3-478f-9abf-ec6c421cb2c2
+java:S1319~"iThe type of "airlineNames" should be an interface such as "Map" rather than the implementation "HashMap".(ìì²úûÿÿÿÿ8Ö„®èø1J$5dc62618-ed7a-4f95-8808-9355ccbdab4b
 š
-java:S1104P"RMake random a static final constant or non-public and provide accessors if needed.(×‘éµùÿÿÿÿ8ºÊœçø1J$20c88afd-2eaf-4cfe-b360-aa405cded2ee
+java:S1104U"RMake random a static final constant or non-public and provide accessors if needed.(×‘éµùÿÿÿÿ8Ö„®èø1J$7a9df2e8-e8e7-456b-afb9-16e8a9203092
 t
-java:S1444P",Make this "public static random" field final(×‘éµùÿÿÿÿ8»Êœçø1J$b7508ff6-b105-4feb-b48b-5a0cf59bbac2
-]
-java:S1220""Move this file to a named package.8»Êœçø1J$99abd811-08ff-4fc8-ac9d-6724376cde42
-m	java:S106,"+Replace this use of System.out by a logger.(‡Ü¨Š8üÊœçø1J$e3236cbb-45b3-4563-a98c-b904d7c931ae
-m	java:S106H"+Replace this use of System.out by a logger.(¬‘¿ì8ıÊœçø1J$fa561145-c015-483c-afd1-4c47816cc2fc
+java:S1444U",Make this "public static random" field final(×‘éµùÿÿÿÿ8×„®èø1J$afcee49f-bcb6-451c-af03-6115514cdd75
+m	java:S106H"+Replace this use of System.out by a logger.(¬‘¿ì8Æ…®èø1J$394e45b1-6092-4cf0-a5ae-5fe75ffed631
 w
-java:S2864I"4Iterate over the "entrySet" instead of the "keySet".(ï«ğÚ8ıÊœçø1J$122f8dba-392b-4380-aaf6-938358e6102f
-L	java:S106J"+Replace this use of System.out by a logger.(ÙÄ¿ûÿÿÿÿ8ŒÒ«çø1
-w
-java:S2864{"4Iterate over the "entrySet" instead of the "keySet".(°çƒ†8€Ëœçø1J$0803c86c-321f-4179-a107-d9d7a67ddc46
+java:S2864J"4Iterate over the "entrySet" instead of the "keySet".(ï«ğÚ8Æ…®èø1J$315938c3-7d53-41f0-a308-f5252846f4a7
+r	java:S106N"+Replace this use of System.out by a logger.(ÙÄ¿ûÿÿÿÿ8Æ…®èø1J$a7614d5c-1d61-4438-8019-0046b6fc6e26
+m	java:S106P"+Replace this use of System.out by a logger.(ÊÅ¯æ8Ç…®èø1J$34dfca59-93c4-47d8-b30e-5b03e79d0dcf
+x
+java:S2864€"4Iterate over the "entrySet" instead of the "keySet".(°çƒ†8Ê…®èø1J$89c0ff0e-d407-4073-aa49-4e147faaae6d
 }
-java:S2864€"4Iterate over the "entrySet" instead of the "keySet".(ªñåãÿÿÿÿÿ8€Ëœçø1J$40ee7b3a-35bf-4086-b274-d961f92ec3ec
+java:S2864…"4Iterate over the "entrySet" instead of the "keySet".(ªñåãÿÿÿÿÿ8Ë…®èø1J$20a27359-512b-453a-a8c9-5c06209c99f3
+c
+java:S1128"FRemove this unused import 'java.util.concurrent.CopyOnWriteArrayList'.(ı¦ü8Àõ°èø1
