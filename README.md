@@ -14,7 +14,7 @@ Ich, Uiyoung Kim, habe mich um die Struktur, Planung und Initialisierung des Pro
 
 
 ## Sean Tyler Straub:
-Ich, Sean Tyler Straub, habe mich um die Planung des Projekts gekümmert, den Travelbroker entwickelt, Großteile des Messagebrokers umgesetzt, bei den Buchungsservices geholfen, die Überarbeitung des Interfaces durchgeführt, beim BookingRequest unterstützt, die Bearbeitung der Main übernommen und die CLI erstellt. Dazu habe ich das Testkonzept überarbeitet.
+Ich, Sean Tyler Straub, habe mich um die Planung des Projekts gekümmert, den Travelbroker entwickelt, Teile des Messagebrokers umgesetzt, bei den Buchungsservices geholfen, die Überarbeitung des Interfaces durchgeführt, beim BookingRequest unterstützt, die Bearbeitung der Main übernommen und die CLI erstellt. Dazu habe ich das Testkonzept überarbeitet.
 
 # Genereller Ablauf der Programmierung
 Durch das Zusammenarbeiten in Intellijs "Code Together" ist in den Git Commits nicht ersichtlich wer was gemacht hat. Deswegen gibt es hier eine kurze Übersicht getrennt nach Systemen. 
