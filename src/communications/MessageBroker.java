@@ -57,7 +57,9 @@ public class MessageBroker {
         switch (whatAmI) {
             //CLient Request coming from Client
             case "ClientRq":
-                clientSockets.put(processID, socket);
+                synchronized (clientSockets){
+                    clientSockets.put(processID, socket);
+                }
                 //Send message to TravelBroker
                 MessageSenderService.sendMessageToTravelBroker(message);
                 break;

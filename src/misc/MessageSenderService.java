@@ -49,19 +49,6 @@ public class MessageSenderService {
             e.printStackTrace();
         }
     }
-    public static void sendMessageWithSocket(String message, Socket socket) {
-        try {
-            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(message);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public static void sendError(String errorMessage){
-        // <WhatAmI> <ProcessId> <Message>
-        String[] messageSplit = errorMessage.split(" ", 3);
-        sendMessageToTravelBroker("Response " + messageSplit[1] + " false " + messageSplit[2]);
-    }
 
     public static void sendMessageToClient(Socket socket, String message){
         try{

@@ -1,41 +1,29 @@
 
-Š
-java:S1192G"GDefine a constant instead of duplicating this literal "flight" 5 times.(µ“üè8”Ê÷1J$9bebd6f5-b3cb-4406-b3e4-098f15749bf2
-f
-java:S1192<"IDefine a constant instead of duplicating this literal " flight " 3 times.(¤ÖƒË8ıªËÊ÷1
-”
-java:S1192·"PDefine a constant instead of duplicating this literal "TravelBroker - " 7 times.(Ì¯³®8•·™Ê÷1J$c408bd80-9e2f-46c1-ae65-67c308c4d5ee
-³
-java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ê©¦8”Ê÷1J$ef453935-620a-4072-b98d-eb0479b7c2e9
-®
-java:S1319"kThe type of "allBookings" should be an interface such as "List" rather than the implementation "ArrayList".(ê©¦8”Ê÷1J$15314483-3ae8-41d4-a26a-7054698ec27c
-Â
-java:S13194"zThe type of "AllBookingsFromOneClientRQ" should be an interface such as "List" rather than the implementation "ArrayList".(ùüï‡úÿÿÿÿ8”Ê÷1J$9df3b350-91d0-4a54-a87e-863d0e2fb3dd
-˜	java:S1174"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ùüï‡úÿÿÿÿ8”Ê÷1J$f3303f6d-4835-4977-afe3-057509d1a8f2
-š
-java:S37764"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ùüï‡úÿÿÿÿ8À”Ê÷1J$f3e4d88f-e8cf-41b6-a773-614f94466762
+	java:S112h"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8îÖìãø1J$ca413a31-2688-4fcb-92ac-2cf1edbe6d01
+¥
+java:S2259—"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(œÉİ˜8¯ıœäø1J$c215a03a-6e11-4d34-af78-df99d7716109
+ª
+java:S2259“"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(Ì’É³ıÿÿÿÿ8®ıœäø1J$8ca03329-520c-4106-893c-2bedf44350cb
+©
+java:S2259“"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(Ì’É³ıÿÿÿÿ8®ıœäø1J$be16ae96-f260-4aba-94f9-82bf78bfbe73
+¤
+java:S2259—"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(œÉİ˜8¯ıœäø1J$4baa099f-1db6-469f-85ce-5fae3d53fcf4
+©
+java:S2259˜"`A "NullPointerException" could be thrown; "getBookingRequestByTypeAndDetails()" can return null.(Ì’É³ıÿÿÿÿ8¯ıœäø1J$a840e7cf-b879-4791-805f-abc45e96a952
+ª
+java:S2259˜"a"NullPointerException" will be thrown when invoking method "getBookingRequestByTypeAndDetails()".(Ì’É³ıÿÿÿÿ8®ıœäø1J$c13d7650-01b9-48a4-a37f-d0c1caceb156
+r	java:S106"+Replace this use of System.out by a logger.(Úş†ºüÿÿÿÿ8ùÖìãø1J$0fd70340-f6b3-4bf9-a860-37aa9d0a0e4d
+r	java:S106;"+Replace this use of System.out by a logger.(¦†¥ƒşÿÿÿÿ8üÖìãø1J$84b9702a-ab72-44ff-a4aa-5f2bf7ae4aff
+m	java:S106F"+Replace this use of System.out by a logger.(ÂÇ«ô8üÖìãø1J$f18a2888-b4d2-4966-8add-9b8cfdd92613
+r	java:S106K"+Replace this use of System.out by a logger.(È€Òúÿÿÿÿ8üÖìãø1J$3e987273-4b9a-447c-8ea8-db83bb99e6a8
+m	java:S106P"+Replace this use of System.out by a logger.(“ÏŞä8üÖìãø1J$942d693b-0a7a-4286-9d4e-b11ff3489d02
+•
+java:S3776T"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ûê¡ë8üÖìãø1J$5bce0721-45ed-4b5b-b7e6-b9147fb4fea4
+z
+java:S6881f"2Use virtual threads for heavy blocking operations.(Èİ£šıÿÿÿÿ8ıÖìãø1J$3a99dae2-59ec-4697-a75f-350bb9acbc3e
 ¡
-java:S2142P"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8Á”Ê÷1J$b0fc381c-9ce7-434e-8a59-bab2a6899104
-m	java:S106<"+Replace this use of System.out by a logger.(¤ÖƒË8Ã”Ê÷1J$3f7a8d9e-03b2-46c9-90cb-492f73619e40
-m	java:S106?"+Replace this use of System.out by a logger.(¤ÖƒË8Ä”Ê÷1J$652cfd5f-0f22-4c38-9ad0-5319d2cc2cc9
-r	java:S106\"+Replace this use of System.out by a logger.(Úş†ºüÿÿÿÿ8Å”Ê÷1J$abb549b6-5dae-445b-9a8b-465f7fcf0220
-r	java:S106|"+Replace this use of System.out by a logger.(¦†¥ƒşÿÿÿÿ8Æ”Ê÷1J$1146d1a9-3e82-4bce-a9ac-2194e7739d12
-o
-java:S1602",Remove useless curly braces around statement(Üò8Å”Ê÷1J$2c05017a-3a70-4a35-a918-d4f918fb4fec
-n	java:S106•"+Replace this use of System.out by a logger.(ÂÇ«ô8Æ”Ê÷1J$82020c7c-dede-43c7-8840-48749afeadb9
-s	java:S106š"+Replace this use of System.out by a logger.(È€Òúÿÿÿÿ8Æ”Ê÷1J$266b87f8-8bdc-482a-83a2-c9fcd63727df
-n	java:S106›"+Replace this use of System.out by a logger.(¿¨¿ş8Ç”Ê÷1J$64995449-9f92-4ae2-be21-2059df38293a
-n	java:S106¡"+Replace this use of System.out by a logger.(“ÏŞä8Ç”Ê÷1J$54d9b326-9fc2-41b4-9bc9-07a4de839648
-n	java:S106·"+Replace this use of System.out by a logger.(Ì¯³®8Ç”Ê÷1J$05c25b2d-e988-4f7b-a792-c731f8212da4
-n	java:S106¿"+Replace this use of System.out by a logger.(éÛš8È”Ê÷1J$34d2e7c6-edda-43d0-9b4e-546919e291c9
-n	java:S106Ã"+Replace this use of System.out by a logger.(â£ñò8È”Ê÷1J$d0bb9415-db16-43cb-ba9a-e2dc18582255
-s	java:S106Í"+Replace this use of System.out by a logger.(«‹š¢ÿÿÿÿÿ8È”Ê÷1J$9706415b-8202-46cf-8f9a-623d14ac7c43
-s	java:S106Ñ"+Replace this use of System.out by a logger.(àûé¯úÿÿÿÿ8É”Ê÷1J$97ee63aa-b506-417d-bb56-caabbe1b3ea9
-n	java:S106Ø"+Replace this use of System.out by a logger.(”§Ó•8É”Ê÷1J$c2f7cfdf-a22e-4b85-a13a-4d6b27d49fb7
-n	java:S106â"+Replace this use of System.out by a logger.(îì¨Ş8É”Ê÷1J$ff1de26a-92ca-49a6-be83-3e1f02106518
-s	java:S106ô"+Replace this use of System.out by a logger.(µ–€´øÿÿÿÿ8Ê”Ê÷1J$c44ebbfa-eb1d-494d-a8dc-f2cd56d979d7
-s	java:S106ø"+Replace this use of System.out by a logger.(Àœİéûÿÿÿÿ8Ê”Ê÷1J$419a0d4c-b78b-4f5c-ba66-3337d814304e
-n	java:S106"+Replace this use of System.out by a logger.(¨­à8Ê”Ê÷1J$c88f77d6-3100-4e49-8198-6ff495de7ecd
-m	java:S106…"+Replace this use of System.out by a logger.(ïÚ“>8Ê”Ê÷1J$c80e2f0e-874f-4a05-82f4-7b5d37a4d5db
-s	java:S106‹"+Replace this use of System.out by a logger.(Á³ù’ùÿÿÿÿ8¤ÊÇÊ÷1J$ec269a40-3e86-40df-a98d-39a17d1cb289
-H	java:S106‘"+Replace this use of System.out by a logger.(œŒ“‘8¼«ËÊ÷1
+java:S2142g"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8şÖìãø1J$2d9ee159-3c09-4d86-8dcc-b170b87a4544
+r	java:S106"+Replace this use of System.out by a logger.(àûé¯úÿÿÿÿ8ÿÖìãø1J$36ce6d28-1ea0-4d29-80b4-43adb338b274
+n	java:S106–"+Replace this use of System.out by a logger.(Ú™à8€×ìãø1J$5e0c0738-915e-4b8f-a2ed-8c8b0539f596
+s	java:S106œ"+Replace this use of System.out by a logger.(Á³ù’ùÿÿÿÿ8×ìãø1J$7cdee574-e216-4293-83ef-0d19eb28959a
+n	java:S106¡"+Replace this use of System.out by a logger.(œŒ“‘8×ìãø1J$2608197d-b19f-4c1d-a1cf-a56b7c0c5377

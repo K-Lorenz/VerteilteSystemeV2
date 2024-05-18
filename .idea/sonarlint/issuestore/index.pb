@@ -18,8 +18,6 @@ U
 %src/communications/MessageBroker.java,3\f\3fce944f195cb78a0bd02316ea1b1faf79ed8bfb
 T
 $src/communications/TravelBroker.java,4\7\47a968da821551f7102303c01a26b0484b60fddb
-Q
-!src/communications/TCPServer.java,b\9\b9dbf879101e022ae058afa3d370de2c981e4c8d
 J
 src/misc/config.properties,f\a\faa85f2e67c32ef09d9257ebafb834bf3014abba
 K
@@ -32,3 +30,9 @@ L
 src/misc/PropertyLoader.java,4\b\4bde5cd9878a2746282b2619b19f42c69b19ec04
 R
 "src/misc/MessageSenderService.java,e\2\e29c51eae5236a9df41c7aac1d13770d6e4bcbc9
+H
+src/booking/booking.java,9\9\9973d2da76d4b4aeb1e9f8f89f3e5d1832dac247
+H
+src/booking/Booking.java,f\5\f56ebfd239d8be1fb0a15b39b92d827061970c92
+H
+src/booking/Request.java,0\1\0195f5315eb9821bb3326ef9b2421f3211e95c22

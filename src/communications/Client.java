@@ -11,10 +11,11 @@ import java.util.UUID;
 
 public class Client {
     Properties properties = PropertyLoader.loadProperties();
+    public final UUID processID = UUID.randomUUID();
 
-    public void start(String input) {
+    public boolean start(String input) {
+        String response = "";
         try {
-            UUID processID = UUID.randomUUID();
             //connect to messageBroker
             Socket socket = new Socket("localhost", Integer.parseInt(properties.getProperty("messagebroker.port")));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -27,9 +28,13 @@ public class Client {
 
             //wait for Final booking Confirmation. Socket is kept open for this Time.
             System.out.println(in.readLine());
+            response = in.readLine();
             socket.close();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return response.equals("Yay! Your booking" + processID + " is confirmed!");
     }
 }

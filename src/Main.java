@@ -8,10 +8,7 @@ import misc.PropertyLoader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.HashMap;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
@@ -39,10 +36,11 @@ public class Main {
 
         tBThread.start();
         mBThread.start();
+        HashMap<UUID, Boolean> finishedProcessList = new HashMap<>();
         for(int i = 0; i<clientAmount; i++){
             Thread clThread = new Thread(()->{
                 Client client = new Client();
-                client.start(testingInputs.get(random.nextInt(0, inputAmount - 1)));
+               finishedProcessList.put(client.processID, client.start(testingInputs.get(random.nextInt(0, inputAmount))));
             });
             clThread.start();
         }
