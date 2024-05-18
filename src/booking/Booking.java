@@ -15,7 +15,6 @@ public record Booking(UUID processID, List<BookingRequest> requests) {
                 }
             }
         }
-
         return false;
     }
 

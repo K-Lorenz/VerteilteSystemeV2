@@ -93,6 +93,7 @@ public class TravelBroker {
                         }
                     } else {
                         request.sendMessage();
+                        System.out.println("TravelBroker - Sending Booking Request to Message Broker: " + "BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity());
                         MessageSenderService.sendMessageToMessageBroker("BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity());
                     }
                 }
