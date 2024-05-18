@@ -30,8 +30,8 @@ Durch das Zusammenarbeiten in Intellijs "Code Together" ist in den Git Commits n
 1. Struktur und Konzept (Kim)
 2. Überarbeitung des Konzepts (Konrad)
 3. Verteilung der Nachrichten Implentierung (Konrad)
-4. Auslagerung in MessageSenderService (Konrad und Tyler)
-5. Implementieren der Logik für das Schicken der Nachrichten (Tyler)
+4. Auslagerung in MessageSenderService (Konrad, Kim und Tyler)
+5. Implementieren der Logik für das Schicken der Nachrichten (Kim)
 6. Clientcommunication (David)
 7. Testing (Tyler)
 ## Travelbroker
