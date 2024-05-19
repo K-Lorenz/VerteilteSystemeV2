@@ -27,7 +27,7 @@ public class Cli {
     public static final String ANSI_BOLD = "\u001B[1m";
 
     /**
-     * Main method for the command-line interface.
+     * Main.Main method for the command-line interface.
      *
      * @param args not used.
      */

@@ -1,0 +1,24 @@
+
+±
+java:S1319‘"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(Ëöõ8‡Ú»‰ù1J$68bc8c84-0062-4c0c-a67e-0f3c41f2bc07
+¶
+java:S1319¡"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(¤€Ÿıÿÿÿÿ8‡Ú»‰ù1J$6d389cf2-4a4c-423c-a4ca-362b1a5f6e33
+°
+java:S1319·"gThe type of "hotelNames" should be an interface such as "Map" rather than the implementation "HashMap".(ìì²úûÿÿÿÿ8‡Ú»‰ù1J$1f988e0f-ca3b-464c-a870-ee0fe7a0a1fa
+²
+java:S1319·"iThe type of "airlineNames" should be an interface such as "Map" rather than the implementation "HashMap".(ìì²úûÿÿÿÿ8‡Ú»‰ù1J$d1aeef15-1cea-4cf3-bfee-b9d15f29cacc
+š
+java:S1104"RMake random a static final constant or non-public and provide accessors if needed.(×‘éµùÿÿÿÿ8ˆÚ»‰ù1J$034806dd-8718-480d-9a80-a7c03c29d600
+t
+java:S1444",Make this "public static random" field final(×‘éµùÿÿÿÿ8ˆÚ»‰ù1J$13a72697-8f91-4642-8a18-8ffe0ee6aaab
+”
+java:S3776%"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(º™Ú78şÚ»‰ù1J$bc5527a6-b550-4442-8220-0b5ae83774bf
+w
+java:S2864d"4Iterate over the "entrySet" instead of the "keySet".(ï«ğÚ8‡Û»‰ù1J$04165ca4-c894-4266-80c9-758297935992
+m	java:S106h"+Replace this use of System.out by a logger.(àÂ8ˆÛ»‰ù1J$d4af18b6-6d6d-4c79-aea7-4f5f8185d16d
+m	java:S106j"+Replace this use of System.out by a logger.(¬‘¿ì8‰Û»‰ù1J$f18057bd-734a-4ffe-8198-738f82b98f91
+m	java:S106k"+Replace this use of System.out by a logger.(­šå÷8‰Û»‰ù1J$13469f98-3526-4877-b939-f0a5a9a56aee
+x
+java:S2864¹"4Iterate over the "entrySet" instead of the "keySet".(°çƒ†8Û»‰ù1J$a8f7d7b7-5733-47e9-b467-e6196ccbc46e
+}
+java:S2864¾"4Iterate over the "entrySet" instead of the "keySet".(ªñåãÿÿÿÿÿ8Û»‰ù1J$62913891-2b46-44d4-a0d7-466210296cd3
