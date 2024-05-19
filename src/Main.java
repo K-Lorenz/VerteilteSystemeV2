@@ -13,6 +13,9 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * A class representing the main class that runs the all Servers and if specified the tests.
+ */
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -23,6 +26,12 @@ public class Main {
     public static final String ANSI_BOLD = "\u001B[1m";
     public static Random random = new Random();
 
+    /**
+     * Main method for the main class.
+     *
+     * @param args not used.
+     * @throws InterruptedException if the thread is interrupted.
+     */
     public static void main(String[] args) throws InterruptedException {
         int clientAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.client.amount"));
         int bookingRequestAmountMax = Integer.parseInt(PropertyLoader.loadProperties().getProperty("main.bookingrequest.amount.max"));
@@ -100,6 +109,15 @@ public class Main {
         }
     }
 
+    /**
+     * Generates a random string with the specified parameters.
+     *
+     * @param min                 the minimum amount of bookings.
+     * @param max                 the maximum amount of bookings.
+     * @param bookingHotelAmount  the amount of hotels.
+     * @param bookingFlightAmount the amount of flights.
+     * @return a random string.
+     */
     public static String randomString(int min, int max, int bookingHotelAmount, int bookingFlightAmount) {
         int paramAmount = random.nextInt(min, max);
         StringBuilder builderString = new StringBuilder();
@@ -115,7 +133,13 @@ public class Main {
         return builderString.toString();
     }
 
-
+    /**
+     * A function that produces a Map of ports corresponding to the airline names.
+     *
+     * @param bookingFlightAmount    the amount of flight systems
+     * @param bookingFlightPortStart the starting port of the flight systems
+     * @return the map with airline names
+     */
     public static HashMap<Integer, String> setAirlineNames(int bookingFlightAmount, int bookingFlightPortStart) {
         HashMap<Integer, String> airlineList = new HashMap<>();
         final String[] airLineNames = {"Zaun Airways", "Air Piltover", "Fly Freljord", "Ionia Air", "Bandle Airways", "Shurima Skyline"};
@@ -125,6 +149,13 @@ public class Main {
         return airlineList;
     }
 
+    /**
+     * A function that produces a Map of ports corresponding to the hotel names.
+     *
+     * @param bookingHotelAmount    the amount of hotel systems
+     * @param bookingHotelPortStart the starting port of the hotel systems
+     * @return the map with hotel names
+     */
     public static HashMap<Integer, String> setHotelNames(int bookingHotelAmount, int bookingHotelPortStart) {
         final HashMap<Integer, String> hotelList = new HashMap<>();
         final String[] hotelNames = {"Schachtelwirt", "Hotel zur Kluft", "Gasthof zum Löwen", "Hotel zur Post", "Hotel zur Sonne", "Hotel zum Bären", "Hotel zum Hirschen", "Hotel zum Ochsen", "Hotel zum Schwan", "Hotel zum Stern", "Hotel zum Storchen", "Hotel zum Taunus", "Hotel zum Turm", "Hotel zum weißen Ross", "Hotel zum weißen Schwan", "Hotel zur alten Post", "Hotel zur alten Schule", "Hotel zur alten Stadtmauer"};
@@ -139,7 +170,14 @@ public class Main {
     }
 
 
-    //after executing Main, visit localhost:8080 to see the hotel and airline Names, keep Main running to see them
+    /**
+     * Starts a HTML-Server to display the hotels and airlines.
+     *
+     * @param bookingHotelPortStart  the starting port of the hotel systems
+     * @param bookingFlightPortStart the starting port of the flight systems
+     * @param hotelNames             the map with hotel names
+     * @param airlineNames           the map with airline names
+     */
     public static void startServer(int bookingHotelPortStart, int bookingFlightPortStart, HashMap<Integer, String> hotelNames, HashMap<Integer, String> airlineNames) {
         StringBuilder hotelListHtml = new StringBuilder("<h2>Hotels:</h2>");
         for (Integer port : hotelNames.keySet()) {

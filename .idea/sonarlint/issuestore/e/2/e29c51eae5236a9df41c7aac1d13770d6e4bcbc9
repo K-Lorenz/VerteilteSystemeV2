@@ -1,7 +1,9 @@
 
-¡	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(äŸÀæøÿÿÿÿ8Û„Åƒù1J$98fae3cd-1126-4084-9588-63b27b684372
-œ	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Šâ”º8Û„Åƒù1J$da5ff1a4-70b6-48f3-9c3d-431d411b3df8
+¡	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(äŸÀæøÿÿÿÿ8Û„Åƒù1J$c82387cc-4a2d-4712-89e5-df9b556b86d8
+œ	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Šâ”º8Û„Åƒù1J$e9f3fea4-da76-4a1d-a623-3a4f9b500d36
 }
-java:S1118	":Add a private constructor to hide the implicit public one.(­úÍÀ8Ü„Åƒù1J$6b556d82-ebee-4c7e-af05-780a5e4511f3
+java:S1118":Add a private constructor to hide the implicit public one.(­úÍÀ8Ü„Åƒù1J$8b729bdd-69a5-43e5-a4dd-8779752c66e9
+ˆ
+java:S1124/"EReorder the modifiers to comply with the Java Language Specification.(¿¤žÉ8‘À¬Šù1J$169e33d8-43c1-4b5d-86ce-1d8e08c9f245
 a
-java:S2119"Save and re-use this "Random".(ŸÍ×á8á„Åƒù1J$921832cc-8afe-4511-bf16-cdd8b7f00661
+java:S21191"Save and re-use this "Random".(ŸÍ×á8á„Åƒù1J$6149d6fd-8be2-45cf-b29e-6b2c64d53a6a

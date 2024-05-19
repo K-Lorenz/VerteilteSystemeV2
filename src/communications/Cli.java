@@ -2,7 +2,9 @@ package communications;
 
 import misc.PropertyLoader;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Objects;
 import java.util.Properties;
@@ -10,6 +12,9 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A command-line interface for the client.
+ */
 public class Cli {
 
     // ANSI escape codes for colors
@@ -21,6 +26,11 @@ public class Cli {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_BOLD = "\u001B[1m";
 
+    /**
+     * Main method for the command-line interface.
+     *
+     * @param args not used.
+     */
     public static void main(String[] args) {
 
         Properties properties = PropertyLoader.loadProperties();
@@ -60,11 +70,7 @@ public class Cli {
                 String[] arr = input.split(" ", 2);
                 String message = "ClientRq " + processID + " " + arr[1];
                 out.println(message);
-                // Loop for receiving multiple messages
-                // Count = Steps of the process
-                for (int i = 0; i < 1; i++) {
-                    System.out.println(in.readLine());
-                }
+                System.out.println(in.readLine());
                 socket.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -72,6 +78,12 @@ public class Cli {
         }
     }
 
+    /**
+     * Checks if the input is in the correct format.
+     *
+     * @param input the input to check.
+     * @return {@code true} if the input is in the correct format, {@code false} otherwise.
+     */
     public static boolean checkValidity(String input) {
         // Check if input is only "book"
         if (Objects.equals(input, "book")) return false;
