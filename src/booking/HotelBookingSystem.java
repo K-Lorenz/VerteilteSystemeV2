@@ -84,7 +84,7 @@ public class HotelBookingSystem implements BookingSystem {
     /**
      * Handles the request to book or cancel a flight.
      *
-     * @param booking String of with the format: <WhatAmI> <processId> <amount>
+     * @param booking String of with the format: "WhatAmI ProcessId Quantity".
      */
     public void handleRequest(String booking) {
         String[] splitMessage = booking.split(" ", 3);

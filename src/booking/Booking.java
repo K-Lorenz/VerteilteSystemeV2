@@ -9,6 +9,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Represents a booking with a unique process ID and a list of booking requests.
  * This class is a record, providing a compact syntax for declaring data carrier classes.
+ * @param processID the unique identifier for this booking process.
+ * @param requests  the list of {@link BookingRequest} associated with this booking.
  */
 public record Booking(UUID processID, List<BookingRequest> requests) {
 
