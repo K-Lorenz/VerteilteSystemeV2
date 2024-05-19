@@ -11,7 +11,7 @@ Anbindung Properties. BookingRequestParser. BookingSystemInterface geschrieben. 
 Ich, Uiyoung Kim, habe mich um die Struktur, Planung und Initialisierung des Projekts gekümmert, die Grundstruktur der Server und Klassen erstellt, die Logik für Buchung und Messagebroker hinzugefügt und im Travelbroker Fehlerfälle bearbeitet. Zudem habe ich bei der Dokumentation geholfen.
 
 ## David Alexander Eugen Wolf:
-
+"Ich, David Wolf, habe das Projekt mitgeplant, die Clientkommunikation entwickelt, die Fälle 'Servercrash' und 'NoMessage' implementiert sowie sowohl die Entstehung im Bookingsystem als auch die Lösung im Travelbroker entwickelt. Des Weiteren habe ich Tests durchgeführt und sowohl das UML-Klassendiagramm als auch das Sequenzdiagramm erstellt."
 
 ## Sean Tyler Straub:
 Ich, Sean Tyler Straub, habe mich um die Planung des Projekts gekümmert, den Travelbroker entwickelt, Teile des Messagebrokers umgesetzt, bei den Buchungsservices geholfen, die Überarbeitung des Interfaces durchgeführt, beim BookingRequest unterstützt, die Bearbeitung der Main übernommen und die CLI erstellt. Dazu habe ich das Testkonzept überarbeitet.
