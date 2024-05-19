@@ -116,10 +116,10 @@ public class TravelBroker {
     public void startBooking(Booking booking) {
         Thread bookingThread = new Thread(() -> {
             while (!booking.uncompletedRequests().isEmpty()) {
-                for (BookingRequest request : booking.uncompletedRequests()) {
+                for (BookingRequest request : booking.requests()) {
                     //MessageSplit [0] = WhatAmI, [1] = ProcessId, [2] = Type, [3] = Hotel/FlightNumber, [4] = Quantity
                     if (booking.isCancelling()) {
-                        if (!request.isCompleted()) {
+                        if (!request.isCancelled()) {
                             request.sendCancellation();
                             sendCancellationRequest(booking.processID(), request.getType(), request.getName() + " " + request.getQuantity());
                         }
@@ -217,6 +217,7 @@ public class TravelBroker {
         String responseType = message.split(" ", 5)[3];
         String details = message.split(" ", 5)[4];
         getBookingRequestByTypeAndDetails(getBookingByUUID(processId), responseType, details).confirmCancel();
+
     }
 
     /**

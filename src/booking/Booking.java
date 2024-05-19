@@ -71,7 +71,11 @@ public record Booking(UUID processID, List<BookingRequest> requests) {
      */
     public List<BookingRequest> uncompletedRequests() {
         List<BookingRequest> uncompleted = new CopyOnWriteArrayList<>(requests);
-        uncompleted.removeIf(BookingRequest::isCompleted);
+        if(isCancelling()){
+            uncompleted.removeIf(BookingRequest::isCancelled);
+        }else{
+            uncompleted.removeIf(BookingRequest::isCompleted);
+        }
         return uncompleted;
     }
 }

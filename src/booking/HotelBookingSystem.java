@@ -115,6 +115,7 @@ public class HotelBookingSystem implements BookingSystem {
                 System.out.println(ANSI_RED + "HotelBookingSystem (" + getName() + ") - processed the request but failed to send a response." + ANSI_RESET);
             }
         } else if (whatAmI.equals("CancellationRq")) {
+            if(bookingList.get(processId)){
             if (cancelList.contains(processId)) {
                 System.out.println(ANSI_YELLOW + "HotelBookingSystem (" + getName() + ") - Request Ignored Idempotency");
                 if (randomNumber > probability) {
@@ -124,6 +125,9 @@ public class HotelBookingSystem implements BookingSystem {
                     System.out.println(ANSI_RED + "HotelBookingSystem (" + getName() + ") - processed the request but failed to send a response." + ANSI_RESET);
                     return;
                 }
+            }}else{
+                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true" + " flight f" + hotelNumber + " " + requestedRooms);
+                return;
             }
             successful = cancel(requestedRooms, processId);
             if (randomNumber > probability) {

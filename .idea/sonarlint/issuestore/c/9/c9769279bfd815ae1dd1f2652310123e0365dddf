@@ -1,31 +1,35 @@
 
 »
-java:S1192k"yDefine a constant instead of duplicating this literal ") - processed the request but failed to send a response." 4 times.(¼µ#8ÍÒ‰ëø1J$c298e27d-59d9-4060-9132-af326fdaa5a9
+java:S1192k"yDefine a constant instead of duplicating this literal ") - processed the request but failed to send a response." 4 times.(¼µ#8ÙÎ§‹ù1J$ac52c9d3-7685-4196-851b-cba38f6f9e05
 Œ
-java:S1192h"IDefine a constant instead of duplicating this literal " hotel h" 4 times.(ñåŞ±8ò†ëø1J$80951b56-6ee9-457e-bf69-da5f99311a0d
+java:S1192h"IDefine a constant instead of duplicating this literal " hotel h" 4 times.(ñåŞ±8ÙÎ§‹ù1J$c2742200-7cd7-4058-a1ee-09471e3b893e
 ˜
-java:S1192D"UDefine a constant instead of duplicating this literal "HotelBookingSystem (" 7 times.(ƒ«ŠÖ8ò†ëø1J$a3eabd6a-d510-45ff-9020-de2fc853fb3d
+java:S1192D"UDefine a constant instead of duplicating this literal "HotelBookingSystem (" 7 times.(ƒ«ŠÖ8ÙÎ§‹ù1J$b875549d-8b23-46dc-b07a-bca647ef5609
 œ
-java:S11924"TDefine a constant instead of duplicating this literal "HotelBookingSystem(" 5 times.(Ñ¯ÚÆşÿÿÿÿ8ò†ëø1J$0b6ed0ca-79ff-43a3-b67e-1756b5ba1512
+java:S11924"TDefine a constant instead of duplicating this literal "HotelBookingSystem(" 5 times.(Ñ¯ÚÆşÿÿÿÿ8ÙÎ§‹ù1J$9f6b797b-1114-4f2a-ad7a-388b615e66e4
+¢
+java:S1192z"ZDefine a constant instead of duplicating this literal "CancellationConfirmation " 3 times.(µÔ¦¶ûÿÿÿÿ8ÚÎ§‹ù1J$70e18838-60af-4cfc-8435-c758e010687a
 ®
-java:S1319("fThe type of "hotelList" should be an interface such as "Map" rather than the implementation "HashMap".(öÚÃŒıÿÿÿÿ8ò†ëø1J$2d50c7b9-cb6b-447f-863f-f2f23210a2f6
+java:S1319("fThe type of "hotelList" should be an interface such as "Map" rather than the implementation "HashMap".(öÚÃŒıÿÿÿÿ8ÚÎ§‹ù1J$01579d7b-2335-4df6-90bb-be5fa34b7007
+J
+java:S5411v"(Use a primitive boolean expression here.(Ù°Óùÿÿÿÿ8œ½®‹ù1
 a
-java:S2119 "Save and re-use this "Random".(¾†–Ù8ü†ëø1J$e531e81b-672d-4527-9b6e-c67315c5cfe4
-r	java:S1064"+Replace this use of System.out by a logger.(Ñ¯ÚÆşÿÿÿÿ8ş†ëø1J$d33338ba-4cf9-4618-b5fa-cfff59a5637f
+java:S2119 "Save and re-use this "Random".(¾†–Ù8áÎ§‹ù1J$36176d4a-8131-4f3b-b160-cbc06d295999
+r	java:S1064"+Replace this use of System.out by a logger.(Ñ¯ÚÆşÿÿÿÿ8áÎ§‹ù1J$37e41d53-b291-4297-b3c8-0c9da06e153f
 u
-java:S68819"2Use virtual threads for heavy blocking operations.(ŞØ€µ8ÿ†ëø1J$945128f2-6ffd-4471-a4bf-4309c7023151
+java:S68819"2Use virtual threads for heavy blocking operations.(ŞØ€µ8âÎ§‹ù1J$2e5dc47d-5082-46bd-b4df-018cb799b3d4
 ¡
-java:S2142I"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8€‡ëø1J$2caed5da-4985-44d3-862c-71e47a666c9d
-m	java:S106>"+Replace this use of System.out by a logger.(¨•†–8‡ëø1J$ad4a6ca5-b38f-4e19-ae10-9a4ce23d925e
-m	java:S106D"+Replace this use of System.out by a logger.(ƒ«ŠÖ8‡ëø1J$463a0d92-7d82-4244-a519-39a540e59d31
+java:S2142I"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(”ı¾8ãÎ§‹ù1J$6b480cc5-eb4c-4db2-8a1b-751ad762ca6c
+m	java:S106>"+Replace this use of System.out by a logger.(¨•†–8äÎ§‹ù1J$460b0fce-c164-4b29-9cca-0094fb521425
+m	java:S106D"+Replace this use of System.out by a logger.(ƒ«ŠÖ8äÎ§‹ù1J$393294af-4519-4977-a196-15c863b5b53d
 š
-java:S3776Y"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(”„ªÆøÿÿÿÿ8‚‡ëø1J$8565172b-537c-415a-ae5c-01f7ab62d1e0
-r	java:S106f"+Replace this use of System.out by a logger.(—Éçúÿÿÿÿ8ƒ‡ëø1J$fe62dc18-2474-4595-8b9f-e82dda611dde
-l	java:S106k"+Replace this use of System.out by a logger.(¼µ#8„‡ëø1J$88f55731-f971-487f-bdb4-574b85654562
-l	java:S106s"+Replace this use of System.out by a logger.(¼µ#8„‡ëø1J$47f057b4-7350-4bd4-a867-dff5bb903400
-r	java:S106w"+Replace this use of System.out by a logger.(—Éçúÿÿÿÿ8„‡ëø1J$1c2ef8ed-5cb6-4a0a-88f6-a07136d0efd3
-l	java:S106|"+Replace this use of System.out by a logger.(¼µ#8…‡ëø1J$438f7c30-4183-4411-b0d4-f977b673bb0e
-m	java:S106„"+Replace this use of System.out by a logger.(¼µ#8…‡ëø1J$833cf943-6c1a-451e-a602-f5bf92980ec6
-n	java:S106”"+Replace this use of System.out by a logger.(€§ë¹8…‡ëø1J$b8d94510-8c0f-4590-bcde-a22a16cc9fa3
-s	java:S106£"+Replace this use of System.out by a logger.(ù…Šúÿÿÿÿ8†‡ëø1J$dfb619cd-88f2-49d5-aa4e-9cbb305807b7
-s	java:S106¨"+Replace this use of System.out by a logger.(¸ñ’¿ùÿÿÿÿ8†‡ëø1J$8b34a1f3-8e7a-4c83-82cf-72ab93949852
+java:S3776Y"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(”„ªÆøÿÿÿÿ8åÎ§‹ù1J$a2db50fd-f10b-4fd2-9209-072863ddaabe
+r	java:S106f"+Replace this use of System.out by a logger.(—Éçúÿÿÿÿ8åÎ§‹ù1J$0752842f-0d11-4625-b5f0-b0119dc81ea2
+l	java:S106k"+Replace this use of System.out by a logger.(¼µ#8æÎ§‹ù1J$297b69f4-0dbb-4832-b8d9-fa3f5a126e69
+l	java:S106s"+Replace this use of System.out by a logger.(¼µ#8æÎ§‹ù1J$52cd46e2-5453-4420-875b-b92cd1d60cbc
+r	java:S106x"+Replace this use of System.out by a logger.(—Éçúÿÿÿÿ8æÎ§‹ù1J$a1cf39ee-f8ee-47fe-b0b2-b48549edeafe
+l	java:S106}"+Replace this use of System.out by a logger.(¼µ#8æÎ§‹ù1J$c2db1634-eb87-4e9c-9b3f-d2750d2ad51e
+m	java:S106ˆ"+Replace this use of System.out by a logger.(¼µ#8çÎ§‹ù1J$898f00bf-4f0d-49d0-8d1d-c360113d5406
+n	java:S106˜"+Replace this use of System.out by a logger.(€§ë¹8çÎ§‹ù1J$24e1829a-f354-412e-a208-d60d1b53000e
+s	java:S106§"+Replace this use of System.out by a logger.(ù…Šúÿÿÿÿ8çÎ§‹ù1J$577866c1-42f1-4180-92ca-cf839128b608
+s	java:S106¬"+Replace this use of System.out by a logger.(¸ñ’¿ùÿÿÿÿ8èÎ§‹ù1J$6ca576d3-392e-443e-9061-2daa42f51226

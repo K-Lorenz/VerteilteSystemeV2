@@ -115,6 +115,7 @@ public class FlightBookingSystem implements BookingSystem {
                 System.out.println(ANSI_RED + "FlightBookingSystem (" + getName() + ") - processed the request but failed to send a response." + ANSI_RESET);
             }
         } else if (whatAmI.equals("CancellationRq")) {
+            if(bookingList.get(processId)){
             if (cancelList.contains(processId)) {
                 System.out.println(ANSI_YELLOW + "FlightBookingSystem (" + getName() + ") - Request Ignored Idempotency" + ANSI_RESET);
                 if (randomNumber > probability) {
@@ -124,6 +125,10 @@ public class FlightBookingSystem implements BookingSystem {
                     System.out.println(ANSI_RED + "FlightBookingSystem (" + getName() + ") - processed the request but failed to send a response." + ANSI_RESET);
                     return;
                 }
+            }
+            }else{
+                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true" + " flight f" + airlineNumber + " " + requestedSeats);
+                return;
             }
             successful = cancel(requestedSeats, processId);
             if (randomNumber > probability) {
