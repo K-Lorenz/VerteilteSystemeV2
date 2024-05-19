@@ -30,6 +30,8 @@ public class Main {
         int bookingFlightPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("bookingsystems.flight.port.start"));
         int messageBrokerPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.port.start"));
         int messageBrokerAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("messagebroker.amount"));
+        int travelBrokerAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("travelbroker.amount"));
+        int travelBrokerPortStart = Integer.parseInt(PropertyLoader.loadProperties().getProperty("travelbroker.port.start"));
 
         for(int i = 0; i<messageBrokerAmount; i++){
             int finalI = i;
@@ -39,12 +41,15 @@ public class Main {
             });
             mBThread.start();
         }
-        Thread tBThread = new Thread(()->{
-            TravelBroker travelBroker = new TravelBroker();
-            travelBroker.start(clientAmount*50);
-        });
+        for(int i = 0; i<travelBrokerAmount; i++){
+            int finalI = i;
+            Thread tBThread = new Thread(()->{
+                TravelBroker travelBroker = new TravelBroker(finalI + travelBrokerPortStart);
+                travelBroker.start(clientAmount*50);
+            });
+            tBThread.start();
+        }
 
-        tBThread.start();
         ConcurrentHashMap<UUID, Boolean> finishedProcessList = new ConcurrentHashMap<>();
         for(int i = 0; i<clientAmount; i++){
             Thread clThread = new Thread(()->{

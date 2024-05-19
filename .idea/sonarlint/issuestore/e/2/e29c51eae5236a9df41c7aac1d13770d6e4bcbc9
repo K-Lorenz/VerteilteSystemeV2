@@ -1,6 +1,7 @@
 
-¡	java:S115	"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(¯ÈŸ¨øÿÿÿÿ8ëåÌíø1J$c04963aa-362f-4424-9ee8-8b3d49a3ae96
+¡	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(äŸÀæøÿÿÿÿ8Û„Åƒù1J$98fae3cd-1126-4084-9588-63b27b684372
+œ	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Šâ”º8Û„Åƒù1J$da5ff1a4-70b6-48f3-9c3d-431d411b3df8
 }
-java:S1118":Add a private constructor to hide the implicit public one.(­úÍÀ8ìåÌíø1J$ed195cd1-69f5-4118-a449-fa9fa8bcb8fc
-t
-java:S1068	",Remove this unused "mbAmount" private field.(¯ÈŸ¨øÿÿÿÿ8ñåÌíø1J$0be2b895-ea5f-491e-99ca-3355eba39e69
+java:S1118	":Add a private constructor to hide the implicit public one.(­úÍÀ8Ü„Åƒù1J$6b556d82-ebee-4c7e-af05-780a5e4511f3
+a
+java:S2119"Save and re-use this "Random".(ŸÍ×á8á„Åƒù1J$921832cc-8afe-4511-bf16-cdd8b7f00661

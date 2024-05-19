@@ -25,9 +25,8 @@ public class TravelBroker {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_BOLD = "\u001B[1m";
 
-    public TravelBroker() {
-        Properties properties = PropertyLoader.loadProperties();
-        port = Integer.parseInt(properties.getProperty("travelbroker.port"));
+    public TravelBroker(int port) {
+        this.port = port;
     }
 
     public void start(int backlog) {

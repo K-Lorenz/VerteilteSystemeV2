@@ -75,7 +75,7 @@ public class MessageBroker {
             //Confirmation coming from Hotel and Flight Systems
             case "Response":
                 //Send messages to TravelBroker
-                MessageSenderService.sendMessageToTravelBroker(message);
+                MessageSenderService.sendMessageToTravelBroker(message, processID);
                 break;
 
             //Booking Request coming from TravelBroker
@@ -92,7 +92,7 @@ public class MessageBroker {
 
             case "CancellationConfirmation":
                 //Send message to TravelBroker
-                MessageSenderService.sendMessageToTravelBroker(message);
+                MessageSenderService.sendMessageToTravelBroker(message, processID);
                 break;
 
             //Client Confirmation coming from TravelBroker
