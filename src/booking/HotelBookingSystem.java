@@ -99,7 +99,7 @@ public class HotelBookingSystem implements BookingSystem {
         if (whatAmI.equals("BookingRq")) {
             //Check if the request has already been processed
             if (bookingList.containsKey(processId)) {
-                System.out.println(ANSI_YELLOW + "HotelBookingSystem (" + getName() + ") - Request Ignored Idempotency");
+                System.out.println(ANSI_YELLOW + "HotelBookingSystem (" + getName() + ") - Request Ignored, Idempotency");
                 if (randomNumber > probability) {
                     MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " hotel h" + hotelNumber + " " + requestedRooms);
                     return;
@@ -115,9 +115,9 @@ public class HotelBookingSystem implements BookingSystem {
                 System.out.println(ANSI_RED + "HotelBookingSystem (" + getName() + ") - processed the request but failed to send a response." + ANSI_RESET);
             }
         } else if (whatAmI.equals("CancellationRq")) {
-            if(bookingList.get(processId)){
+            if(bookingList.containsKey(processId) && bookingList.get(processId)){
             if (cancelList.contains(processId)) {
-                System.out.println(ANSI_YELLOW + "HotelBookingSystem (" + getName() + ") - Request Ignored Idempotency");
+                System.out.println(ANSI_YELLOW + "HotelBookingSystem (" + getName() + ") - Request Ignored, Idempotency");
                 if (randomNumber > probability) {
                     MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true" + " hotel h" + hotelNumber + " " + requestedRooms);
                     return;

@@ -99,7 +99,7 @@ public class FlightBookingSystem implements BookingSystem {
         if (whatAmI.equals("BookingRq")) {
             //Check if the request has already been processed
             if (bookingList.containsKey(processId)) {
-                System.out.println(ANSI_YELLOW + "FlightBookingSystem (" + getName() + ") - Request Ignored Idempotency" + ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "FlightBookingSystem (" + getName() + ") - Request Ignored, Idempotency" + ANSI_RESET);
                 if (randomNumber > probability) {
                     MessageSenderService.sendMessageToMessageBroker("Response " + processId + " " + bookingList.get(processId) + " flight f" + airlineNumber + " " + requestedSeats);
                     return;
@@ -115,9 +115,9 @@ public class FlightBookingSystem implements BookingSystem {
                 System.out.println(ANSI_RED + "FlightBookingSystem (" + getName() + ") - processed the request but failed to send a response." + ANSI_RESET);
             }
         } else if (whatAmI.equals("CancellationRq")) {
-            if(bookingList.get(processId)){
+            if(bookingList.containsKey(processId) && bookingList.get(processId)){
             if (cancelList.contains(processId)) {
-                System.out.println(ANSI_YELLOW + "FlightBookingSystem (" + getName() + ") - Request Ignored Idempotency" + ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "FlightBookingSystem (" + getName() + ") - Request Ignored, Idempotency" + ANSI_RESET);
                 if (randomNumber > probability) {
                     MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true" + " flight f" + airlineNumber + " " + requestedSeats);
                     return;
