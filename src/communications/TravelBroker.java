@@ -129,9 +129,8 @@ public class TravelBroker {
                             MessageSenderService.sendMessageToMessageBroker("BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity());
                     }
                 }
-
-
                 try {
+                    System.out.println(ANSI_CYAN + "TravelBroker - Waiting for responses..." + ANSI_RESET);
                     Thread.sleep(retryDelay);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -172,7 +171,7 @@ public class TravelBroker {
      */
     private synchronized void handleConfirmation(UUID processId, String responseType, String details) {
         Objects.requireNonNull(getBookingRequestByTypeAndDetails(Objects.requireNonNull(getBookingByUUID(processId)), responseType, details)).confirm();
-        System.out.println(ANSI_GREEN + "TravelBroker - " + responseType + " " + details + " of " + processId + " was confirmed. Waiting for other responses." + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "TravelBroker - " + responseType + " " + details + " of " + processId + " was confirmed." + ANSI_RESET);
     }
 
     /**
@@ -228,7 +227,7 @@ public class TravelBroker {
      * @param details      the details of the {@link BookingRequest} that has been cancelled.
      */
     private synchronized void handleCancellation(UUID processId, String responseType, String details) {
-        System.out.println(ANSI_RED + "TravelBroker - " + responseType + " " + details + " of " + processId + " was rejected. Waiting for other responses." + ANSI_RESET);
+        System.out.println(ANSI_RED + "TravelBroker - " + responseType + " " + details + " of " + processId + " was rejected." + ANSI_RESET);
         getBookingRequestByTypeAndDetails(getBookingByUUID(processId), responseType, details).reject();
         getBookingRequestByTypeAndDetails(getBookingByUUID(processId), responseType, details).confirmCancel();
     }

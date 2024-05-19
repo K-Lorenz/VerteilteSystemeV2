@@ -126,7 +126,7 @@ public class HotelBookingSystem implements BookingSystem {
                     return;
                 }
             }}else{
-                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true" + " flight f" + hotelNumber + " " + requestedRooms);
+                MessageSenderService.sendMessageToMessageBroker("CancellationConfirmation " + processId + " true" + " hotel h" + hotelNumber + " " + requestedRooms);
                 return;
             }
             successful = cancel(requestedRooms, processId);
