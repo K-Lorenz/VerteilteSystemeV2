@@ -1,14 +1,16 @@
 
-r	java:S106"+Replace this use of System.out by a logger.(ãË–úÿÿÿÿ8ÂÊ×Ë÷1J$4ddd8e99-4ca4-4fea-9a64-2f9fe87e06fb
-m	java:S106"+Replace this use of System.out by a logger.(šû«‰8ÂÊ×Ë÷1J$e0c2e1d5-6d51-4b0e-8dec-1ac6f703089a
-m	java:S106"+Replace this use of System.out by a logger.(¨úõ8ÂÊ×Ë÷1J$bc3cf081-5c1a-4922-acdf-1680e1eea986
-r	java:S106"+Replace this use of System.out by a logger.(”Ä®ûÿÿÿÿ8ÂÊ×Ë÷1J$68a72812-b79c-4c10-8687-f35cb8d54f39
-m	java:S106 "+Replace this use of System.out by a logger.(ÔÚÄÏ8ÂÊ×Ë÷1J$d1a79371-6054-478a-8031-78e0767352d1
-r	java:S106!"+Replace this use of System.out by a logger.(ãË–úÿÿÿÿ8ÂÊ×Ë÷1J$9d7034c1-9b23-41ca-a775-10ab603186e6
-r	java:S106""+Replace this use of System.out by a logger.(ë½¹şÿÿÿÿÿ8ÂÊ×Ë÷1J$0952ea34-e58b-48c3-9a27-cf638c0b269c
-r	java:S106,"+Replace this use of System.out by a logger.(¯Ø¶úûÿÿÿÿ8ÃÊ×Ë÷1J$2b4e6744-ac0f-473d-b360-62428968cd86
-r	java:S106-"+Replace this use of System.out by a logger.(ë½¹şÿÿÿÿÿ8ÃÊ×Ë÷1J$7cfa4412-fcf8-4612-b4ba-b0e83f016bc9
-l	java:S1063"+Replace this use of System.out by a logger.(ƒ¹º;8ÃÊ×Ë÷1J$7d79070c-2a7e-4014-b456-21c03555dcfa
-l	java:S106B"+Replace this use of System.out by a logger.(Ü²÷#8ÅÊ×Ë÷1J$1fb2b97d-d080-419f-b95f-21d7e8bfb1b4
-œ
-java:S5843P"TSimplify this regular expression to reduce its complexity from 29 to the 20 allowed.(Ñãİ‘üÿÿÿÿ8…ıõ1J$7ff80963-4fd0-4e94-803b-61eceb221c9c
+L	java:S106"+Replace this use of System.out by a logger.(ãË–úÿÿÿÿ8ö½‰„ù1
+G	java:S106"+Replace this use of System.out by a logger.(šû«‰8÷½‰„ù1
+G	java:S106"+Replace this use of System.out by a logger.(¨úõ8÷½‰„ù1
+L	java:S106"+Replace this use of System.out by a logger.(”Ä®ûÿÿÿÿ8÷½‰„ù1
+G	java:S106 "+Replace this use of System.out by a logger.(ÔÚÄÏ8÷½‰„ù1
+L	java:S106!"+Replace this use of System.out by a logger.(ãË–úÿÿÿÿ8÷½‰„ù1
+L	java:S106""+Replace this use of System.out by a logger.(ë½¹şÿÿÿÿÿ8÷½‰„ù1
+L	java:S106,"+Replace this use of System.out by a logger.(¯Ø¶úûÿÿÿÿ8ù½‰„ù1
+L	java:S106-"+Replace this use of System.out by a logger.(ë½¹şÿÿÿÿÿ8ù½‰„ù1
+F	java:S1063"+Replace this use of System.out by a logger.(ƒ¹º;8ù½‰„ù1
+E
+java:S21407")Use "java.util.Random.nextInt()" instead.(Òúî8ú½‰„ù1
+F	java:S106B"+Replace this use of System.out by a logger.(Ü²÷#8ü½‰„ù1
+v
+java:S5843P"TSimplify this regular expression to reduce its complexity from 29 to the 20 allowed.(Ñãİ‘üÿÿÿÿ8ş½‰„ù1

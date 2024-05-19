@@ -102,9 +102,9 @@ public class Main {
         for(int i = 0; i<paramAmount; i++){
             boolean type = random.nextBoolean();
             if(type){
-                builderString.append("--flight 'f").append(random.nextInt(0, bookingFlightAmount-1));
+                builderString.append("--flight 'f").append(random.nextInt(0, bookingFlightAmount));
             }else{
-                builderString.append("--hotel 'h").append(random.nextInt(0, bookingHotelAmount-1));
+                builderString.append("--hotel 'h").append(random.nextInt(0, bookingHotelAmount));
             }
             builderString.append("' ").append(random.nextInt(1, 10)).append(" ");
         }

@@ -52,7 +52,7 @@ public class Cli {
             try {
                 UUID processID = UUID.randomUUID();
                 // Connect to messageBroker
-                Socket socket = new Socket("localhost", Integer.parseInt(properties.getProperty("messagebroker.port")));
+                Socket socket = new Socket("localhost", Integer.parseInt(properties.getProperty("messagebroker.port.start")) + (int) (Math.random() * Integer.parseInt(properties.getProperty("messagebroker.amount"))));
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
