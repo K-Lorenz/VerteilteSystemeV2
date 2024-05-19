@@ -11,16 +11,16 @@ public class MessageSenderService {
     private static HashMap<UUID, Integer> tbInstanceMap = new HashMap<>();
     private static final int messageBrokerPort = Integer.parseInt(PropertyLoader.loadProperties().getProperty("travelbroker.port.start"));
     private static final int messageBrokerAmount = Integer.parseInt(PropertyLoader.loadProperties().getProperty("travelbroker.amount"));
-    public static void sendMessageToMessageBroker(String message) {
+    public synchronized static void sendMessageToMessageBroker(String message) {
         //connect to messageBroker
         int port = mbInstanceMap.get(UUID.fromString(message.split(" ", 3)[1]));
 
         sendMessageToPort(message, port);
     }
-    public static void sendMessageToTravelBroker(String message, UUID processId) {
+    public synchronized static void sendMessageToTravelBroker(String message, UUID processId) {
         sendMessageToPort(message, tbInstanceMap.get(processId));
     }
-    public static void sendMessageToTravelBroker(String message, UUID processId, int port){
+    public synchronized static void sendMessageToTravelBroker(String message, UUID processId, int port){
         mbInstanceMap.put(processId, port);
         tbInstanceMap.put(processId, messageBrokerPort + new Random().nextInt(messageBrokerAmount));
         sendMessageToTravelBroker(message, processId);
