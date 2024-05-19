@@ -57,7 +57,7 @@ public class Main {
         for (int i = 0; i < clientAmount; i++) {
             Thread clThread = new Thread(() -> {
                 Client client = new Client();
-                boolean result = client.start("book " + randomString(bookingRequestAmountMin, bookingRequestAmountMax, bookingHotelAmount, bookingFlightAmount));
+                boolean result = client.start(randomString(bookingRequestAmountMin, bookingRequestAmountMax, bookingHotelAmount, bookingFlightAmount));
                 finishedProcessList.put(client.processID, result);
             });
             clThread.start();
@@ -85,7 +85,6 @@ public class Main {
             while (true) {
                 Thread.sleep(2000);
                 if (finishedProcessList.size() == clientAmount) {
-                    System.out.println("All Clients finished");
                     int success = 0;
                     for (UUID processID : finishedProcessList.keySet()) {
                         if (Boolean.TRUE.equals(finishedProcessList.get(processID))) {
@@ -93,6 +92,7 @@ public class Main {
                         }
                         System.out.println((Boolean.TRUE.equals(finishedProcessList.get(processID)) ? ANSI_GREEN : ANSI_RED) + processID + " finished with " + finishedProcessList.get(processID) + ANSI_RESET);
                     }
+                    System.out.println("All Clients finished");
                     System.out.println(ANSI_BOLD + ANSI_YELLOW + "Success Rate: " + (success * 100 / clientAmount) + "%" + ANSI_RESET);
                     break;
                 }

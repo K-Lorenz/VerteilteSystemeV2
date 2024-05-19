@@ -29,9 +29,7 @@ public class Client {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            //Remove unneccessary "book" from input
-            String[] arr = input.split(" ", 2);
-            String message = "ClientRq " + processID + " " + arr[1];
+            String message = "ClientRq " + processID + " " + input;
             out.println(message);
 
             //wait for Final booking Confirmation. Socket is kept open for this Time.

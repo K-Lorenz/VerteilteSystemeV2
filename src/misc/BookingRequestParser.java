@@ -33,11 +33,4 @@ public class BookingRequestParser {
         }
         return bookings;
     }
-    public static BookingRequest parseSingle(String request){
-        List<BookingRequest> bookings = parse(request);
-        if(bookings.size() == 1){
-            return bookings.get(0);
-        }
-        return null;
-    }
 }
