@@ -77,7 +77,6 @@ public class BookingRequest {
     public synchronized boolean retriesExceeded() {
         return timesSent >= retries;
     }
-
     /**
      * Confirms the booking request.
      */
@@ -85,6 +84,13 @@ public class BookingRequest {
         this.isConfirmed = true;
     }
 
+    /**
+     * Returns whether the booking request is confirmed.
+     * @return {@code true} if the booking request is confirmed, {@code false} otherwise.
+     */
+    public synchronized boolean isConfirmed(){
+        return isConfirmed;
+    }
     /**
      * Confirms the cancellation of the booking request.
      */
@@ -98,7 +104,7 @@ public class BookingRequest {
      * @return {@code true} if the booking request is confirmed canceled, {@code false} otherwise.
      */
     public synchronized boolean isCancelled() {
-        return isCanceled;
+        return isCanceled || isFailed();
     }
 
     /**

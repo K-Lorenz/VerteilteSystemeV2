@@ -116,7 +116,7 @@ public class TravelBroker {
     public void startBooking(Booking booking) {
         Thread bookingThread = new Thread(() -> {
             while (!booking.uncompletedRequests().isEmpty()) {
-                for (BookingRequest request : booking.requests()) {
+                for (BookingRequest request : booking.uncompletedRequests()) {
                     //MessageSplit [0] = WhatAmI, [1] = ProcessId, [2] = Type, [3] = Hotel/FlightNumber, [4] = Quantity
                     if (booking.isCancelling()) {
                         if (!request.isCancelled()) {
@@ -124,9 +124,9 @@ public class TravelBroker {
                             sendCancellationRequest(booking.processID(), request.getType(), request.getName() + " " + request.getQuantity());
                         }
                     } else {
-                        request.sendMessage();
-                        System.out.println(ANSI_CYAN + "TravelBroker - Sending Booking Request to Message Broker: " + "BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity() + ANSI_RESET);
-                        MessageSenderService.sendMessageToMessageBroker("BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity());
+                            request.sendMessage();
+                            System.out.println(ANSI_CYAN + "TravelBroker - Sending Booking Request to Message Broker: " + "BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity() + ANSI_RESET);
+                            MessageSenderService.sendMessageToMessageBroker("BookingRq " + booking.processID() + " " + request.getType() + " " + request.getName() + " " + request.getQuantity());
                     }
                 }
 

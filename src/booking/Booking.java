@@ -37,7 +37,7 @@ public record Booking(UUID processID, List<BookingRequest> requests) {
     public boolean isCancelling() {
         synchronized (requests) {
             for (BookingRequest request : requests) {
-                if (request.isRejected() || request.retriesExceeded()) {
+                if ((request.isRejected() || request.retriesExceeded()) && !request.isConfirmed()) {
                     return true;
                 }
             }
@@ -55,7 +55,7 @@ public record Booking(UUID processID, List<BookingRequest> requests) {
     public boolean isSuccessful() {
         synchronized (requests) {
             for (BookingRequest request : requests) {
-                if (request.isFailed() || request.isRejected() || request.isCancelled()) {
+                if (request.isCancelled()) {
                     return false;
                 }
             }
